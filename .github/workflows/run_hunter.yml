@@ -1,0 +1,70 @@
+name: Crypto Alpha Hunter 24H
+
+on:
+  workflow_dispatch:
+    inputs:
+      job_type:
+        description: '手动运行哪个任务？(track / project / evolve / dashboard)'
+        required: true
+        default: 'track'
+  schedule:
+    - cron: '0 0,12 * * *'   # 每天北京时间 08:00、20:00 嗅探赛道
+    - cron: '15 */4 * * *'   # 每 4 小时深挖并评估项目
+    - cron: '0 14 * * 0'     # 每周日北京时间 22:00 自我进化复盘
+
+# 赋予 GitHub Actions 自动提交更新网页文件的权限
+permissions:
+  contents: write
+
+jobs:
+  run-agent:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. 拉取仓库代码
+        uses: actions/checkout@v4
+
+      - name: 2. 安装 Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: 3. 安装依赖库
+        run: pip install -r requirements.txt
+
+      - name: 4. 执行 AI 投研任务并生成最新网页看板
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          SILICON_API_KEY: ${{ secrets.SILICON_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          FEISHU_APP_ID: ${{ secrets.FEISHU_APP_ID }}
+          FEISHU_APP_SECRET: ${{ secrets.FEISHU_APP_SECRET }}
+          FEISHU_APP_TOKEN: ${{ secrets.FEISHU_APP_TOKEN }}
+          TABLE_ID_CONFIG: ${{ secrets.TABLE_ID_CONFIG }}
+          TABLE_ID_RADAR: ${{ secrets.TABLE_ID_RADAR }}
+          TABLE_ID_ALPHA: ${{ secrets.TABLE_ID_ALPHA }}
+          FEISHU_URL: ${{ secrets.FEISHU_URL }}
+          COINGECKO_API_KEY: ${{ secrets.COINGECKO_API_KEY }}
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            if [ "${{ github.event.inputs.job_type }}" == "track" ]; then python job1_track_finder.py; fi
+            if [ "${{ github.event.inputs.job_type }}" == "project" ]; then python job2_project_hunter.py; fi
+            if [ "${{ github.event.inputs.job_type }}" == "evolve" ]; then python job3_self_evolver.py; fi
+          elif [ "${{ github.event.schedule }}" == "0 0,12 * * *" ]; then
+            python job1_track_finder.py
+          elif [ "${{ github.event.schedule }}" == "0 14 * * 0" ]; then
+            python job3_self_evolver.py
+          else
+            python job2_project_hunter.py
+          fi
+          # 无论执行完哪个任务，最后都重新拉取飞书数据并刷新 docs/index.html 看板
+          python notifier.py
+
+      - name: 5. 自动将最新网页推送至 GitHub Pages
+        run: |
+          git config --global user.name "Crypto-Alpha-Bot"
+          git config --global user.email "bot@github.com"
+          git add docs/
+          git diff --staged --quiet || git commit -m "📊 Auto-update Web Dashboard"
+          git push
