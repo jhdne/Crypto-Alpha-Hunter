@@ -13,12 +13,16 @@ def get_coingecko_hot_categories():
   if config.COINGECKO_API_KEY:
     headers["x-cg-demo-api-key"] = config.COINGECKO_API_KEY
 
-  res = requests.get(url, headers=headers, timeout=20).json()
+  try:
+    res = requests.get(url, headers=headers, timeout=20).json()
+  except Exception as e:
+    print(f"⚠️ CoinGecko 请求失败: {e}")
+    return []
+
   if not isinstance(res, list):
     print(f"⚠️ CoinGecko 接口返回异常: {res}")
     return []
 
-  # 修复点：使用 (c.get("volume_24h") or 0) 防止 NoneType 报错
   valid = [
       c
       for c in res
@@ -65,57 +69,60 @@ def run():
   news_str = "\n".join(vc_news) if vc_news else "今日暂无重大融资快讯"
 
   prompt = f"""
-    【二级市场暴涨板块】：\n{cats_str}
-    【一级市场最新融资快讯】：\n{news_str}
-    请剔除纯粹由单个土狗带动的伪板块，挑选出 2~3 个最具叙事潜力和资金热度的核心赛道（必须从上述二级板块中选择真实存在的 ID）。
-    严格输出 JSON 数组格式：
-    [
-        {{"id": "板块真实ID", "name": "板块名称", "source": "二级暴涨 或 一级+二级共振", "change_24h": 12.5, "comment": "一句话核心逻辑"}}
-    ]
-    """
+【二级市场暴涨板块】：
+{cats_str}
+
+【一级市场最新融资快讯】：
+{news_str}
+
+请剔除纯粹由单个土狗带动的伪板块，挑选出 2~3 个最具叙事潜力和资金热度的核心赛道（必须从上述二级板块中选择真实存在的 ID）。
+严格输出 JSON 数组格式：
+[
+    {{"id": "板块真实ID", "name": "板块名称", "source": "二级暴涨 或 一级+二级共振", "change_24h": 12.5, "comment": "一句话核心逻辑"}}
+]
+"""
   print("🧠 正在呼叫 AI 大模型提炼核心风口赛道...")
-    try:
-    print("🧠 正在呼叫 AI 大模型提炼核心风口赛道...")
-    ai_picks = llm_engine.extract_json(llm_engine.ask_ai(prompt, role="default"))
+  try:
+    raw_reply = llm_engine.ask_ai(prompt, role="default")
+    ai_picks = llm_engine.extract_json(raw_reply)
   except Exception as e:
-    print(f"⚠️ AI双通道失败，启用规则降级模式: {e}")
-    # 降级：直接取 24h 涨幅前3写入飞书，保证流程不中断
-    ai_picks = [
-        {
-            "id": c["id"],
-            "name": c["name"],
-            "source": "二级暴涨(规则降级)",
-            "change_24h": round(float(c["market_cap_change_24h"] or 0), 2),
-            "comment": f"AI暂时不可用，规则兜底：24h涨幅{c['market_cap_change_24h']:.1f}%，成交量${(c.get('volume_24h') or 0)/1e6:.1f}M",
-        }
-        for c in cg_cats[:3]
-    ]
+    print(f"⚠️ AI 赛道提炼异常，使用涨幅榜第一名保底: {e}")
+    top_c = cg_cats[0]
+    ai_picks = [{
+        "id": top_c["id"],
+        "name": top_c["name"],
+        "source": "二级暴涨",
+        "change_24h": top_c["market_cap_change_24h"],
+        "comment": "24小时资金流入与涨幅居前",
+    }]
 
   # 查重并写入飞书表2
   existing_records = feishu_db.get_records(config.TABLE_ID_RADAR)
   existing_ids = {
       r.get("fields", {}).get("赛道ID")
       for r in existing_records
-      if "fields" in r
+      if isinstance(r, dict) and "fields" in r
   }
 
   new_tracks_msg = []
   for pick in ai_picks:
+    if not isinstance(pick, dict) or "id" not in pick:
+      continue
     if pick["id"] not in existing_ids:
       res = feishu_db.add_record(
           config.TABLE_ID_RADAR,
           {
               "赛道ID": str(pick["id"]),
-              "赛道名称": str(pick["name"]),
+              "赛道名称": str(pick.get("name", pick["id"])),
               "发现来源": str(pick.get("source", "二级暴涨")),
               "24h涨幅(%)": round(float(pick.get("change_24h") or 0), 2),
               "AI赛道简评": str(pick.get("comment", "")),
               "人工状态": "允许深挖",
           },
       )
-      print(f"✅ 已写入飞书赛道表: {pick['name']} | 状态: {res.get('msg')}")
+      print(f"✅ 已写入飞书赛道表: {pick.get('name')} | 状态: {res.get('msg')}")
       new_tracks_msg.append(
-          f"- **{pick['name']}** (`{pick['id']}`)：{pick['comment']}"
+          f"- **{pick.get('name')}** (`{pick['id']}`)：{pick.get('comment', '')}"
       )
 
   if new_tracks_msg:
@@ -123,7 +130,8 @@ def run():
         "📡 发现新热门赛道并已加入深挖队列", "\n".join(new_tracks_msg)
     )
   else:
-    print("今日热门赛道均已在库中，无新增赛道。")
+    print("今日热门赛道均已在库中，直接刷新看板。")
+    notifier.build_dashboard()
 
 
 if __name__ == "__main__":
