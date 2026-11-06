@@ -12,7 +12,6 @@ on:
     - cron: '15 */4 * * *'   # 每 4 小时深挖并评估项目
     - cron: '0 14 * * 0'     # 每周日北京时间 22:00 自我进化复盘
 
-# 赋予 GitHub Actions 自动提交更新网页文件的权限
 permissions:
   contents: write
 
@@ -33,10 +32,8 @@ jobs:
 
       - name: 4. 执行 AI 投研任务并生成最新网页看板
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
-          SILICON_API_KEY: ${{ secrets.SILICON_API_KEY }}
-          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GLM_API_KEY: ${{ secrets.GLM_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           FEISHU_APP_ID: ${{ secrets.FEISHU_APP_ID }}
           FEISHU_APP_SECRET: ${{ secrets.FEISHU_APP_SECRET }}
           FEISHU_APP_TOKEN: ${{ secrets.FEISHU_APP_TOKEN }}
@@ -58,7 +55,6 @@ jobs:
           else
             python job2_project_hunter.py
           fi
-          # 无论执行完哪个任务，最后都重新拉取飞书数据并刷新 docs/index.html 看板
           python notifier.py
 
       - name: 5. 自动将最新网页推送至 GitHub Pages
