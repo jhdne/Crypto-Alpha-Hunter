@@ -74,7 +74,22 @@ def run():
     ]
     """
   print("🧠 正在呼叫 AI 大模型提炼核心风口赛道...")
-  ai_picks = llm_engine.extract_json(llm_engine.ask_ai(prompt, role="default"))
+    try:
+    print("🧠 正在呼叫 AI 大模型提炼核心风口赛道...")
+    ai_picks = llm_engine.extract_json(llm_engine.ask_ai(prompt, role="default"))
+  except Exception as e:
+    print(f"⚠️ AI双通道失败，启用规则降级模式: {e}")
+    # 降级：直接取 24h 涨幅前3写入飞书，保证流程不中断
+    ai_picks = [
+        {
+            "id": c["id"],
+            "name": c["name"],
+            "source": "二级暴涨(规则降级)",
+            "change_24h": round(float(c["market_cap_change_24h"] or 0), 2),
+            "comment": f"AI暂时不可用，规则兜底：24h涨幅{c['market_cap_change_24h']:.1f}%，成交量${(c.get('volume_24h') or 0)/1e6:.1f}M",
+        }
+        for c in cg_cats[:3]
+    ]
 
   # 查重并写入飞书表2
   existing_records = feishu_db.get_records(config.TABLE_ID_RADAR)
