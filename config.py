@@ -1,56 +1,47 @@
 # config.py
 import os
 
-# ================= 1. 万能大模型提供商注册表 =================
+
+def _env(key, default=""):
+  val = os.getenv(key, default)
+  return val.strip() if isinstance(val, str) else default
+
+
+# ================= 1. 大模型配置中心 (主用 GLM + 备用 Groq) =================
 LLM_PROVIDERS = {
-    "gemini": {
-        "base_url": (
-            "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions"
-        ),
-        "api_key": os.getenv("GEMINI_API_KEY", ""),
-        "default_model": "Gemini 3.5 Flash-Lite",
+    "glm": {
+        # 智谱 AI 官方兼容接口
+        "base_url": "https://open.bigmodel.cn/api/paas/v4/chat/completions",
+        "api_key": _env("GLM_API_KEY") or _env("ZHIPU_API_KEY"),
+        "default_model": "glm-4.7-flash",
     },
-    "deepseek": {
-        "base_url": "https://api.deepseek.com/chat/completions",
-        "api_key": os.getenv("DEEPSEEK_API_KEY", ""),
-        "default_model": "deepseek-chat",
-    },
-    "siliconflow": {
-        "base_url": "https://api.siliconflow.cn/v1/chat/completions",
-        "api_key": os.getenv("SILICON_API_KEY", ""),
-        "default_model": "deepseek-ai/DeepSeek-V3",
-    },
-    "openrouter": {
-        "base_url": "https://openrouter.ai/api/v1/chat/completions",
-        "api_key": os.getenv("OPENROUTER_API_KEY", ""),
-        "default_model": "anthropic/claude-3.5-sonnet",
-    },
-    "openai": {
-        "base_url": "https://api.openai.com/v1/chat/completions",
-        "api_key": os.getenv("OPENAI_API_KEY", ""),
-        "default_model": "gpt-4o-mini",
+    "groq": {
+        # Groq 官方接口 (https://console.groq.com/)
+        "base_url": "https://api.groq.com/openai/v1/chat/completions",
+        "api_key": _env("GROQ_API_KEY"),
+        "default_model": "llama-3.3-70b-versatile",  # Groq 上最聪明且免费的旗舰模型
     },
 }
 
-# ================= 2. 智能体角色模型自由分配 =================
+# ================= 2. 所有任务统一使用 GLM，失败自动切换 Groq =================
 ROLE_MODELS = {
-    "default": os.getenv("MODEL_DEFAULT", "gemini"),
-    "bull_agent": os.getenv("MODEL_BULL", "gemini"),
-    "bear_agent": os.getenv("MODEL_BEAR", "gemini"),
-    "cio_agent": os.getenv("MODEL_CIO", "gemini"),
-    "evolver_agent": os.getenv("MODEL_EVOLVER", "gemini"),
-    "fallback": os.getenv("MODEL_FALLBACK", "gemini"),
+    "default": "glm",  # 赛道分析用 GLM
+    "bull_agent": "glm",  # 看多游资用 GLM
+    "bear_agent": "glm",  # 看空风控用 GLM
+    "cio_agent": "glm",  # 首席投资官裁决用 GLM
+    "evolver_agent": "glm",  # 自我进化用 GLM
+    "fallback": "groq",  # 备用模型：一旦 GLM 报错或超限，自动切换至 Groq
 }
 
 # ================= 3. 飞书与外部数据源密钥 =================
-FEISHU_APP_ID = os.getenv("FEISHU_APP_ID", "")
-FEISHU_APP_SECRET = os.getenv("FEISHU_APP_SECRET", "")
-FEISHU_APP_TOKEN = os.getenv("FEISHU_APP_TOKEN", "")
+FEISHU_APP_ID = _env("FEISHU_APP_ID")
+FEISHU_APP_SECRET = _env("FEISHU_APP_SECRET")
+FEISHU_APP_TOKEN = _env("FEISHU_APP_TOKEN")
 
-TABLE_ID_CONFIG = os.getenv("TABLE_ID_CONFIG", "")
-TABLE_ID_RADAR = os.getenv("TABLE_ID_RADAR", "")
-TABLE_ID_ALPHA = os.getenv("TABLE_ID_ALPHA", "")
-FEISHU_URL = os.getenv("FEISHU_URL", "https://feishu.cn")
+TABLE_ID_CONFIG = _env("TABLE_ID_CONFIG")
+TABLE_ID_RADAR = _env("TABLE_ID_RADAR")
+TABLE_ID_ALPHA = _env("TABLE_ID_ALPHA")
+FEISHU_URL = _env("FEISHU_URL", "https://feishu.cn")
 
-COINGECKO_API_KEY = os.getenv("COINGECKO_API_KEY", "")
-TAVILY_API_KEY = os.getenv("TAVILY_API_KEY", "")
+COINGECKO_API_KEY = _env("COINGECKO_API_KEY")
+TAVILY_API_KEY = _env("TAVILY_API_KEY")
