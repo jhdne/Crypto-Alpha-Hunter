@@ -53,8 +53,8 @@ def run():
   print("🔍 开始执行 Job2：项目漏斗筛选与多智能体评估...")
   cfg_records = feishu_db.get_records(config.TABLE_ID_CONFIG)
   w = cfg_records[0].get("fields", {}) if cfg_records else {}
-  min_mc = float(w.get("最低市值(万美元)") or 500) * 10000
-  max_mc = float(w.get("最高市值(万美元)") or 15000) * 10000
+  min_mc = float(w.get("最低市值(万美元)") or 50) * 10000
+  max_mc = float(w.get("最高市值(万美元)") or 1500) * 10000
 
   radar_records = feishu_db.get_records(config.TABLE_ID_RADAR)
   approved_tracks = [
