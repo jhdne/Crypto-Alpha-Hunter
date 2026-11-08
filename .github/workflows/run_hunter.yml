@@ -44,17 +44,8 @@ jobs:
           COINGECKO_API_KEY: ${{ secrets.COINGECKO_API_KEY }}
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
         run: |
-          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
-            if [ "${{ github.event.inputs.job_type }}" == "track" ]; then python job1_track_finder.py; fi
-            if [ "${{ github.event.inputs.job_type }}" == "project" ]; then python job2_project_hunter.py; fi
-            if [ "${{ github.event.inputs.job_type }}" == "evolve" ]; then python job3_self_evolver.py; fi
-          elif [ "${{ github.event.schedule }}" == "0 0,12 * * *" ]; then
-            python job1_track_finder.py
-          elif [ "${{ github.event.schedule }}" == "0 14 * * 0" ]; then
-            python job3_self_evolver.py
-          else
-            python job2_project_hunter.py
-          fi
+          python job1_track_finder.py
+          python job2_project_hunter.py
           python notifier.py
 
       - name: 5. 自动将最新网页推送至 GitHub Pages
