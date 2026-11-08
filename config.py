@@ -3,37 +3,60 @@ import os
 
 
 def _env(key, default=""):
-  val = os.getenv(key, default)
-  return val.strip() if isinstance(val, str) else default
+    val = os.getenv(key, default)
+    return val.strip() if isinstance(val, str) else default
 
 
 # ================= 1. 大模型配置中心 (主用 GLM + 备用 Groq) =================
+# 兼容新版 llm_engine.py 所需的 3 个核心字典
+LLM_API_KEYS = {
+    "glm": _env("GLM_API_KEY") or _env("ZHIPU_API_KEY"),
+    "groq": _env("GROQ_API_KEY"),
+    "deepseek": _env("DEEPSEEK_API_KEY"),
+    "openai": _env("OPENAI_API_KEY"),
+}
+
+LLM_ENDPOINTS = {
+    "glm": "https://open.bigmodel.cn/api/paas/v4/chat/completions",
+    "groq": "https://api.groq.com/openai/v1/chat/completions",
+    "deepseek": "https://api.deepseek.com/chat/completions",
+    "openai": "https://api.openai.com/v1/chat/completions",
+}
+
+# 所有任务优先使用 GLM，失败自动切换至 Groq
+AGENT_MODEL_ROUTING = {
+    "default": {"provider": "glm", "model": "glm-4.7-flash"},
+    "bull_agent": {"provider": "glm", "model": "glm-4.7-flash"},
+    "bear_agent": {"provider": "glm", "model": "glm-4.7-flash"},
+    "cio_agent": {"provider": "glm", "model": "glm-4.7-flash"},
+    "evolver_agent": {"provider": "glm", "model": "glm-4.7-flash"},
+    "fallback": {"provider": "groq", "model": "llama-3.3-70b-versatile"},
+}
+
+# 保留旧版字典结构（防止其他脚本引用报错）
 LLM_PROVIDERS = {
     "glm": {
-        # 智谱 AI 官方兼容接口
-        "base_url": "https://open.bigmodel.cn/api/paas/v4/chat/completions",
-        "api_key": _env("GLM_API_KEY") or _env("ZHIPU_API_KEY"),
+        "base_url": LLM_ENDPOINTS["glm"],
+        "api_key": LLM_API_KEYS["glm"],
         "default_model": "glm-4.7-flash",
     },
     "groq": {
-        # Groq 官方接口 (https://console.groq.com/)
-        "base_url": "https://api.groq.com/openai/v1/chat/completions",
-        "api_key": _env("GROQ_API_KEY"),
-        "default_model": "llama-3.3-70b-versatile",  # Groq 上最聪明且免费的旗舰模型
+        "base_url": LLM_ENDPOINTS["groq"],
+        "api_key": LLM_API_KEYS["groq"],
+        "default_model": "llama-3.3-70b-versatile",
     },
 }
 
-# ================= 2. 所有任务统一使用 GLM，失败自动切换 Groq =================
 ROLE_MODELS = {
-    "default": "glm",  # 赛道分析用 GLM
-    "bull_agent": "glm",  # 看多游资用 GLM
-    "bear_agent": "glm",  # 看空风控用 GLM
-    "cio_agent": "glm",  # 首席投资官裁决用 GLM
-    "evolver_agent": "glm",  # 自我进化用 GLM
-    "fallback": "groq",  # 备用模型：一旦 GLM 报错或超限，自动切换至 Groq
+    "default": "glm",
+    "bull_agent": "glm",
+    "bear_agent": "glm",
+    "cio_agent": "glm",
+    "evolver_agent": "glm",
+    "fallback": "groq",
 }
 
-# ================= 3. 飞书与外部数据源密钥 =================
+# ================= 2. 飞书与外部数据源密钥 =================
 FEISHU_APP_ID = _env("FEISHU_APP_ID")
 FEISHU_APP_SECRET = _env("FEISHU_APP_SECRET")
 FEISHU_APP_TOKEN = _env("FEISHU_APP_TOKEN")
