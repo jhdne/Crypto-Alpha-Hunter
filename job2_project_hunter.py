@@ -1,4 +1,3 @@
-```python
 import time
 import requests
 from datetime import datetime, timezone, timedelta
@@ -767,6 +766,3 @@ def run_job2():
 if __name__ == "__main__":
     import re
     run_job2()
-```
-
----
