@@ -1,9 +1,12 @@
+# notifier.py - V5.0 GitHub Pages 响应式投研看板构建器（双向兼容字段解析）
 import os
 import json
 from datetime import datetime, timezone, timedelta
 from config import (
-    FEISHU_APP_ID, FEISHU_URL, LLM_API_KEYS,
-    COINGECKO_API_KEY, TAVILY_API_KEY
+    FEISHU_APP_ID,
+    FEISHU_URL,
+    LLM_API_KEYS,
+    TAVILY_API_KEY,
 )
 from feishu_db import FeishuDB
 
@@ -19,10 +22,11 @@ def load_local_db():
             print(f"⚠️ 读取本地数据库失败: {e}")
     return {
         "updated_at": "",
+        "api_status": {},
         "hot_keywords": [],
         "vc_And_news": [],
         "tracks": [],
-        "projects": []
+        "projects": [],
     }
 
 
@@ -34,25 +38,23 @@ def save_local_db(data):
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 
-def _get_str(fields, keys, default=""):
-    for k in keys:
-        val = fields.get(k)
-        if val is not None and val != "":
-            if isinstance(val, list):
-                return ", ".join(str(x.get("text", x)) if isinstance(x, dict) else str(x) for x in val)
-            return str(val)
-    return default
-
-
-def _get_float(fields, keys, default=0.0):
-    for k in keys:
-        val = fields.get(k)
-        if val is not None and val != "":
-            try:
-                return float(str(val).replace("%", "").replace(",", "").strip())
-            except Exception:
-                continue
-    return default
+def _normalize_news_items(local_data):
+    raw_news = local_data.get("vc_And_news") or local_data.get("vc_news") or []
+    normalized = []
+    for item in raw_news:
+        if isinstance(item, dict):
+            normalized.append({
+                "type": item.get("type", "情报"),
+                "title": item.get("title", ""),
+            })
+        elif isinstance(item, str):
+            if "热搜" in item:
+                normalized.append({"type": "🔥 热搜飙升", "title": item})
+            elif "融资" in item or "VC" in item:
+                normalized.append({"type": "💰 VC融资", "title": item})
+            else:
+                normalized.append({"type": "📰 媒体快讯", "title": item})
+    return normalized
 
 
 def build_dashboard(latest_alert_title="", latest_alert_md=""):
@@ -70,13 +72,13 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
 
     tz_bj = timezone(timedelta(hours=8))
     now_str = local_data.get("updated_at") or datetime.now(tz_bj).strftime("%Y-%m-%d %H:%M:%S (UTC+8)")
-    hot_keywords = local_data.get("hot_keywords", [])
-    vc_and_news = local_data.get("vc_And_news", [])
+    hot_keywords = local_data.get("hot_keywords") or local_data.get("keywords") or []
+    vc_and_news = _normalize_news_items(local_data)
     tracks_data = local_data.get("tracks", [])
     projects_data = local_data.get("projects", [])
 
     api_status = [
-        {"name": "智谱 GLM-4.7", "ok": bool(LLM_API_KEYS.get("glm")), "desc": "主脑投研引擎"},
+        {"name": "智谱 GLM 引擎", "ok": bool(LLM_API_KEYS.get("glm")), "desc": "主脑投研引擎"},
         {"name": "Groq 极速引擎", "ok": bool(LLM_API_KEYS.get("groq")), "desc": "容灾备用大模型"},
         {"name": "飞书多维表格", "ok": feishu_ok, "desc": "云端数据库已连接" if feishu_ok else "本地 JSON 引擎驱动"},
         {"name": "GeckoTerminal/DEX", "ok": True, "desc": "链上实时金狗雷达"},
@@ -85,7 +87,11 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
 
     status_html = ""
     for st in api_status:
-        dot_color = "bg-emerald-400 shadow-[0_0_8px_#34d399]" if st["ok"] else "bg-amber-400 shadow-[0_0_8px_#fbbf24]"
+        dot_color = (
+            "bg-emerald-400 shadow-[0_0_8px_#34d399]"
+            if st["ok"]
+            else "bg-amber-400 shadow-[0_0_8px_#fbbf24]"
+        )
         border_color = "border-emerald-500/20" if st["ok"] else "border-amber-500/20"
         status_html += f"""
         <div class="glass rounded-xl p-3.5 border {border_color} flex items-center justify-between">
@@ -100,7 +106,7 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
     kw_html = ""
     if hot_keywords:
         for kw in hot_keywords:
-            tag = kw.get("keyword", "")
+            tag = kw.get("keyword") or kw.get("word") or ""
             reason = kw.get("reason", "")
             heat = kw.get("heat", 85)
             kw_html += f"""
@@ -119,7 +125,11 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
     if vc_and_news:
         for item in vc_and_news[:8]:
             t_type = item.get("type", "情报")
-            badge_cls = "bg-purple-500/20 text-purple-300 border-purple-500/30" if "VC" in t_type or "融资" in t_type else "bg-sky-500/20 text-sky-300 border-sky-500/30"
+            badge_cls = (
+                "bg-purple-500/20 text-purple-300 border-purple-500/30"
+                if ("VC" in t_type or "融资" in t_type)
+                else "bg-sky-500/20 text-sky-300 border-sky-500/30"
+            )
             news_html += f"""
             <div class="flex items-start gap-2.5 py-2 border-b border-slate-800/70 last:border-0 text-xs">
                 <span class="px-2 py-0.5 rounded border {badge_cls} shrink-0 font-semibold">{t_type}</span>
@@ -132,11 +142,18 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
     tracks_html = ""
     if tracks_data:
         for t in tracks_data[:8]:
-            chg = float(t.get("change_24h", 0))
+            t_name = t.get("name") or t.get("赛道名称") or ""
+            t_source = t.get("source") or t.get("发现来源") or "多维雷达"
+            t_reason = t.get("reason") or t.get("AI赛道简评") or "具备较强叙事催化与资金关注度"
+            chg = float(t.get("change_24h") if t.get("change_24h") is not None else (t.get("24h涨幅(%)") or 0))
             chg_color = "text-emerald-400" if chg >= 0 else "text-rose-400"
             chg_sign = "+" if chg >= 0 else ""
-            status = str(t.get("status", "已批准"))
-            badge_bg = "bg-emerald-500/15 text-emerald-300 border-emerald-500/30" if "批准" in status else "bg-indigo-500/15 text-indigo-300 border-indigo-500/30"
+            status = str(t.get("status") or t.get("人工状态") or "已批准")
+            badge_bg = (
+                "bg-emerald-500/15 text-emerald-300 border-emerald-500/30"
+                if ("批准" in status or "允许" in status)
+                else "bg-indigo-500/15 text-indigo-300 border-indigo-500/30"
+            )
             tracks_html += f"""
             <div class="glass rounded-xl p-4 border border-slate-800 hover:border-indigo-500/40 transition flex flex-col justify-between">
                 <div>
@@ -144,11 +161,11 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
                         <span class="text-xs px-2 py-0.5 rounded-full border {badge_bg}">{status}</span>
                         <span class="text-sm font-bold {chg_color}">{chg_sign}{chg:.2f}% (24h)</span>
                     </div>
-                    <h3 class="text-base font-bold text-white mb-1">{t.get('name', '')}</h3>
-                    <p class="text-xs text-slate-400 mb-3">来源: {t.get('source', '多维雷达')}</p>
+                    <h3 class="text-base font-bold text-white mb-1">{t_name}</h3>
+                    <p class="text-xs text-slate-400 mb-3">来源: {t_source}</p>
                 </div>
                 <div class="text-xs text-slate-300 bg-slate-900/80 rounded-lg p-2.5 border border-slate-800/80 leading-relaxed">
-                    💡 {t.get('reason', '具备较强叙事催化与资金关注度')}
+                    💡 {t_reason}
                 </div>
             </div>
             """
@@ -179,10 +196,8 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
 
             chg_1h = float(p.get("change_1h", 0))
             chg_24h = float(p.get("change_24h", 0))
-            chg_7d = float(p.get("change_7d", 0))
             c1h_cls = "text-emerald-400" if chg_1h >= 0 else "text-rose-400"
             c24_cls = "text-emerald-400" if chg_24h >= 0 else "text-rose-400"
-            c7d_cls = "text-emerald-400" if chg_7d >= 0 else "text-rose-400"
 
             price_val = float(p.get("price", 0))
             price_str = f"${price_val:.6f}" if price_val < 0.01 else f"${price_val:.4f}"
@@ -194,26 +209,45 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
             commits_4w = int(p.get("commits_4w", 0))
             vc_hits = p.get("vc_hits") or []
 
-            # 根据项目类型展示差异化核心指标（Meme看池子流动性与买卖盘，价值项目看流通率与代码/VC）
             if filter_tag == "meme" or (buys_24h + sells_24h > 0):
                 extra_metric_1_label = "DEX 池子流动性"
                 extra_metric_1_val = f"${liq_wan:.1f}万" if liq_wan > 0 else "链上深度充足"
                 extra_metric_2_label = "24h 链上买卖单"
-                extra_metric_2_val = f"<span class='text-emerald-400'>{buys_24h}买</span> / <span class='text-rose-400'>{sells_24h}卖</span> ({buy_ratio}%)" if (buys_24h + sells_24h) > 0 else f"买盘占比 {buy_ratio}%"
+                extra_metric_2_val = (
+                    f"<span class='text-emerald-400'>{buys_24h}买</span> / <span class='text-rose-400'>{sells_24h}卖</span> ({buy_ratio}%)"
+                    if (buys_24h + sells_24h) > 0
+                    else f"买盘占比 {buy_ratio}%"
+                )
             else:
                 extra_metric_1_label = "MC/FDV 流通率"
-                extra_metric_1_val = f"{p.get('mc_fdv_ratio', 0):.1f}%"
+                extra_metric_1_val = f"{float(p.get('mc_fdv_ratio', 0)):.1f}%"
                 extra_metric_2_label = "基本面/机构背调"
-                extra_metric_2_val = f"VC: {', '.join(vc_hits[:2])}" if vc_hits else (f"GitHub月提交: {commits_4w}次" if commits_4w > 0 else f"距ATH: {p.get('ath_drop', 0):.1f}%")
+                extra_metric_2_val = (
+                    f"VC: {', '.join(vc_hits[:2])}"
+                    if vc_hits
+                    else (
+                        f"GitHub月提交: {commits_4w}次"
+                        if commits_4w > 0
+                        else f"距ATH: {float(p.get('ath_drop', 0)):.1f}%"
+                    )
+                )
 
             catalyst_str = p.get("catalyst") or "链上资金与叙事共振异动"
             report_html = str(p.get("ai_report", "")).replace("\n", "<br>")
             symbol_clean = str(p.get("symbol", "")).upper()
             dex_url = p.get("dex_url") or f"https://dexscreener.com/search?q={symbol_clean}"
             cg_id = p.get("coingecko_id") or p.get("id") or ""
-            cg_url = f"https://www.coingecko.com/en/coins/{cg_id}" if cg_id and not str(cg_id).startswith("dex_") else f"https://www.coingecko.com/en/search?query={symbol_clean}"
+            cg_url = (
+                f"https://www.coingecko.com/en/coins/{cg_id}"
+                if cg_id and not str(cg_id).startswith("dex_")
+                else f"https://www.coingecko.com/en/search?query={symbol_clean}"
+            )
 
-            addr_badge = f'<span class="text-[11px] font-mono text-slate-400 bg-slate-800/90 px-2 py-0.5 rounded border border-slate-700" title="{contract_addr}">📋 {short_addr}</span>' if short_addr else ""
+            addr_badge = (
+                f'<span class="text-[11px] font-mono text-slate-400 bg-slate-800/90 px-2 py-0.5 rounded border border-slate-700" title="{contract_addr}">📋 {short_addr}</span>'
+                if short_addr
+                else ""
+            )
 
             projects_html += f"""
             <div class="project-card glass rounded-2xl p-5 border border-slate-800 hover:border-indigo-500/50 transition flex flex-col justify-between" data-type="{filter_tag}">
@@ -253,11 +287,11 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
                         </div>
                         <div>
                             <span class="text-slate-400 block">24h 换手率</span>
-                            <span class="text-amber-300 font-semibold text-sm">{p.get('turnover_24h', 0):.1f}%</span>
+                            <span class="text-amber-300 font-semibold text-sm">{float(p.get('turnover_24h', 0)):.1f}%</span>
                         </div>
                         <div>
                             <span class="text-slate-400 block">流通市值</span>
-                            <span class="text-emerald-300 font-semibold">${p.get('market_cap', 0):.1f}万</span>
+                            <span class="text-emerald-300 font-semibold">${float(p.get('market_cap', 0)):.1f}万</span>
                         </div>
                         <div>
                             <span class="text-slate-400 block">{extra_metric_1_label}</span>
@@ -293,7 +327,8 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
 
     feishu_btn = (
         f'<a href="{FEISHU_URL}" target="_blank" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium transition shadow-lg shadow-indigo-600/30">📊 打开飞书控制台</a>'
-        if FEISHU_URL else ""
+        if FEISHU_URL
+        else ""
     )
 
     html = f"""<!DOCTYPE html>
@@ -359,17 +394,17 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
         </section>
 
         <section>
-            <div class="flex items-center justify-between mb-4">
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
                 <div>
                     <h2 class="text-lg font-bold text-white">🎯 早期高赔率 Alpha 标的池（已完成深度背调验真）</h2>
                     <p class="text-xs text-slate-400">已自动排除 Top 大市值老白马，聚焦 $20万 ~ $3亿 市值区间的早期高弹性标的</p>
                 </div>
                 <div class="flex flex-wrap gap-2">
-                    <button onclick="filterProjects('all')" class="filter-btn active px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white transition">全部精选 ({len(projects_data)})</button>
-                    <button onclick="filterProjects('meme')" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-amber-300 hover:bg-slate-700 transition">🐶 链上早期Meme/金狗</button>
-                    <button onclick="filterProjects('breakout')" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-purple-300 hover:bg-slate-700 transition">🚀 叙事异动黑马</button>
-                    <button onclick="filterProjects('leader')" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-emerald-300 hover:bg-slate-700 transition">📈 强势赛道龙头</button>
-                    <button onclick="filterProjects('value')" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-sky-300 hover:bg-slate-700 transition">💎 机构潜伏/底部价值</button>
+                    <button onclick="filterProjects('all', this)" class="filter-btn active px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white transition">全部精选 ({len(projects_data)})</button>
+                    <button onclick="filterProjects('meme', this)" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-amber-300 hover:bg-slate-700 transition">🐶 链上早期Meme/金狗</button>
+                    <button onclick="filterProjects('breakout', this)" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-purple-300 hover:bg-slate-700 transition">🚀 叙事异动黑马</button>
+                    <button onclick="filterProjects('leader', this)" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-emerald-300 hover:bg-slate-700 transition">📈 强势赛道龙头</button>
+                    <button onclick="filterProjects('value', this)" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-sky-300 hover:bg-slate-700 transition">💎 机构潜伏/底部价值</button>
                 </div>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
@@ -389,15 +424,17 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
     </main>
 
     <script>
-        function filterProjects(type) {{
+        function filterProjects(type, btnEl) {{
             const cards = document.querySelectorAll('.project-card');
             const btns = document.querySelectorAll('.filter-btn');
             btns.forEach(b => {{
                 b.classList.remove('bg-indigo-600', 'text-white');
                 b.classList.add('bg-slate-800');
             }});
-            event.currentTarget.classList.remove('bg-slate-800');
-            event.currentTarget.classList.add('bg-indigo-600', 'text-white');
+            if (btnEl) {{
+                btnEl.classList.remove('bg-slate-800');
+                btnEl.classList.add('bg-indigo-600', 'text-white');
+            }}
 
             cards.forEach(card => {{
                 if (type === 'all' || card.dataset.type === type) {{
