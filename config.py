@@ -8,7 +8,6 @@ def _env(key, default=""):
 
 
 # ================= 1. 大模型配置中心 (主用 GLM + 备用 Groq) =================
-# 兼容新版 llm_engine.py 所需的 3 个核心字典
 LLM_API_KEYS = {
     "glm": _env("GLM_API_KEY") or _env("ZHIPU_API_KEY"),
     "groq": _env("GROQ_API_KEY"),
@@ -25,20 +24,20 @@ LLM_ENDPOINTS = {
 
 # 所有任务优先使用 GLM，失败自动切换至 Groq
 AGENT_MODEL_ROUTING = {
-    "default": {"provider": "glm", "model": "glm-4.7-flash"},
-    "bull_agent": {"provider": "glm", "model": "glm-4.7-flash"},
-    "bear_agent": {"provider": "glm", "model": "glm-4.7-flash"},
-    "cio_agent": {"provider": "glm", "model": "glm-4.7-flash"},
-    "evolver_agent": {"provider": "glm", "model": "glm-4.7-flash"},
+    "default": {"provider": "glm", "model": "glm-4-flash"},
+    "bull_agent": {"provider": "glm", "model": "glm-4-flash"},
+    "bear_agent": {"provider": "glm", "model": "glm-4-flash"},
+    "cio_agent": {"provider": "glm", "model": "glm-4-flash"},
+    "evolver_agent": {"provider": "glm", "model": "glm-4-flash"},
     "fallback": {"provider": "groq", "model": "llama-3.3-70b-versatile"},
 }
 
-# 保留旧版字典结构（防止其他脚本引用报错）
+# 保留旧版字典结构兼容
 LLM_PROVIDERS = {
     "glm": {
         "base_url": LLM_ENDPOINTS["glm"],
         "api_key": LLM_API_KEYS["glm"],
-        "default_model": "glm-4.7-flash",
+        "default_model": "glm-4-flash",
     },
     "groq": {
         "base_url": LLM_ENDPOINTS["groq"],
