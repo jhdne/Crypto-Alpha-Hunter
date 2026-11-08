@@ -1,4 +1,3 @@
-```python
 import os
 import json
 from datetime import datetime, timezone, timedelta
@@ -429,4 +428,3 @@ def send_email(title, md_content):
 
 if __name__ == "__main__":
     build_dashboard("系统状态同步", "已完成最新数据构建。")
-```
