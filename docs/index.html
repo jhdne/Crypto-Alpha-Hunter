@@ -3,163 +3,588 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto Alpha Hunter | AI 投研终端</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <title>Crypto Alpha Hunter V4.0 | 机构级 AI 投研终端</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen font-sans pb-16">
-    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans pb-20 selection:bg-indigo-500 selection:text-white">
+    <!-- 顶部毛玻璃导航栏 -->
+    <header class="border-b border-slate-800/80 bg-slate-900/80 backdrop-blur-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 py-3.5 flex flex-wrap justify-between items-center gap-3">
             <div class="flex items-center gap-3">
-                <span class="text-2xl">🦅</span>
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-emerald-500 flex items-center justify-center text-xl shadow-lg">🦅</div>
                 <div>
-                    <h1 class="font-extrabold text-lg tracking-wide text-white">CRYPTO ALPHA HUNTER</h1>
-                    <p class="text-[11px] text-slate-400">全自动赛道嗅探 · 多智能体博弈投委会 · 自我进化终端</p>
+                    <div class="flex items-center gap-2.5">
+                        <h1 class="font-black text-lg tracking-wider text-white">CRYPTO ALPHA HUNTER</h1>
+                        <span class="bg-gradient-to-r from-indigo-500 to-emerald-500 text-slate-950 text-[11px] font-mono font-extrabold px-2 py-0.5 rounded-md">V4.0 双轮驱动版</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400">全网热搜 Meme 异动直通车 · 主流赛道反弹雷达 · 多智能体投委会</p>
                 </div>
             </div>
             <div class="flex items-center gap-4">
-                <span class="text-xs text-slate-400 font-mono">最后更新(北京时间): 2026-11-08 07:43:40</span>
-                <a href="https://open.larksuite.com" target="_blank" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-4 py-2 rounded-lg transition">
-                    ⚙️ 打开飞书控制台
+                <div class="text-right hidden sm:block">
+                    <div class="text-[10px] text-slate-500">最后巡航时间 (北京时间)</div>
+                    <div class="text-xs text-emerald-400 font-mono font-bold">2026-11-08 11:10:41</div>
+                </div>
+                <a href="https://open.larksuite.com" target="_blank" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-lg transition">
+                    ⚙️ 飞书控制台
                 </a>
             </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 mt-6 space-y-8">
-        <section class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-xl p-4">
-                <div class="text-xs font-bold text-indigo-400 mb-3 flex justify-between">
-                    <span>🧬 当前自进化策略权重 (表1: 赛道热度权重)</span>
-                    <span class="text-slate-400 font-mono">市值区间: $500万 ~ $15000万</span>
-                </div>
-                <div class="grid grid-cols-5 gap-2 text-center">
-                    <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
-                        <div class="text-[11px] text-slate-400">赛道热度</div>
-                        <div class="text-base font-mono font-bold text-white mt-0.5">20%</div>
-                    </div>
-                    <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
-                        <div class="text-[11px] text-slate-400">价格安全垫</div>
-                        <div class="text-base font-mono font-bold text-emerald-400 mt-0.5">30%</div>
-                    </div>
-                    <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
-                        <div class="text-[11px] text-slate-400">GitHub技术</div>
-                        <div class="text-base font-mono font-bold text-white mt-0.5">15%</div>
-                    </div>
-                    <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
-                        <div class="text-[11px] text-slate-400">VC与营销背书</div>
-                        <div class="text-base font-mono font-bold text-amber-400 mt-0.5">20%</div>
-                    </div>
-                    <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
-                        <div class="text-[11px] text-slate-400">市值与解锁赔率</div>
-                        <div class="text-base font-mono font-bold text-white mt-0.5">15%</div>
-                    </div>
-                </div>
+    <main class="max-w-7xl mx-auto px-4 mt-6 space-y-7">
+        <!-- 模块1：五大引擎实时状态灯 + 头条警报 -->
+        <section class="grid grid-cols-1 lg:grid-cols-4 gap-4">
+            <div class="lg:col-span-3 grid grid-cols-2 sm:grid-cols-5 gap-2.5">
+                
+        <div class="bg-slate-900/90 border border-slate-800/90 rounded-xl p-3 flex flex-col justify-between">
+            <div class="text-xs font-bold text-slate-200 flex items-center gap-2"><span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> 二级行情与热搜引擎</div>
+            <div class="text-[11px] text-emerald-400/90 mt-1 truncate font-mono">正常 (已捕获 12 个主流升温赛道)</div>
+        </div>
+        <div class="bg-slate-900/90 border border-slate-800/90 rounded-xl p-3 flex flex-col justify-between">
+            <div class="text-xs font-bold text-slate-200 flex items-center gap-2"><span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> 一级VC融资与媒体源</div>
+            <div class="text-[11px] text-emerald-400/90 mt-1 truncate font-mono">正常 (实时捕获 6 条热搜与融资情报)</div>
+        </div>
+        <div class="bg-slate-900/90 border border-slate-800/90 rounded-xl p-3 flex flex-col justify-between">
+            <div class="text-xs font-bold text-slate-200 flex items-center gap-2"><span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> AI 投委会 (GLM/Groq)</div>
+            <div class="text-[11px] text-emerald-400/90 mt-1 truncate font-mono">正常 (多智能体投委会辩论完成)</div>
+        </div>
+        <div class="bg-slate-900/90 border border-slate-800/90 rounded-xl p-3 flex flex-col justify-between">
+            <div class="text-xs font-bold text-slate-200 flex items-center gap-2"><span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> 链上换手与动量雷达</div>
+            <div class="text-[11px] text-emerald-400/90 mt-1 truncate font-mono">正常 (链上换手率+热搜动量双擎已启用)</div>
+        </div>
+        <div class="bg-slate-900/90 border border-slate-800/90 rounded-xl p-3 flex flex-col justify-between">
+            <div class="text-xs font-bold text-slate-200 flex items-center gap-2"><span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> 飞书控制台 & 双保险库</div>
+            <div class="text-[11px] text-emerald-400/90 mt-1 truncate font-mono">正常 (飞书已同步)</div>
+        </div>
             </div>
-            <div class="bg-indigo-950/30 border border-indigo-500/30 rounded-xl p-4 flex flex-col justify-between">
+            <div class="bg-gradient-to-br from-indigo-950/60 to-slate-900 border border-indigo-500/40 rounded-xl p-3.5 flex flex-col justify-between">
                 <div class="flex justify-between items-center">
-                    <span class="text-xs font-bold text-indigo-300">📢 最新系统广播</span>
-                    <span class="text-[11px] text-slate-400 font-mono">2026-11-07 08:08</span>
+                    <span class="text-xs font-extrabold text-indigo-300">⚡ 最新 Alpha 警报</span>
+                    <span class="text-[10px] text-slate-400 font-mono">2026-11-08 11:10</span>
                 </div>
-                <div class="my-2 text-sm font-bold text-white">🚨 发现高潜安全标的 $WPOL (76.0分)</div>
-                <div class="text-xs text-slate-300 line-clamp-2">【核心业务】
-Wrapped POL (WPOL) 是在 Polygon PoS 链上的 MATIC 跨链包装代币，提供 1:1 锁定的价值锚定，使用户能够在其他链上使用 MATIC 资产进行 DeFi、交易及流动性提供。项目本身主要是资产包装层，技术复杂度相对较低，核心价值来源于底层 MATIC 的价格与 Polygon 生态的活跃度。
-
-【看多逻辑】
-1. **资本背书**：a16z、Paradigm、Coinbase 等顶级 VC 已参与早期融资，显示出对 Polygon 生态及跨链资产的长期看好，后续可能带来更多融资、合作与生态资源。
-2. **生态红利**：Polygon 正在快速扩容并吸引大量 DeFi、NFT 项目，MATIC 需求上行将直接提升 WPOL 的流动性与交易量。包装资产的跨链需求在多链互操作性趋势下仍具潜力。
-3. **估值低位**：当前市值约 1,426 万美元，已跌至历史高点的 3.2%（-96.8%），若 MATIC 或 Polygon 市场回暖，WPOL 有显著的价格修复空间，潜在回报率较高。
-
-【核心风险】
-1. **锚定机制风险**：WPOL 完全依赖 MATIC 1:1 锁定，若 Polygon 主网出现安全漏洞、流动性枯竭或监管干预，资产锚定可能失效，导致 WPOL 价值快速蒸发。
-2. **治理与稀释风险**：顶级 VC 已持有大量股份，后续若进行增发或引入新投资者，现有持有人可能面临股权稀释，退出收益受限。
-3. **技术停滞**：近 4 周 GitHub 零提交，表明项目缺乏活跃开发。包装代币的竞争日益激烈，若没有功能升级或跨链创新，WPOL 容易被更具技术优势的竞争品取代。
-4. **市场流动性**：市值虽低但交易深度有限，大额买卖可能导致显著滑点，增加持仓成本。
-
-【操作建议】
-- **短期**：鉴于高波动性与技术停滞，建议保持观望或小仓位试探性买入，重点关注 Polygon 主网安全事件、MATIC 价格走势以及 VC 是否有后续融资或合作公告。
-- **中期**：若出现 MATIC 价格回升（> $1.2）或 Polygon 生态新增重要 DeFi 项目，考虑逐步加仓，利用低估值获取潜在反弹收益。
-- **长期**：持续监测项目治理结构、VC 持股比例变化以及代码库活跃度。若出现持续开发或推出跨链功能的积极信号，可转为中性或偏多仓位；若出现安全事件或增发稀释，则考虑减持或止损。
-- **风险控制**：设置止损位在当前价格的 20% 以下，仓位不超过整体加密资产配置的 5%。</div>
+                <div class="text-xs font-bold text-white mt-1 truncate">🚨 捕获 📈 赛道反弹龙头：$MET (76.6分)</div>
+                <div class="text-[11px] text-slate-300 mt-0.5 line-clamp-2">所属板块：去中心化交易所 (DEX) | 24h涨跌：+16.3% | 换手率：29.7%。【核心业务】Meteora ($MET) 是基于 Solana 的去中心化交易所（DEX）协议，提供低手续费和高吞吐量的流动性聚合服务。当前项目已上线多链桥接功能，吸引部分 DeF...</div>
             </div>
         </section>
 
+        <!-- 模块2：全网叙事风向标 & 一二级市场情报 -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+            <div class="lg:col-span-7 bg-slate-900/70 border border-slate-800 rounded-2xl p-4">
+                <h2 class="text-sm font-extrabold text-white mb-3 flex items-center gap-2">
+                    <span>🔥 全网热搜叙事词云 & 异动风向标</span>
+                </h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    
+        <div class="bg-slate-950/80 border border-indigo-500/30 hover:border-indigo-400 rounded-xl p-3 transition flex justify-between items-center">
+            <div>
+                <div class="text-sm font-extrabold text-indigo-300">#AI Agent 反弹</div>
+                <div class="text-[11px] text-slate-400 mt-0.5">AI 相关代币在近期回调后出现资金回流，媒体热搜和VC布局同步提升热度</div>
+            </div>
+            <div class="bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 text-xs font-mono font-bold px-2.5 py-1 rounded-lg">🔥 96</div>
+        </div>
+        <div class="bg-slate-950/80 border border-indigo-500/30 hover:border-indigo-400 rounded-xl p-3 transition flex justify-between items-center">
+            <div>
+                <div class="text-sm font-extrabold text-indigo-300">#Real World Assets (RWA)</div>
+                <div class="text-[11px] text-slate-400 mt-0.5">机构资金逐步进入真实资产链上化，成交额突破千亿美元，监管指引逐步明朗</div>
+            </div>
+            <div class="bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 text-xs font-mono font-bold px-2.5 py-1 rounded-lg">🔥 94</div>
+        </div>
+        <div class="bg-slate-950/80 border border-indigo-500/30 hover:border-indigo-400 rounded-xl p-3 transition flex justify-between items-center">
+            <div>
+                <div class="text-sm font-extrabold text-indigo-300">#DePIN</div>
+                <div class="text-[11px] text-slate-400 mt-0.5">去中心化基础设施网络（DePIN）在元宇宙与IoT场景落地，社群讨论和项目融资激增</div>
+            </div>
+            <div class="bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 text-xs font-mono font-bold px-2.5 py-1 rounded-lg">🔥 92</div>
+        </div>
+        <div class="bg-slate-950/80 border border-indigo-500/30 hover:border-indigo-400 rounded-xl p-3 transition flex justify-between items-center">
+            <div>
+                <div class="text-sm font-extrabold text-indigo-300">#Meme 狂潮</div>
+                <div class="text-[11px] text-slate-400 mt-0.5">社交媒体驱动的 meme 代币再次出现爆发式涨幅，短线投机情绪高涨</div>
+            </div>
+            <div class="bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 text-xs font-mono font-bold px-2.5 py-1 rounded-lg">🔥 90</div>
+        </div>
+        <div class="bg-slate-950/80 border border-indigo-500/30 hover:border-indigo-400 rounded-xl p-3 transition flex justify-between items-center">
+            <div>
+                <div class="text-sm font-extrabold text-indigo-300">#Restaking</div>
+                <div class="text-[11px] text-slate-400 mt-0.5">Restaking 作为提升 PoS 链上收益的新模型，流动性治理代币成交额快速增长</div>
+            </div>
+            <div class="bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 text-xs font-mono font-bold px-2.5 py-1 rounded-lg">🔥 89</div>
+        </div>
+        <div class="bg-slate-950/80 border border-indigo-500/30 hover:border-indigo-400 rounded-xl p-3 transition flex justify-between items-center">
+            <div>
+                <div class="text-sm font-extrabold text-indigo-300">#Rollup 叠加</div>
+                <div class="text-[11px] text-slate-400 mt-0.5">二层扩容方案在以太坊生态持续落地，交易费用下降带动相关代币需求回暖</div>
+            </div>
+            <div class="bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 text-xs font-mono font-bold px-2.5 py-1 rounded-lg">🔥 88</div>
+        </div>
+                </div>
+            </div>
+            <div class="lg:col-span-5 bg-slate-900/70 border border-slate-800 rounded-2xl p-4">
+                <h2 class="text-sm font-extrabold text-white mb-2 flex items-center gap-2">
+                    <span>💰 实时热搜飙升、VC 融资与媒体快讯</span>
+                </h2>
+                <ul class="max-h-48 overflow-y-auto pr-1"><li class="text-xs text-slate-300 py-1.5 border-b border-slate-800/60 flex items-start gap-2"><span>•</span><span>🔥 [全网热搜飙升] Bitcoin($BTC), Worldcoin($WLD), Grass($GRASS), NEAR Protocol($NEAR), Geodnet($GEOD), Dacity Coin($DACITY), Pearl($PEARL), Ethereum($ETH)</span></li><li class="text-xs text-slate-300 py-1.5 border-b border-slate-800/60 flex items-start gap-2"><span>•</span><span>📰 [媒体快讯] Cathie Wood：需从长期视角看待近期市场波动与选举结果，中期选举不会阻碍AI革命</span></li><li class="text-xs text-slate-300 py-1.5 border-b border-slate-800/60 flex items-start gap-2"><span>•</span><span>📰 [媒体快讯] 某巨鲸通过THORChain将493.15枚ETH兑换为约14.5枚BTC</span></li><li class="text-xs text-slate-300 py-1.5 border-b border-slate-800/60 flex items-start gap-2"><span>•</span><span>📰 [媒体快讯] Ex-FBI counterintelligence agent stole almost $2.5M in crypto</span></li><li class="text-xs text-slate-300 py-1.5 border-b border-slate-800/60 flex items-start gap-2"><span>•</span><span>📰 [媒体快讯] Gnosis Pay breach exposes card details, personal data and crypto wallet inf</span></li><li class="text-xs text-slate-300 py-1.5 border-b border-slate-800/60 flex items-start gap-2"><span>•</span><span>📰 [媒体快讯] US 401(k) proposal leaves door open to altcoins, but hurdles remain</span></li></ul>
+            </div>
+        </section>
+
+        <!-- 模块3：主流赛道轮动与反弹雷达 -->
         <section>
-            <h2 class="text-base font-bold text-white mb-3 flex items-center gap-2">
-                <span>📡 热门与潜力赛道雷达 (共 4 个)</span>
-            </h2>
+            <div class="flex justify-between items-center mb-3">
+                <h2 class="text-base font-extrabold text-white flex items-center gap-2">
+                    <span>📡 核心赛道反弹与资金轮动雷达 (已自动过滤稳定币与包装币 · 共 4 个)</span>
+                </h2>
+            </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 
-        <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-4 hover:border-indigo-500/50 transition">
-            <div class="flex justify-between items-start mb-2">
-                <div>
-                    <h3 class="font-bold text-white text-base">Crypto-Backed Tokens</h3>
-                    <span class="text-xs text-slate-500 font-mono">asset-backed-tokens</span>
+        <div class="bg-slate-900/90 border border-slate-800 hover:border-indigo-500/50 rounded-2xl p-4 transition flex flex-col justify-between">
+            <div>
+                <div class="flex justify-between items-start gap-2 mb-2">
+                    <h3 class="font-extrabold text-white text-base leading-snug">去中心化交易所 (DEX)</h3>
+                    <span class="text-xs font-mono font-bold px-2 py-0.5 rounded border text-emerald-400 bg-emerald-500/10 border-emerald-500/30">+2.2%</span>
                 </div>
-                <span class="text-xs px-2 py-0.5 rounded border bg-emerald-500/20 text-emerald-400 border-emerald-500/30">允许深挖</span>
-            </div>
-            <div class="flex items-center gap-3 my-2 text-xs">
-                <span class="bg-slate-800 px-2 py-1 rounded text-slate-300">来源: 二级暴涨</span>
-                <span class="font-mono font-bold text-emerald-400">24h: +7.1%</span>
-            </div>
-            <p class="text-xs text-slate-400 leading-relaxed mt-2">加密资产抵押代币板块受市场追捧，涨幅显著，显示投资者对加密资产抵押的认可和信任</p>
-        </div>
-        
-        <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-4 hover:border-indigo-500/50 transition">
-            <div class="flex justify-between items-start mb-2">
-                <div>
-                    <h3 class="font-bold text-white text-base">EUR Stablecoin</h3>
-                    <span class="text-xs text-slate-500 font-mono">eur-stablecoin</span>
+                <div class="flex items-center gap-2 mb-2.5">
+                    <span class="text-[11px] bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded font-medium">🔥赛道强势反弹</span>
+                    <span class="text-[11px] text-slate-500 font-mono truncate">decentralized-exchange</span>
                 </div>
-                <span class="text-xs px-2 py-0.5 rounded border bg-emerald-500/20 text-emerald-400 border-emerald-500/30">允许深挖</span>
+                <p class="text-xs text-slate-300 leading-relaxed">24h涨幅居榜首且成交额 1444M，资金正从中心化平台流向 DEX，建议布局核心流动性提供者（LP）代币或交易所原生代币，逢低加仓。</p>
             </div>
-            <div class="flex items-center gap-3 my-2 text-xs">
-                <span class="bg-slate-800 px-2 py-1 rounded text-slate-300">来源: 二级暴涨</span>
-                <span class="font-mono font-bold text-emerald-400">24h: +0.9%</span>
-            </div>
-            <p class="text-xs text-slate-400 leading-relaxed mt-2">欧元稳定币板块涨幅稳健，反映了市场对稳定币的稳定性和流动性的需求增加</p>
         </div>
-        
-        <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-4 hover:border-indigo-500/50 transition">
-            <div class="flex justify-between items-start mb-2">
-                <div>
-                    <h3 class="font-bold text-white text-base">Remora Markets Tokenized rStocks</h3>
-                    <span class="text-xs text-slate-500 font-mono">remora-markets-tokenized-rstocks</span>
+        <div class="bg-slate-900/90 border border-slate-800 hover:border-indigo-500/50 rounded-2xl p-4 transition flex flex-col justify-between">
+            <div>
+                <div class="flex justify-between items-start gap-2 mb-2">
+                    <h3 class="font-extrabold text-white text-base leading-snug">娱乐</h3>
+                    <span class="text-xs font-mono font-bold px-2 py-0.5 rounded border text-emerald-400 bg-emerald-500/10 border-emerald-500/30">+2.1%</span>
                 </div>
-                <span class="text-xs px-2 py-0.5 rounded border bg-emerald-500/20 text-emerald-400 border-emerald-500/30">允许深挖</span>
-            </div>
-            <div class="flex items-center gap-3 my-2 text-xs">
-                <span class="bg-slate-800 px-2 py-1 rounded text-slate-300">来源: 一级+二级共振</span>
-                <span class="font-mono font-bold text-emerald-400">24h: +3.2%</span>
-            </div>
-            <p class="text-xs text-slate-400 leading-relaxed mt-2">Lombard Systems完成种子轮融资，为代币化证券基础设施注入资本，推动可交易化的传统资产上链。</p>
-        </div>
-        
-        <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-4 hover:border-indigo-500/50 transition">
-            <div class="flex justify-between items-start mb-2">
-                <div>
-                    <h3 class="font-bold text-white text-base">Cookie Launchpad</h3>
-                    <span class="text-xs text-slate-500 font-mono">cookie-launchpad</span>
+                <div class="flex items-center gap-2 mb-2.5">
+                    <span class="text-[11px] bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded font-medium">🔥赛道强势反弹</span>
+                    <span class="text-[11px] text-slate-500 font-mono truncate">entertainment</span>
                 </div>
-                <span class="text-xs px-2 py-0.5 rounded border bg-emerald-500/20 text-emerald-400 border-emerald-500/30">允许深挖</span>
+                <p class="text-xs text-slate-300 leading-relaxed">娱乐赛道受 NFT、元宇宙内容消费推动，涨幅与 DEX 并驾齐驱，关注头部娱乐元宇宙项目及其代币，短线可做波段买入。</p>
             </div>
-            <div class="flex items-center gap-3 my-2 text-xs">
-                <span class="bg-slate-800 px-2 py-1 rounded text-slate-300">来源: 二级暴涨</span>
-                <span class="font-mono font-bold text-emerald-400">24h: +11.9%</span>
-            </div>
-            <p class="text-xs text-slate-400 leading-relaxed mt-2">Launchpad项目在链上项目孵化和早期投资者争夺中形成热点，吸引大量资金涌入新兴链生态。</p>
         </div>
-        
+        <div class="bg-slate-900/90 border border-slate-800 hover:border-indigo-500/50 rounded-2xl p-4 transition flex flex-col justify-between">
+            <div>
+                <div class="flex justify-between items-start gap-2 mb-2">
+                    <h3 class="font-extrabold text-white text-base leading-snug">真实资产 (RWA)</h3>
+                    <span class="text-xs font-mono font-bold px-2 py-0.5 rounded border text-emerald-400 bg-emerald-500/10 border-emerald-500/30">+1.2%</span>
+                </div>
+                <div class="flex items-center gap-2 mb-2.5">
+                    <span class="text-[11px] bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded font-medium">💰一二级共振</span>
+                    <span class="text-[11px] text-slate-500 font-mono truncate">real-world-assets-rwa</span>
+                </div>
+                <p class="text-xs text-slate-300 leading-relaxed">成交额 1176M，机构资金在 RWA 资产上布局加速，建议关注链上资产代币化平台及其治理代币，适合中长期持有。</p>
+            </div>
+        </div>
+        <div class="bg-slate-900/90 border border-slate-800 hover:border-indigo-500/50 rounded-2xl p-4 transition flex flex-col justify-between">
+            <div>
+                <div class="flex justify-between items-start gap-2 mb-2">
+                    <h3 class="font-extrabold text-white text-base leading-snug">流动性再质押治理代币</h3>
+                    <span class="text-xs font-mono font-bold px-2 py-0.5 rounded border text-emerald-400 bg-emerald-500/10 border-emerald-500/30">+0.7%</span>
+                </div>
+                <div class="flex items-center gap-2 mb-2.5">
+                    <span class="text-[11px] bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded font-medium">💰一二级共振</span>
+                    <span class="text-[11px] text-slate-500 font-mono truncate">liquid-restaking-governance-token</span>
+                </div>
+                <p class="text-xs text-slate-300 leading-relaxed">Restaking 仍在早期成长期，成交额 60M，流动性激励机制吸引套利资金，适合在回调时低位建仓，待生态成熟后可期待收益放大。</p>
+            </div>
+        </div>
             </div>
         </section>
 
+        <!-- 模块4：多智能体精选项目库 (带交互式分类 Tab) -->
         <section>
-            <h2 class="text-base font-bold text-white mb-3 flex items-center gap-2">
-                <span>💎 多智能体投委会精选项目库 (按综合得分排序 · 共 0 个)</span>
-            </h2>
+            <div class="flex flex-wrap justify-between items-center gap-3 mb-4">
+                <h2 class="text-base font-extrabold text-white flex items-center gap-2">
+                    <span>💎 多智能体投委会精选 Alpha 标的库 (共 6 个)</span>
+                </h2>
+                <!-- 交互式分类筛选按钮 -->
+                <div class="flex items-center gap-2 bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs">
+                    <button onclick="filterProjects('all')" id="tab-all" class="tab-btn bg-indigo-600 text-white font-bold px-3 py-1.5 rounded-lg transition">全部 (6)</button>
+                    <button onclick="filterProjects('meme')" id="tab-meme" class="tab-btn text-slate-400 hover:text-white px-3 py-1.5 rounded-lg transition">🔥 热门Meme/异动</button>
+                    <button onclick="filterProjects('rebound')" id="tab-rebound" class="tab-btn text-slate-400 hover:text-white px-3 py-1.5 rounded-lg transition">📈 赛道反弹龙头</button>
+                    <button onclick="filterProjects('value')" id="tab-value" class="tab-btn text-slate-400 hover:text-white px-3 py-1.5 rounded-lg transition">💎 底部价值潜伏</button>
+                </div>
+            </div>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <div class="text-slate-500 text-sm">暂无精选项目，请运行 project 任务</div>
+                
+        <div class="project-card bg-slate-900/95 border border-slate-800 hover:border-indigo-500/60 rounded-2xl p-5 transition flex flex-col justify-between shadow-lg" data-category="rebound">
+            <div>
+                <div class="flex justify-between items-start gap-2 mb-3">
+                    <div>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="text-2xl font-black text-white tracking-tight">$MET</span>
+                            <span class="text-xs text-slate-400 font-medium">Meteora</span>
+                            <span class="text-xs px-2.5 py-0.5 rounded-full border font-bold bg-emerald-500/20 text-emerald-300 border-emerald-500/40">📈 赛道反弹龙头</span>
+                        </div>
+                        <div class="text-xs text-indigo-400 mt-1 font-medium">所属叙事：去中心化交易所 (DEX)</div>
+                    </div>
+                    <div class="px-3 py-1.5 rounded-xl font-mono font-black text-sm shadow bg-indigo-600 text-white">
+                        76.6 分
+                    </div>
+                </div>
+
+                <!-- 六维核心行情指标矩阵 -->
+                <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 bg-slate-950/90 p-3 rounded-xl border border-slate-800/80 mb-4 text-center">
+                    <div>
+                        <div class="text-[10px] text-slate-500">当前价格</div>
+                        <div class="text-xs font-mono font-bold text-white mt-0.5">$0.323681</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">24h 动量</div>
+                        <div class="text-xs font-mono font-bold text-emerald-400 mt-0.5">+16.3%</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">7d 趋势</div>
+                        <div class="text-xs font-mono font-bold text-emerald-400 mt-0.5">+13.1%</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">24h 换手率</div>
+                        <div class="text-xs font-mono font-bold text-indigo-400 mt-0.5">29.7%</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">流通市值</div>
+                        <div class="text-xs font-mono font-bold text-slate-200 mt-0.5">$18288.6万</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">MC/FDV流通</div>
+                        <div class="text-xs font-mono font-bold text-emerald-400 mt-0.5">56.6%</div>
+                    </div>
+                </div>
+
+                <!-- 多智能体辩论裁决报告 -->
+                <div class="text-xs text-slate-300 leading-relaxed bg-slate-950/50 p-3.5 rounded-xl border border-slate-800/60">
+                    【核心业务】Meteora ($MET) 是基于 Solana 的去中心化交易所（DEX）协议，提供低手续费和高吞吐量的流动性聚合服务。当前项目已上线多链桥接功能，吸引部分 DeFi 项目接入。<br>【看多逻辑】<br>1. **赛道反弹**：近期 Solana 生态整体回暖，DEX 交易量显著提升，$MET 受益于行业热度，24h涨幅 16.34%。<br>2. **高换手率**：29.7% 的日换手率表明资金活跃，流动性充足，短线买盘可能继续推高价格。<br>3. **量价齐升**：7d涨幅 13.06% 与成交额增长同步，显示多头情绪仍在积聚，且当前价格距离历史最高点仍有约 53% 回撤空间，技术面仍有上行潜力。<br>【核心风险】<br>1. **流动性陷阱**：极高的换手率常伴随拉高出货风险，若大户抛售，价格可能快速回撤。<br>2. **代币解锁压力**：MC/FDV 流通率仅 56.6%，意味着约 43% 代币仍未解锁，未来解锁窗口可能带来显著抛压。<br>3. **赛道泡沫**：当前上涨主要受 Solana 热度驱动，基本面（如链上活跃用户、交易手续费收入）增长有限，板块回调时 $MET 将首当其冲受挤压。<br>【操作建议】<br>- **短线**：可考虑在当前回调至 $0.30‑$0.32 区间进行小仓位做多，设定止盈目标 $0.38（约 15%）并严格止损 $0.28，以防突发抛压。<br>- **中长线**：鉴于代币解锁风险与赛道不确定性，建议维持观望或仅配置极小比例（≤5%）的组合资金，待项目生态指标（如日活用户、链上交易量）出现持续增长再逐步加仓。<br>- **风险控制**：密切关注 Solana 网络整体表现、代币解锁时间表以及大额转账监测，一旦出现大额卖单或链上活跃度下降，即时降低仓位或退出。
+                </div>
+            </div>
+
+            <!-- 底部操作栏：一键看K线与链上数据 -->
+            <div class="mt-4 pt-3 border-t border-slate-800/80 flex flex-wrap justify-between items-center gap-2 text-xs">
+                <span class="text-slate-500 font-mono text-[11px]">更新: 11-08 11:10 | 距ATH: -52.9%</span>
+                <div class="flex items-center gap-2">
+                    <a href="https://dexscreener.com/search?q=MET" target="_blank" class="bg-slate-800 hover:bg-indigo-600 text-slate-200 hover:text-white px-3 py-1 rounded-lg transition font-medium">📈 DexScreener 链上K线</a>
+                    <a href="https://www.coingecko.com/en/coins/meteora" target="_blank" class="bg-slate-800 hover:bg-emerald-600 text-slate-200 hover:text-white px-3 py-1 rounded-lg transition font-medium">🦎 CoinGecko 详情</a>
+                </div>
+            </div>
+        </div>
+        <div class="project-card bg-slate-900/95 border border-slate-800 hover:border-indigo-500/60 rounded-2xl p-5 transition flex flex-col justify-between shadow-lg" data-category="value">
+            <div>
+                <div class="flex justify-between items-start gap-2 mb-3">
+                    <div>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="text-2xl font-black text-white tracking-tight">$THE</span>
+                            <span class="text-xs text-slate-400 font-medium">Thena</span>
+                            <span class="text-xs px-2.5 py-0.5 rounded-full border font-bold bg-amber-500/20 text-amber-300 border-amber-500/40">💎 底部价值潜伏</span>
+                        </div>
+                        <div class="text-xs text-indigo-400 mt-1 font-medium">所属叙事：去中心化交易所 (DEX)</div>
+                    </div>
+                    <div class="px-3 py-1.5 rounded-xl font-mono font-black text-sm shadow bg-indigo-600 text-white">
+                        69.8 分
+                    </div>
+                </div>
+
+                <!-- 六维核心行情指标矩阵 -->
+                <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 bg-slate-950/90 p-3 rounded-xl border border-slate-800/80 mb-4 text-center">
+                    <div>
+                        <div class="text-[10px] text-slate-500">当前价格</div>
+                        <div class="text-xs font-mono font-bold text-white mt-0.5">$0.037598</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">24h 动量</div>
+                        <div class="text-xs font-mono font-bold text-emerald-400 mt-0.5">+0.9%</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">7d 趋势</div>
+                        <div class="text-xs font-mono font-bold text-rose-400 mt-0.5">-22.6%</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">24h 换手率</div>
+                        <div class="text-xs font-mono font-bold text-indigo-400 mt-0.5">163.4%</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">流通市值</div>
+                        <div class="text-xs font-mono font-bold text-slate-200 mt-0.5">$514.8万</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">MC/FDV流通</div>
+                        <div class="text-xs font-mono font-bold text-emerald-400 mt-0.5">47.6%</div>
+                    </div>
+                </div>
+
+                <!-- 多智能体辩论裁决报告 -->
+                <div class="text-xs text-slate-300 leading-relaxed bg-slate-950/50 p-3.5 rounded-xl border border-slate-800/60">
+                    【核心业务】<br>Thena ($THE) 是去中心化交易所 (DEX) 生态中的流动性聚合协议，旨在通过跨链桥接和订单路由提升交易效率并降低滑点。项目聚焦于低费用的 AMM 设计以及对流动性提供者的激励机制，目标是成为多链 DeFi 的基础设施层。<br><br>【看多逻辑】<br>1. **极低估值**：当前价格距离历史最高点跌幅 99.1%，市值仅约 515 万美元，理论上具备数倍甚至数十倍的上行空间。<br>2. **超高换手**：24h 成交额 841 万美元，换手率 163.4%，显示资金流动性活跃，短线拉升潜力显著。<br>3. **流通率 47.6%**：约一半代币仍在锁仓，若项目方逐步解锁并用于生态激励或合作，可能进一步提升需求。<br>4. **技术潜力**：若实现跨链聚合或被主流 DEX（如 Uniswap、Sushiswap）列入白名单，交易量将快速增长，带动价格上行。<br><br>【核心风险】<br>1. **流动性与资金链风险**：项目方或大户若突然撤出流动性，可能导致价格剧烈下跌，空头仓位面临逼空风险。<br>2. **锁仓代币解锁压力**：大规模解锁可能产生抛压，稀释现有流通供应，短期内压制价格。<br>3. **监管不确定性**：DeFi 项目仍面临监管审查，若出现不利政策或合规问题，可能导致资金外流。<br>4. **竞争激烈**：DEX 市场竞争者众多（如 Uniswap、Curve、GMX），若技术或生态合作进展不及预期，难以形成持续的网络效应。<br><br>【操作建议】<br>- **短期**：鉴于超高换手和潜在技术突破，可考虑在 0.035‑0.040 USD 区间进行小额波段买入，设置止盈 15% 与止损 10%。<br>- **中期**：观察项目方锁仓解锁计划及是否有主流 DEX 上线公告，若出现正面信号，可逐步加仓至 0.045 USD 左右。<br>- **长期**：保持警惕监管动向和竞争格局，若项目未能实现跨链聚合或生态扩张，建议在持仓 20% 以上时逐步减持，转向更具护城河的 DeFi 项目。
+                </div>
+            </div>
+
+            <!-- 底部操作栏：一键看K线与链上数据 -->
+            <div class="mt-4 pt-3 border-t border-slate-800/80 flex flex-wrap justify-between items-center gap-2 text-xs">
+                <span class="text-slate-500 font-mono text-[11px]">更新: 11-08 11:10 | 距ATH: -99.1%</span>
+                <div class="flex items-center gap-2">
+                    <a href="https://dexscreener.com/search?q=THE" target="_blank" class="bg-slate-800 hover:bg-indigo-600 text-slate-200 hover:text-white px-3 py-1 rounded-lg transition font-medium">📈 DexScreener 链上K线</a>
+                    <a href="https://www.coingecko.com/en/coins/thena" target="_blank" class="bg-slate-800 hover:bg-emerald-600 text-slate-200 hover:text-white px-3 py-1 rounded-lg transition font-medium">🦎 CoinGecko 详情</a>
+                </div>
+            </div>
+        </div>
+        <div class="project-card bg-slate-900/95 border border-slate-800 hover:border-indigo-500/60 rounded-2xl p-5 transition flex flex-col justify-between shadow-lg" data-category="meme">
+            <div>
+                <div class="flex justify-between items-start gap-2 mb-3">
+                    <div>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="text-2xl font-black text-white tracking-tight">$NEAR</span>
+                            <span class="text-xs text-slate-400 font-medium">NEAR Protocol</span>
+                            <span class="text-xs px-2.5 py-0.5 rounded-full border font-bold bg-rose-500/20 text-rose-300 border-rose-500/40">🔥 热门Meme/异动</span>
+                        </div>
+                        <div class="text-xs text-indigo-400 mt-1 font-medium">所属叙事：全网热搜异动榜</div>
+                    </div>
+                    <div class="px-3 py-1.5 rounded-xl font-mono font-black text-sm shadow bg-indigo-600 text-white">
+                        66.4 分
+                    </div>
+                </div>
+
+                <!-- 六维核心行情指标矩阵 -->
+                <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 bg-slate-950/90 p-3 rounded-xl border border-slate-800/80 mb-4 text-center">
+                    <div>
+                        <div class="text-[10px] text-slate-500">当前价格</div>
+                        <div class="text-xs font-mono font-bold text-white mt-0.5">$3.72</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">24h 动量</div>
+                        <div class="text-xs font-mono font-bold text-rose-400 mt-0.5">-1.0%</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">7d 趋势</div>
+                        <div class="text-xs font-mono font-bold text-rose-400 mt-0.5">-17.1%</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">24h 换手率</div>
+                        <div class="text-xs font-mono font-bold text-indigo-400 mt-0.5">5.2%</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">流通市值</div>
+                        <div class="text-xs font-mono font-bold text-slate-200 mt-0.5">$487533.7万</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">MC/FDV流通</div>
+                        <div class="text-xs font-mono font-bold text-emerald-400 mt-0.5">100.0%</div>
+                    </div>
+                </div>
+
+                <!-- 多智能体辩论裁决报告 -->
+                <div class="text-xs text-slate-300 leading-relaxed bg-slate-950/50 p-3.5 rounded-xl border border-slate-800/60">
+                    【核心业务】NEAR Protocol 是基于 Nightshade 分片技术的公链，提供高吞吐量、低费用的去中心化计算平台，生态涵盖 DeFi、NFT、游戏等多元应用。近期虽有技术升级和生态扩容计划，但整体用户增长和实际链上活跃度趋于平稳。<br>【看多逻辑】1. **巨量换手与流动性**：24h 成交额约 25.18 亿美元，换手率 5.2% 显示短期资金活跃度仍高，易触发技术性拉升。2. **超跌修复空间**：当前价格距历史最高点下跌约 81.8%，空头压力可能已释放，若市场情绪转暖，存在一定的反弹弹性。3. **蓝筹属性**：流通市值约 487.5 亿美元，属于大市值 L1 项目，具备一定的机构持仓基底和长期抗跌能力。<br>【核心风险】1. **流动性陷阱**：虽然成交额大，但相对市值的换手率并不突出，若大额持仓机构获利了结，缺乏足够的接盘方可能导致快速跌破。2. **基本面疲软**：实际链上活跃度增长放缓，核心应用落地进度不及预期，叙事驱动的热度难以持续。3. **板块轮动压力**：宏观环境下，资本正从 L1 公链向 AI、Meme 等热点轮换，NEAR 可能成为减仓目标。<br>【操作建议】综合看多与看空因素，建议采取**审慎中性**立场：<br>- **短线**：若出现明显放量突破关键技术位（如 $4.00），可考虑小仓位做多，止盈设在 $4.50 左右；若跌破 $3.30，建议快速止损。 <br>- **中长期**：维持观望，待生态项目实际落地或链上活跃度出现明显回升信号后再考虑布局。当前建议仓位控制在总资产的 1%-2% 以内。
+                </div>
+            </div>
+
+            <!-- 底部操作栏：一键看K线与链上数据 -->
+            <div class="mt-4 pt-3 border-t border-slate-800/80 flex flex-wrap justify-between items-center gap-2 text-xs">
+                <span class="text-slate-500 font-mono text-[11px]">更新: 11-08 11:07 | 距ATH: -81.8%</span>
+                <div class="flex items-center gap-2">
+                    <a href="https://dexscreener.com/search?q=NEAR" target="_blank" class="bg-slate-800 hover:bg-indigo-600 text-slate-200 hover:text-white px-3 py-1 rounded-lg transition font-medium">📈 DexScreener 链上K线</a>
+                    <a href="https://www.coingecko.com/en/coins/near" target="_blank" class="bg-slate-800 hover:bg-emerald-600 text-slate-200 hover:text-white px-3 py-1 rounded-lg transition font-medium">🦎 CoinGecko 详情</a>
+                </div>
+            </div>
+        </div>
+        <div class="project-card bg-slate-900/95 border border-slate-800 hover:border-indigo-500/60 rounded-2xl p-5 transition flex flex-col justify-between shadow-lg" data-category="meme">
+            <div>
+                <div class="flex justify-between items-start gap-2 mb-3">
+                    <div>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="text-2xl font-black text-white tracking-tight">$LINK</span>
+                            <span class="text-xs text-slate-400 font-medium">Chainlink</span>
+                            <span class="text-xs px-2.5 py-0.5 rounded-full border font-bold bg-rose-500/20 text-rose-300 border-rose-500/40">🔥 热门Meme/异动</span>
+                        </div>
+                        <div class="text-xs text-indigo-400 mt-1 font-medium">所属叙事：全网热搜异动榜</div>
+                    </div>
+                    <div class="px-3 py-1.5 rounded-xl font-mono font-black text-sm shadow bg-indigo-600 text-white">
+                        60.5 分
+                    </div>
+                </div>
+
+                <!-- 六维核心行情指标矩阵 -->
+                <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 bg-slate-950/90 p-3 rounded-xl border border-slate-800/80 mb-4 text-center">
+                    <div>
+                        <div class="text-[10px] text-slate-500">当前价格</div>
+                        <div class="text-xs font-mono font-bold text-white mt-0.5">$10.78</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">24h 动量</div>
+                        <div class="text-xs font-mono font-bold text-rose-400 mt-0.5">-0.2%</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">7d 趋势</div>
+                        <div class="text-xs font-mono font-bold text-rose-400 mt-0.5">-7.3%</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">24h 换手率</div>
+                        <div class="text-xs font-mono font-bold text-indigo-400 mt-0.5">1.9%</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">流通市值</div>
+                        <div class="text-xs font-mono font-bold text-slate-200 mt-0.5">$826594.6万</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">MC/FDV流通</div>
+                        <div class="text-xs font-mono font-bold text-emerald-400 mt-0.5">76.7%</div>
+                    </div>
+                </div>
+
+                <!-- 多智能体辩论裁决报告 -->
+                <div class="text-xs text-slate-300 leading-relaxed bg-slate-950/50 p-3.5 rounded-xl border border-slate-800/60">
+                    【核心业务】<br>Chainlink（LINK）是领先的去中心化预言机网络，为区块链提供可靠的链下数据喂价服务，支撑DeFi、NFT、跨链等多类应用。即将上线的Chainlink 2.0 升级旨在提升可扩展性、降低成本，并进一步支持跨链预言机功能，理论上将扩大其在生态系统中的需求。<br><br>【看多逻辑】<br>1. 价格已回撤至 ATH 79.5% 以下，具备技术性反弹空间，成本相对低位，短线吸筹吸引力提升。<br>2. Chainlink 2.0 升级和跨链预言机扩容预期将带来新的生态需求，尤其是 DeFi 与跨链桥接场景，可能在中长期提升链上使用率。<br>3. 流通市值仅占 FDV 76.7%，流通率相对偏低，若机构或大户逐步释放持仓并配合成交额提升，价格有望出现快速拉升。<br><br>【核心风险】<br>1. 价格已跌至近一年低点，链上实际需求未出现明显增长，基本面仍显疲弱，短期内缺乏强劲买盘支撑。<br>2. DeFi 预言机竞争加剧，Aave、Uniswap 等项目已推出自研或第三方预言机方案，可能分流 LINK 的市场份额。<br>3. 大户持仓集中度高，若出现抛售行为将导致流动性紧张，进一步压低价格；当前 24h 成交额仅 1.9% 换手率，说明市场活跃度不足。<br>4. 整体加密市场情绪偏弱，链上资金流出趋势可能抑制任何潜在的反弹。<br><br>【操作建议】<br>- 短期：建议观望或以极低仓位进行波段操作，重点关注链上活跃度、Chainlink 2.0 上线进度及大户持仓动向；若出现明显买盘放大且成交额突破 2% 换手率，可考虑小额建仓。<br>- 中期：若 Chainlink 2.0 成功部署且生态合作案例增多，可逐步加仓，目标价位参考 12-14 美元区间。<br>- 风控：设置止损在 9.0 美元（约 -16%）以下，若出现大户集中抛售或链上需求持续下降，及时清仓。<br>- 组合配置：将 LINK 作为高波动性、非核心配置的 2-3% 权重资产，配合更稳健的主流币（如 BTC、ETH）进行风险平衡。
+                </div>
+            </div>
+
+            <!-- 底部操作栏：一键看K线与链上数据 -->
+            <div class="mt-4 pt-3 border-t border-slate-800/80 flex flex-wrap justify-between items-center gap-2 text-xs">
+                <span class="text-slate-500 font-mono text-[11px]">更新: 11-08 11:06 | 距ATH: -79.5%</span>
+                <div class="flex items-center gap-2">
+                    <a href="https://dexscreener.com/search?q=LINK" target="_blank" class="bg-slate-800 hover:bg-indigo-600 text-slate-200 hover:text-white px-3 py-1 rounded-lg transition font-medium">📈 DexScreener 链上K线</a>
+                    <a href="https://www.coingecko.com/en/coins/chainlink" target="_blank" class="bg-slate-800 hover:bg-emerald-600 text-slate-200 hover:text-white px-3 py-1 rounded-lg transition font-medium">🦎 CoinGecko 详情</a>
+                </div>
+            </div>
+        </div>
+        <div class="project-card bg-slate-900/95 border border-slate-800 hover:border-indigo-500/60 rounded-2xl p-5 transition flex flex-col justify-between shadow-lg" data-category="meme">
+            <div>
+                <div class="flex justify-between items-start gap-2 mb-3">
+                    <div>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="text-2xl font-black text-white tracking-tight">$WLD</span>
+                            <span class="text-xs text-slate-400 font-medium">Worldcoin</span>
+                            <span class="text-xs px-2.5 py-0.5 rounded-full border font-bold bg-rose-500/20 text-rose-300 border-rose-500/40">🔥 热门Meme/异动</span>
+                        </div>
+                        <div class="text-xs text-indigo-400 mt-1 font-medium">所属叙事：全网热搜异动榜</div>
+                    </div>
+                    <div class="px-3 py-1.5 rounded-xl font-mono font-black text-sm shadow bg-indigo-600 text-white">
+                        57.1 分
+                    </div>
+                </div>
+
+                <!-- 六维核心行情指标矩阵 -->
+                <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 bg-slate-950/90 p-3 rounded-xl border border-slate-800/80 mb-4 text-center">
+                    <div>
+                        <div class="text-[10px] text-slate-500">当前价格</div>
+                        <div class="text-xs font-mono font-bold text-white mt-0.5">$0.331307</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">24h 动量</div>
+                        <div class="text-xs font-mono font-bold text-rose-400 mt-0.5">-3.1%</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">7d 趋势</div>
+                        <div class="text-xs font-mono font-bold text-rose-400 mt-0.5">-17.1%</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">24h 换手率</div>
+                        <div class="text-xs font-mono font-bold text-indigo-400 mt-0.5">8.5%</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">流通市值</div>
+                        <div class="text-xs font-mono font-bold text-slate-200 mt-0.5">$124135.1万</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">MC/FDV流通</div>
+                        <div class="text-xs font-mono font-bold text-emerald-400 mt-0.5">37.5%</div>
+                    </div>
+                </div>
+
+                <!-- 多智能体辩论裁决报告 -->
+                <div class="text-xs text-slate-300 leading-relaxed bg-slate-950/50 p-3.5 rounded-xl border border-slate-800/60">
+                    【核心业务】Worldcoin (WLD) 旨在通过硬件设备（Orb）实现全球唯一的身份验证与代币分配，定位为去中心化的身份网络。项目依赖于硬件部署与用户采集生物特征，当前仍处于早期扩张阶段，实际使用场景有限，且监管风险较高。<br>【看多逻辑】1. **资金活跃度**：24h 成交额突破 1 亿美元，换手率 8.5%，显示短线资金参与度高，主力有意在低位洗盘。2. **流通率低**：MC/FDV 仅 37.5%，潜在流通供应仍有较大空间，一旦需求回暖，价格可能出现快速拉升。3. **热度回归**：全网热搜异动榜的曝光提升了社区关注度，情绪修复可能带来短期买盘。<br>【核心风险】1. **叙事崩塌**：自 ATH 以来跌幅超 97%，市场对其“眼球经济”属性的信心大幅削弱。2. **代币解锁压力**：低流通率意味着大量代币待解锁，解锁后可能出现巨量抛售。3. **监管与合规**：涉及生物特征数据的身份系统面临全球监管审查，潜在合规成本和法律风险高。4. **实用性不足**：当前生态链上实际应用场景稀少，项目仍高度依赖投机需求。<br>【操作建议】综合多空观点，建议保持审慎观望。若短线资金出现明显买入迹象且价格跌破 $0.30，可考虑小仓位逢低布局，止损位设在 $0.25 左右；若出现持续抛压或负面监管消息，建议及时止盈或清仓。整体上，建议将 WLD 列为高风险投机标的，仓位控制在组合总额的 2% 以下。
+                </div>
+            </div>
+
+            <!-- 底部操作栏：一键看K线与链上数据 -->
+            <div class="mt-4 pt-3 border-t border-slate-800/80 flex flex-wrap justify-between items-center gap-2 text-xs">
+                <span class="text-slate-500 font-mono text-[11px]">更新: 11-08 11:08 | 距ATH: -97.2%</span>
+                <div class="flex items-center gap-2">
+                    <a href="https://dexscreener.com/search?q=WLD" target="_blank" class="bg-slate-800 hover:bg-indigo-600 text-slate-200 hover:text-white px-3 py-1 rounded-lg transition font-medium">📈 DexScreener 链上K线</a>
+                    <a href="https://www.coingecko.com/en/coins/worldcoin-wld" target="_blank" class="bg-slate-800 hover:bg-emerald-600 text-slate-200 hover:text-white px-3 py-1 rounded-lg transition font-medium">🦎 CoinGecko 详情</a>
+                </div>
+            </div>
+        </div>
+        <div class="project-card bg-slate-900/95 border border-slate-800 hover:border-indigo-500/60 rounded-2xl p-5 transition flex flex-col justify-between shadow-lg" data-category="meme">
+            <div>
+                <div class="flex justify-between items-start gap-2 mb-3">
+                    <div>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="text-2xl font-black text-white tracking-tight">$PEARL</span>
+                            <span class="text-xs text-slate-400 font-medium">Pearl</span>
+                            <span class="text-xs px-2.5 py-0.5 rounded-full border font-bold bg-rose-500/20 text-rose-300 border-rose-500/40">🔥 热门Meme/异动</span>
+                        </div>
+                        <div class="text-xs text-indigo-400 mt-1 font-medium">所属叙事：全网热搜异动榜</div>
+                    </div>
+                    <div class="px-3 py-1.5 rounded-xl font-mono font-black text-sm shadow bg-indigo-600 text-white">
+                        51.6 分
+                    </div>
+                </div>
+
+                <!-- 六维核心行情指标矩阵 -->
+                <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 bg-slate-950/90 p-3 rounded-xl border border-slate-800/80 mb-4 text-center">
+                    <div>
+                        <div class="text-[10px] text-slate-500">当前价格</div>
+                        <div class="text-xs font-mono font-bold text-white mt-0.5">$1.78</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">24h 动量</div>
+                        <div class="text-xs font-mono font-bold text-emerald-400 mt-0.5">+0.6%</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">7d 趋势</div>
+                        <div class="text-xs font-mono font-bold text-emerald-400 mt-0.5">+23.0%</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">24h 换手率</div>
+                        <div class="text-xs font-mono font-bold text-indigo-400 mt-0.5">1.3%</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">流通市值</div>
+                        <div class="text-xs font-mono font-bold text-slate-200 mt-0.5">$66332.1万</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-500">MC/FDV流通</div>
+                        <div class="text-xs font-mono font-bold text-emerald-400 mt-0.5">17.7%</div>
+                    </div>
+                </div>
+
+                <!-- 多智能体辩论裁决报告 -->
+                <div class="text-xs text-slate-300 leading-relaxed bg-slate-950/50 p-3.5 rounded-xl border border-slate-800/60">
+                    【核心业务】<br>Pearl ($PEARL) 为 Meme/异动类代币，主要依赖社交媒体热度和短期资金流入，缺乏明确的产品或生态支撑。<br><br>【看多逻辑】<br>1. 短线动能强：24h涨幅+0.63%，7日累计+23%，呈现强势上升通道，易吸引追涨资金。<br>2. 稀缺供应：流通市值仅占FDV的17.7%，流通供应相对紧张，突破关键阻力位后买盘可能放大。<br>3. 热度聚焦：位列全网热搜异动榜，24h成交额882万美元（换手率1.3%），社群关注度高，具备FOMO效应。<br><br>【核心风险】<br>1. 流动性不足：市值约6.6亿美元，24h成交额仅882万美元，换手率低，大额卖单可能导致价格剧烈波动，平仓困难。<br>2. 高位回撤空间：当前价比ATH低27.5%，若热度消退仍有30%+的下行空间。<br>3. 基本面薄弱：缺乏实质性产品或生态，极度依赖短期炒作，一旦舆论热度下降，需求几乎为零，价格可能快速崩盘。<br><br>【操作建议】<br>- 风险偏好高且具备短线操作经验的投资者可考虑在关键阻力位附近小仓位做多，严格设置止损（如5%以内）。<br>- 对流动性和基本面要求较高的机构或保守投资者建议观望或保持轻仓，避免在高波动期持仓。<br>- 持续监测社群热度、成交量及关键技术位（如突破或跌破支撑），如出现显著回撤或热度下降，及时减仓或止损。
+                </div>
+            </div>
+
+            <!-- 底部操作栏：一键看K线与链上数据 -->
+            <div class="mt-4 pt-3 border-t border-slate-800/80 flex flex-wrap justify-between items-center gap-2 text-xs">
+                <span class="text-slate-500 font-mono text-[11px]">更新: 11-08 11:09 | 距ATH: -27.5%</span>
+                <div class="flex items-center gap-2">
+                    <a href="https://dexscreener.com/search?q=PEARL" target="_blank" class="bg-slate-800 hover:bg-indigo-600 text-slate-200 hover:text-white px-3 py-1 rounded-lg transition font-medium">📈 DexScreener 链上K线</a>
+                    <a href="https://www.coingecko.com/en/coins/pearl-2" target="_blank" class="bg-slate-800 hover:bg-emerald-600 text-slate-200 hover:text-white px-3 py-1 rounded-lg transition font-medium">🦎 CoinGecko 详情</a>
+                </div>
+            </div>
+        </div>
             </div>
         </section>
     </main>
+
+    <script>
+        function filterProjects(cat) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white', 'font-bold');
+                btn.classList.add('text-slate-400');
+            });
+            const activeBtn = document.getElementById('tab-' + cat);
+            activeBtn.classList.add('bg-indigo-600', 'text-white', 'font-bold');
+            activeBtn.classList.remove('text-slate-400');
+
+            document.querySelectorAll('.project-card').forEach(card => {
+                if (cat === 'all' || card.dataset.category === cat) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
 </body>
 </html>
