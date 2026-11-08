@@ -1,3 +1,5 @@
+# job2_project_hunter.py - V5.0 三大早期捕获引擎 + 强制深度背调系统
+import re
 import time
 import requests
 from datetime import datetime, timezone, timedelta
@@ -12,10 +14,10 @@ TOKEN_BLACKLIST = {
     "gusd", "usdp", "eurc", "eurs", "ceur", "sdy", "usd0", "usdb", "deusd", "usr",
     "wbtc", "weth", "wbnb", "wsol", "wmatic", "wavax", "steth", "wsteth", "reth",
     "cbeth", "weeth", "ezeth", "rseth", "sweth", "meth", "msol", "jitosol", "bnsol",
-    "cbbtc", "tbtc", "solvbtc", "lbtc", "ebtc", "matic", "fbomb"
+    "cbbtc", "tbtc", "solvbtc", "lbtc", "ebtc", "matic", "fbomb",
 }
 
-# 2. 铁律排除：大市值老牌白马与主流公链（我们只抓早期、高赔率、高爆发潜力项目！）
+# 2. 铁律排除：大市值老牌白马与主流公链（只抓早期、高赔率、高爆发潜力项目）
 MEGA_CAP_BLACKLIST = {
     "bitcoin", "ethereum", "tether", "binancecoin", "solana", "ripple", "usd-coin",
     "cardano", "dogecoin", "tron", "chainlink", "avalanche-2", "toncoin", "shiba-inu",
@@ -24,13 +26,13 @@ MEGA_CAP_BLACKLIST = {
     "ethereum-classic", "dai", "okb", "cronos", "aave", "mantle", "vechain", "render-token",
     "bittensor", "filecoin", "arbitrum", "optimism", "cosmos", "injective-protocol",
     "immutable-x", "fantom", "the-graph", "theta-token", "algorand", "maker", "sei-network",
-    "bonk", "floki", "worldcoin-wld", "celestia", "lido-dao", " gala", "flow", "eos"
+    "bonk", "floki", "worldcoin-wld", "celestia", "lido-dao", "gala", "flow", "eos",
 }
 
 MEGA_CAP_SYMBOLS = {
     "btc", "eth", "sol", "bnb", "xrp", "ada", "doge", "trx", "link", "avax",
     "ton", "shib", "dot", "near", "uni", "ltc", "bch", "icp", "etc", "apt",
-    "sui", "arb", "op", "atom", "fil", "xlm", "hbar", "vet", "aave", "mkr"
+    "sui", "arb", "op", "atom", "fil", "xlm", "hbar", "vet", "aave", "mkr",
 }
 
 
@@ -52,7 +54,7 @@ def is_excluded_token(coin_id="", symbol="", name="", market_cap=0, max_mc_usd=3
 
     bad_patterns = [
         "wrapped", "staked", "bridged", "peg", "stablecoin", "usd", "eur",
-        "treasury", "tokenized", "restaked", "liquid staking"
+        "treasury", "tokenized", "restaked", "liquid staking",
     ]
     for pat in bad_patterns:
         if pat in nm or pat in cid:
@@ -78,7 +80,7 @@ def fetch_onchain_meme_candidates():
         resp = requests.get(
             url,
             headers={"Accept": "application/json;version=20230302", "User-Agent": "Mozilla/5.0"},
-            timeout=15
+            timeout=15,
         )
         if resp.status_code == 200:
             payload = resp.json()
@@ -87,7 +89,12 @@ def fetch_onchain_meme_candidates():
 
             for pool in pools:
                 attrs = pool.get("attributes", {})
-                rel_token_id = pool.get("relationships", {}).get("base_token", {}).get("data", {}).get("id", "")
+                rel_token_id = (
+                    pool.get("relationships", {})
+                    .get("base_token", {})
+                    .get("data", {})
+                    .get("id", "")
+                )
                 token_meta = included.get(rel_token_id, {})
 
                 chain = rel_token_id.split("_")[0].upper() if "_" in rel_token_id else "ONCHAIN"
@@ -104,7 +111,7 @@ def fetch_onchain_meme_candidates():
                 price = float(attrs.get("base_token_price_usd") or 0)
                 liq_usd = float(attrs.get("reserve_in_usd") or 0)
                 fdv_usd = float(attrs.get("fdv_usd") or 0)
-                mc_usd = float(attrs.get("market_cap_usd") or fdv_usd or 0)
+                mc_usd = float(attrs.get("market_cap_usd") or fdv_usd or (liq_usd * 6) or 0)
 
                 if is_excluded_token(cg_id, symbol, name, mc_usd, max_mc_usd=150_000_000):
                     continue
@@ -152,7 +159,7 @@ def fetch_onchain_meme_candidates():
                     "is_meme_candidate": True,
                     "initial_opp_type": "🐶 链上早期Meme/金狗",
                     "track_name": f"{chain} 链上热池金狗",
-                    "dex_url": f"https://dexscreener.com/{chain.lower()}/{contract_addr}" if contract_addr else ""
+                    "dex_url": f"https://dexscreener.com/{chain.lower()}/{contract_addr}" if contract_addr else "",
                 })
     except Exception as e:
         print(f"⚠️ GeckoTerminal 链上热门池抓取异常: {e}")
@@ -163,18 +170,23 @@ def fetch_onchain_meme_candidates():
         if resp.status_code == 200:
             boosts = resp.json()
             if isinstance(boosts, list):
-                for b in boosts[:8]:
+                for b in boosts[:12]:
                     token_addr = b.get("tokenAddress")
                     chain_id = (b.get("chainId") or "").upper()
                     if not token_addr:
                         continue
-                    pair_resp = requests.get(f"https://api.dexscreener.com/latest/dex/tokens/{token_addr}", timeout=10)
+                    pair_resp = requests.get(
+                        f"https://api.dexscreener.com/latest/dex/tokens/{token_addr}",
+                        timeout=10,
+                    )
                     if pair_resp.status_code == 200:
                         pairs = pair_resp.json().get("pairs") or []
                         if not pairs:
                             continue
-                        # 取流动性最大的主池
-                        best_pair = max(pairs, key=lambda x: float((x.get("liquidity") or {}).get("usd") or 0))
+                        best_pair = max(
+                            pairs,
+                            key=lambda x: float((x.get("liquidity") or {}).get("usd") or 0),
+                        )
                         base_tok = best_pair.get("baseToken") or {}
                         sym = (base_tok.get("symbol") or "").strip().upper()
                         nm = base_tok.get("name") or sym
@@ -183,7 +195,7 @@ def fetch_onchain_meme_candidates():
 
                         liq = float((best_pair.get("liquidity") or {}).get("usd") or 0)
                         fdv = float(best_pair.get("fdv") or 0)
-                        mc = float(best_pair.get("marketCap") or fdv or 0)
+                        mc = float(best_pair.get("marketCap") or fdv or (liq * 5) or 0)
                         vol24 = float((best_pair.get("volume") or {}).get("h24") or 0)
                         chg1h = float((best_pair.get("priceChange") or {}).get("h1") or 0)
                         chg6h = float((best_pair.get("priceChange") or {}).get("h6") or 0)
@@ -223,7 +235,7 @@ def fetch_onchain_meme_candidates():
                             "is_meme_candidate": True,
                             "initial_opp_type": "🐶 链上早期Meme/金狗",
                             "track_name": f"{chain_id} 社区助推金狗",
-                            "dex_url": best_pair.get("url") or f"https://dexscreener.com/{chain_id.lower()}/{token_addr}"
+                            "dex_url": best_pair.get("url") or f"https://dexscreener.com/{chain_id.lower()}/{token_addr}",
                         })
     except Exception as e:
         print(f"⚠️ DexScreener Boosted 抓取异常: {e}")
@@ -237,7 +249,7 @@ def fetch_onchain_meme_candidates():
             "order": "volume_desc",
             "per_page": 50,
             "page": 1,
-            "price_change_percentage": "1h,24h,7d"
+            "price_change_percentage": "1h,24h,7d",
         }
         resp = requests.get(url, headers=cg_headers(), params=params, timeout=15)
         if resp.status_code == 200:
@@ -248,7 +260,6 @@ def fetch_onchain_meme_candidates():
                 mc = float(c.get("market_cap") or 0)
                 vol = float(c.get("total_volume") or 0)
                 chg24 = float(c.get("price_change_percentage_24h") or 0)
-                # 只选市值 $100万 ~ $8000万、24h涨幅 > 8%、换手率 > 25% 的中早期强势 Meme
                 if 1_000_000 <= mc <= 80_000_000 and chg24 >= 8.0 and (vol / mc) >= 0.25:
                     if is_excluded_token(c.get("id"), sym, c.get("name"), mc, max_mc_usd=80_000_000):
                         continue
@@ -291,14 +302,13 @@ def fetch_narrative_breakout_candidates(max_mc_usd=300_000_000):
                     "vs_currency": "usd",
                     "ids": ",".join(trending_ids[:15]),
                     "order": "volume_desc",
-                    "price_change_percentage": "1h,24h,7d"
+                    "price_change_percentage": "1h,24h,7d",
                 }
                 m_resp = requests.get(m_url, headers=cg_headers(), params=params, timeout=15)
                 if m_resp.status_code == 200:
                     for c in m_resp.json():
                         mc = float(c.get("market_cap") or 0)
                         vol = float(c.get("total_volume") or 0)
-                        # 核心过滤：严禁大市值白马（>3亿美元）和极微盘（<100万美元）进入
                         if is_excluded_token(c.get("id"), c.get("symbol"), c.get("name"), mc, max_mc_usd=max_mc_usd):
                             continue
                         if mc < 1_000_000 or vol < 1_500_000:
@@ -337,7 +347,7 @@ def fetch_sector_alpha_candidates(track_id, track_name, min_mc_usd=1_500_000, ma
         "order": "volume_desc",
         "per_page": 45,
         "page": 1,
-        "price_change_percentage": "1h,24h,7d"
+        "price_change_percentage": "1h,24h,7d",
     }
     try:
         resp = requests.get(url, headers=cg_headers(), params=params, timeout=15)
@@ -370,7 +380,7 @@ def fetch_sector_alpha_candidates(track_id, track_name, min_mc_usd=1_500_000, ma
             c["buys_24h"] = 0
             c["sells_24h"] = 0
             c["buy_ratio"] = 50.0
-            c["is_meme_candidate"] = ("meme" in track_id.lower())
+            c["is_meme_candidate"] = "meme" in track_id.lower()
             c["track_name"] = track_name
             c["dex_url"] = ""
 
@@ -418,7 +428,7 @@ def conduct_deep_research(coin):
     contract_addr = coin.get("contract_address") or ""
 
     # Step 1: CoinGecko 深度元数据背调
-    if cg_id and not cg_id.startswith("dex_"):
+    if cg_id and not str(cg_id).startswith("dex_"):
         try:
             url = f"https://api.coingecko.com/api/v3/coins/{cg_id}?localization=false&tickers=false&market_data=false&community_data=true&developer_data=true"
             resp = requests.get(url, headers=cg_headers(), timeout=12)
@@ -426,8 +436,7 @@ def conduct_deep_research(coin):
                 data = resp.json()
                 real_categories = [cat for cat in (data.get("categories") or []) if cat]
                 raw_desc = (data.get("description") or {}).get("en") or ""
-                # 清理 HTML 标签并截取前 350 字符
-                clean_desc = re.sub(r"<[^>]+>", "", raw_desc).strip() if "re" in globals() else raw_desc[:350]
+                clean_desc = re.sub(r"<[^>]+>", "", raw_desc).strip()
                 description_en = clean_desc[:350]
 
                 dev = data.get("developer_data") or {}
@@ -442,15 +451,19 @@ def conduct_deep_research(coin):
         except Exception as e:
             print(f"   ⚠️ CG 深度背调 {symbol} 异常: {e}")
 
-    # Step 2: 根据真实分类标签，严格纠正 Meme 与非 Meme 归属！
+    # Step 2: 根据真实分类标签，严格纠正 Meme 与非 Meme 归属
     if real_categories:
         cat_joined = " | ".join(real_categories).lower()
         is_really_meme = any(k in cat_joined for k in ["meme", "dog", "cat", "pump.fun", "frog", "elon"])
-        is_utility_project = any(k in cat_joined for k in [
-            "layer 1", "layer 2", "defi", "decentralized finance", "oracle", "artificial intelligence",
-            "depin", "real world assets", "rwa", "infrastructure", "smart contract", "gaming",
-            "gamefi", "storage", "privacy", "zero knowledge", "zk", "dex", "lending", "derivatives"
-        ])
+        is_utility_project = any(
+            k in cat_joined
+            for k in [
+                "layer 1", "layer 2", "defi", "decentralized finance", "oracle",
+                "artificial intelligence", "depin", "real world assets", "rwa",
+                "infrastructure", "smart contract", "gaming", "gamefi", "storage",
+                "privacy", "zero knowledge", "zk", "dex", "lending", "derivatives",
+            ]
+        )
         if is_utility_project and not is_really_meme:
             coin["is_meme_candidate"] = False
             if coin.get("initial_opp_type") == "🐶 链上早期Meme/金狗":
@@ -459,11 +472,18 @@ def conduct_deep_research(coin):
             coin["is_meme_candidate"] = True
             coin["initial_opp_type"] = "🐶 链上早期Meme/金狗"
 
-        # 提取最有代表性的真实赛道名
-        ignored_generic = {"alleged sec securities", "ftx holdings", "alameda research portfolio", "made in usa"}
+        ignored_generic = {
+            "alleged sec securities",
+            "ftx holdings",
+            "alameda research portfolio",
+            "made in usa",
+        }
         meaningful_cats = [
-            c for c in real_categories
-            if c.lower() not in ignored_generic and "ecosystem" not in c.lower() and "portfolio" not in c.lower()
+            c
+            for c in real_categories
+            if c.lower() not in ignored_generic
+            and "ecosystem" not in c.lower()
+            and "portfolio" not in c.lower()
         ]
         if meaningful_cats and coin.get("track_name") in ["待深度背调验真", "全网热搜异动榜", ""]:
             coin["track_name"] = meaningful_cats[0][:22]
@@ -476,11 +496,15 @@ def conduct_deep_research(coin):
             if d_resp.status_code == 200:
                 pairs = d_resp.json().get("pairs") or []
                 matching_pairs = [
-                    p for p in pairs
+                    p
+                    for p in pairs
                     if ((p.get("baseToken") or {}).get("symbol") or "").upper() == symbol
                 ]
                 if matching_pairs:
-                    best_p = max(matching_pairs, key=lambda x: float((x.get("liquidity") or {}).get("usd") or 0))
+                    best_p = max(
+                        matching_pairs,
+                        key=lambda x: float((x.get("liquidity") or {}).get("usd") or 0),
+                    )
                     liq = float((best_p.get("liquidity") or {}).get("usd") or 0)
                     if liq > 0:
                         coin["liquidity_usd"] = liq
@@ -509,8 +533,13 @@ def conduct_deep_research(coin):
                 query = f'"{name}" ({symbol}) crypto project funding investors catalyst news'
             t_resp = requests.post(
                 "https://api.tavily.com/search",
-                json={"api_key": TAVILY_API_KEY, "query": query, "search_depth": "basic", "max_results": 3},
-                timeout=12
+                json={
+                    "api_key": TAVILY_API_KEY,
+                    "query": query,
+                    "search_depth": "basic",
+                    "max_results": 3,
+                },
+                timeout=12,
             )
             if t_resp.status_code == 200:
                 results = t_resp.json().get("results", [])
@@ -518,7 +547,8 @@ def conduct_deep_research(coin):
                 news_snippets = [r.get("content", "")[:140] for r in results[:2]]
                 top_vcs = [
                     "binance", "a16z", "paradigm", "polychain", "coinbase",
-                    "pantera", "multicoin", "animoca", "sequoia", "dragonfly", "okx", "solana ventures"
+                    "pantera", "multicoin", "animoca", "sequoia", "dragonfly",
+                    "okx", "solana ventures",
                 ]
                 vc_hits = [vc.upper() for vc in top_vcs if vc in combined_text]
         except Exception:
@@ -546,8 +576,6 @@ def calculate_quant_score(coin, track_heat_score, weights):
     ath_drop = float(coin.get("ath_change_percentage") or -50)
     liq = float(coin.get("liquidity_usd") or 0)
     buy_ratio = float(coin.get("buy_ratio") or 50.0)
-    buys_24h = int(coin.get("buys_24h") or 0)
-    sells_24h = int(coin.get("sells_24h") or 0)
     commits = int(coin.get("commits_4w") or 0)
     vc_hits = coin.get("vc_hits") or []
 
@@ -556,7 +584,6 @@ def calculate_quant_score(coin, track_heat_score, weights):
 
     if coin.get("is_meme_candidate"):
         # 🐶 链上 Meme 专属评分公式
-        # 1. 流动性安全分 (25%)：池子 > $200k 满分，>$80k 85分，>$40k 70分
         if liq >= 200_000:
             liq_score = 95
         elif liq >= 80_000:
@@ -566,11 +593,9 @@ def calculate_quant_score(coin, track_heat_score, weights):
         else:
             liq_score = 65
 
-        # 2. 买盘压制与动量分 (30%)：看 24h 买卖比 + 1h/24h 动量
         buy_bonus = min(max((buy_ratio - 48.0) * 3.5, 0), 30)
         mom_score = min(65 + buy_bonus + (10 if chg_1h > 2 else 0), 98)
 
-        # 3. 爆发换手率分 (25%)：Meme 黄金换手率 30% ~ 300%
         if turnover >= 0.8:
             vel_score = 95
         elif turnover >= 0.35:
@@ -580,7 +605,6 @@ def calculate_quant_score(coin, track_heat_score, weights):
         else:
             vel_score = 60
 
-        # 4. 早期市值赔率与社区热度 (20%)：$50万 ~ $2500万 最具十倍爆发力
         if 500_000 <= mc <= 25_000_000:
             odds_score = 95
         elif 25_000_000 < mc <= 60_000_000:
@@ -603,7 +627,6 @@ def calculate_quant_score(coin, track_heat_score, weights):
         tech_score = min(55 + commits * 3, 95) if commits > 0 else 65
         vc_score = min(65 + len(vc_hits) * 15, 98) if vc_hits else 68
 
-        # 早期市值赔率：$200万 ~ $5000万 赔率最高
         if 2_000_000 <= mc <= 50_000_000:
             mc_score = 95
         elif 50_000_000 < mc <= 150_000_000:
@@ -612,11 +635,11 @@ def calculate_quant_score(coin, track_heat_score, weights):
             mc_score = 72
 
         quant_total = (
-            track_heat_score * weights.get("track_heat", 0.25) +
-            safety_score * weights.get("price_safety", 0.25) +
-            tech_score * weights.get("tech_strength", 0.20) +
-            vc_score * weights.get("marketing_vc", 0.15) +
-            mc_score * weights.get("mc_odds", 0.15)
+            track_heat_score * weights.get("track_heat", 0.25)
+            + safety_score * weights.get("price_safety", 0.25)
+            + tech_score * weights.get("tech_strength", 0.20)
+            + vc_score * weights.get("marketing_vc", 0.15)
+            + mc_score * weights.get("mc_odds", 0.15)
         )
 
     return round(quant_total, 1), round(mc_fdv_ratio * 100, 1), round(turnover * 100, 1)
@@ -651,17 +674,19 @@ def run_job2():
             n_coin["track_heat"] = 88
             candidate_pool.append(n_coin)
 
-    # 3. 启动【引擎 3：重点赛道龙头与底部价值潜伏】
+    # 3. 启动【引擎 3：重点赛道龙头与底部价值潜伏】（兼容中英文键名）
     for track in approved_tracks[:4]:
-        t_id = track.get("id", "")
-        t_name = track.get("name", t_id)
+        t_id = track.get("id") or track.get("赛道ID") or ""
+        t_name = track.get("name") or track.get("赛道名称") or t_id
         if not t_id or t_id == "trending-meme":
             continue
-        t_change = float(track.get("change_24h") or 0)
+        t_change = float(track.get("change_24h") or track.get("24h涨幅(%)") or 0)
         t_heat = min(max(72 + t_change * 2.5, 65), 96)
 
         print(f"🔎 正在深挖赛道: {t_name} ({t_id})...")
-        t_coins = fetch_sector_alpha_candidates(t_id, t_name, min_mc_usd=1_500_000, max_mc_usd=300_000_000)
+        t_coins = fetch_sector_alpha_candidates(
+            t_id, t_name, min_mc_usd=1_500_000, max_mc_usd=300_000_000
+        )
         for c in t_coins:
             key = (c.get("symbol") or "").lower()
             if key and key not in seen_keys:
@@ -672,7 +697,6 @@ def run_job2():
 
     print(f"📊 三大引擎初筛共汇总 {len(candidate_pool)} 个早期高潜力候选标的，开始执行【强制深度背调】...")
 
-    # 取前 12 个最优候选进行深度背调 + AI 投委会辩论
     selected_projects = []
     tz_bj = timezone(timedelta(hours=8))
     now_str = datetime.now(tz_bj).strftime("%Y-%m-%d %H:%M")
@@ -682,12 +706,15 @@ def run_job2():
         print(f"🕵️‍♂️ 正在深度背调: ${sym} ({coin.get('name')})...")
         coin = conduct_deep_research(coin)
 
-        # 如果深度背调后发现是大市值漏网之鱼，直接剔除
-        if is_excluded_token(coin.get("coingecko_id"), sym, coin.get("name"), coin.get("market_cap"), max_mc_usd=350_000_000):
+        if is_excluded_token(
+            coin.get("coingecko_id"), sym, coin.get("name"), coin.get("market_cap"), max_mc_usd=350_000_000
+        ):
             print(f"   ⏭️ ${sym} 经背调属于大市值老币或稳定衍生品，已剔除")
             continue
 
-        quant_score, mc_fdv_pct, turnover_pct = calculate_quant_score(coin, coin.get("track_heat", 80), weights)
+        quant_score, mc_fdv_pct, turnover_pct = calculate_quant_score(
+            coin, coin.get("track_heat", 80), weights
+        )
         if quant_score < 62:
             continue
 
@@ -712,7 +739,7 @@ def run_job2():
             "github_commits_4w": coin.get("commits_4w", 0),
             "vc_endorsements": coin.get("vc_hits", []),
             "latest_news_catalysts": coin.get("news_snippets", []),
-            "quant_score": quant_score
+            "quant_score": quant_score,
         }
 
         ai_score, debate_report, verified_type, verified_track, catalyst = multi_agent_evaluate(dossier)
@@ -747,22 +774,38 @@ def run_job2():
                 "final_score": final_score,
                 "ai_report": debate_report,
                 "dex_url": coin.get("dex_url") or f"https://dexscreener.com/search?q={sym}",
-                "discovered_at": now_str
+                "discovered_at": now_str,
             }
             db.save_alpha_project(p_data)
             selected_projects.append(p_data)
             print(f"   ✅ 入选! ${sym} | 类型: {verified_type} | 赛道: {final_track} | 综合得分: {final_score}")
         time.sleep(1.2)
 
-    # 按综合得分排序并更新本地 JSON 数据库（优先展示最新一批鲜活项目）
+    # 重新读取最新本地库，按综合得分排序并更新项目池
+    latest_local = notifier.load_local_db()
     selected_projects.sort(key=lambda x: x["final_score"], reverse=True)
     if selected_projects:
-        local_data["projects"] = selected_projects[:18]
-        notifier.save_local_db(local_data)
+        # 将本轮新入选项目置顶，并合并历史优质早期项目（自动剔除旧的大市值白马与重复项）
+        merged = list(selected_projects)
+        existing_syms = {p["symbol"].upper() for p in merged}
+        for old_p in latest_local.get("projects", []):
+            old_sym = str(old_p.get("symbol", "")).upper()
+            old_mc_usd = float(old_p.get("market_cap") or 0) * 10000
+            if (
+                old_sym
+                and old_sym not in existing_syms
+                and not is_excluded_token(old_p.get("id", ""), old_sym, old_p.get("name", ""), old_mc_usd)
+            ):
+                existing_syms.add(old_sym)
+                merged.append(old_p)
+        latest_local["projects"] = merged[:18]
+        notifier.save_local_db(latest_local)
 
-    notifier.send_wechat("🎯 [Alpha 狙击战报] 早期项目深度背调完成", f"本轮共严选出 {len(selected_projects)} 个早期高赔率项目")
+    notifier.send_wechat(
+        "🎯 [Alpha 狙击战报] 早期项目深度背调完成",
+        f"本轮共严选出 {len(selected_projects)} 个早期高赔率项目",
+    )
 
 
 if __name__ == "__main__":
-    import re
     run_job2()
