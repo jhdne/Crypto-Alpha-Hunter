@@ -1,4 +1,3 @@
-```python
 import json
 import re
 import time
@@ -234,6 +233,3 @@ def multi_agent_evaluate(project_data):
         f"⚖️【CIO裁决 ({verdict})】: {summary.strip()}"
     )
     return ai_score, report, verified_type, verified_track, catalyst
-```
-
----
