@@ -1,15 +1,14 @@
-# llm_engine.py - V5.0 多智能体大模型引擎（兼容 ask_ai 与 call_llm）
+# llm_engine.py - V6.0 具备进化记忆注入与买点位置审计的多智能体引擎
 import json
 import re
 import time
 import requests
-from config import LLM_API_KEYS, LLM_ENDPOINTS, AGENT_MODEL_ROUTING
+from config import LLM_API_KEYS, LLM_ENDPOINTS, AGENT_MODEL_ROUTING, DEFAULT_EVOLUTION_STATE
 
 _GROQ_LIVE_MODELS_CACHE = None
 
 
 def _get_groq_live_models(api_key):
-    """动态拉取 Groq 当前在线的可用模型列表"""
     global _GROQ_LIVE_MODELS_CACHE
     if _GROQ_LIVE_MODELS_CACHE:
         return _GROQ_LIVE_MODELS_CACHE
@@ -140,7 +139,6 @@ def call_llm(agent_role="default", system_prompt="", user_prompt="", temperature
 
 
 def ask_ai(prompt, role="default", system_prompt="", temperature=0.3, json_mode=False):
-    """兼容 V4.0 脚本 (job1 / job3) 的快捷调用接口"""
     return call_llm(
         agent_role=role,
         system_prompt=system_prompt,
@@ -182,63 +180,79 @@ def extract_json(text):
     return {}
 
 
-def multi_agent_evaluate(project_data):
+def multi_agent_evaluate(project_data, evolution_state=None):
     """
-    V5.0 双模式多智能体投委会辩论（自动区分【链上早期Meme】与【叙事/价值项目】）
-    同时基于深度背调数据验真项目的【真实机会类型】与【精准细分赛道】
+    V6.0 进化记忆驱动的多智能体投委会辩论：
+    - 将 job3 实盘回测总结的【最新进化铁律】注入多空与 CIO 脑中
+    - 重点审计【是否处于发币/启动极早期】、【当前买点位置是否过高】、【市值赔率是否足够大】
     """
+    if not isinstance(evolution_state, dict):
+        evolution_state = DEFAULT_EVOLUTION_STATE
+
+    tactical_rules = evolution_state.get("tactical_rules") or DEFAULT_EVOLUTION_STATE["tactical_rules"]
+    evo_reason = evolution_state.get("evolution_reason") or DEFAULT_EVOLUTION_STATE["evolution_reason"]
+    gen_num = evolution_state.get("generation", 1)
+    rules_text = "\n".join([f"  - {r}" for r in tactical_rules])
+
     is_meme = project_data.get("is_meme_candidate", False)
     project_json = json.dumps(project_data, ensure_ascii=False, indent=2)
 
     if is_meme:
         bull_sys = (
-            "你是顶级的链上金狗与 Meme 币早期狙击手（Degen Alpha Hunter）。"
-            "你极其擅长从链上流动性、买卖单笔数比（Buys vs Sells）、短时爆发换手率、社区文化梗（Meme 叙事传播力）中发掘早期 10x 金狗。"
-            "注意：Meme 币不需要看 GitHub 代码提交，重点看叙事传播度、买盘强度和筹码换手。请用3点简明扼要列出看多逻辑（150字内）。"
+            "你是顶级的链上极早期金狗与 Meme 狙击手（Degen Alpha Hunter）。"
+            "你只对【刚开盘/刚启动早期、小市值($15万~$1500万)、买单明显压制卖单、换手健康】的早期高赔率金狗感兴趣。"
+            "请结合档案中的上线账龄(age_label)、1h/6h/24h涨幅节奏、买卖比和叙事梗，用3点简明列出早期看多逻辑（130字内）。"
         )
         bear_sys = (
-            "你是冷酷的链上风控与防貔貅/防砸盘审计员。"
-            "请根据项目的池子流动性大小、FDV市值比、短时涨幅是否过热、是否存在庄家拉高出货（阴跌或卖单激增）风险，"
-            "一针见血指出 2-3 个最大风险点（150字内）。"
+            "你是极其严酷的链上防追高与防派发审计员（Anti-FOMO Bear Agent）。"
+            "请专门审计该项目是否存在以下致命问题：1. 已经错过发币早期最佳窗口？2. 24h或6h涨幅已经过高、存在庄家拉高派发让我们高位接盘的风险？3. 市值是否已经偏大或买盘衰竭？"
+            "一针见血指出 2-3 个位置与筹码风险点（130字内）。"
         )
     else:
         bull_sys = (
-            "你是专注于发掘早期百倍币的加密 VC 激进派合伙人（Bull Agent）。"
-            "请结合深度背调档案中的真实业务简介、所属细分赛道、近期催化剂新闻、市值赔率空间、开发活跃度或机构背书，"
-            "用3点简明扼要提炼该项目最具爆发力的看涨逻辑（150字内）。"
+            "你是专注于发掘早期低市值十倍黑马的加密 VC 狙击合伙人（Early Alpha Bull Agent）。"
+            "你痛恨大市值老白马，专门寻找【市值$100万~$5000万、处于底部蓄势突破初期或新叙事刚点火、买盘刚放量】的高赔率项目。"
+            "请结合档案中的建仓位置评级、市值赔率、催化剂与基本面，用3点提炼看涨逻辑（130字内）。"
         )
         bear_sys = (
-            "你是严苛的加密基金风控总监（Bear Agent）。"
-            "请根据项目的流通率(MC/FDV)解锁抛压、换手率真实性、代码提交情况、赛道竞争格局以及短期追高风险，"
-            "一针见血指出 2-3 个核心隐患（150字内）。"
+            "你是严苛的加密基金买点风控总监（Position & Timing Bear Agent）。"
+            "请专门审计：1. 该项目当前位置是否已经涨幅过大、属于右侧追高接盘？2. 市值是否过高导致赔率不足？3. 流通率(MC/FDV)解锁抛压或换手率是否存在诱多嫌疑？"
+            "一针见血指出 2-3 个核心隐患（130字内）。"
         )
 
-    bull_view = call_llm("bull_agent", bull_sys, f"【深度背调档案】:\n{project_json}", temperature=0.5)
-    time.sleep(0.5)
+    bull_view = call_llm("bull_agent", bull_sys, f"【深度背调档案】:\n{project_json}", temperature=0.45)
+    time.sleep(0.4)
     bear_view = call_llm(
         "bear_agent",
         bear_sys,
         f"【深度背调档案】:\n{project_json}\n\n【多头观点】:\n{bull_view}",
-        temperature=0.4,
+        temperature=0.35,
     )
-    time.sleep(0.5)
+    time.sleep(0.4)
 
-    cio_sys = """你是加密基金首席投资官 (CIO)。请阅读项目【深度背调档案】以及多空双方辩论，做出最终裁决并完成严格分类验真：
-1. 【分类验真铁律】：
-   - 仔细核对档案中的 `coingecko_categories`、`description` 和 `onchain_metrics`。
-   - 只有真正属于文化社区梗、动物币、名人梗、AI纯Meme或链上原生土狗的项目，才能归类为 `🐶 链上早期Meme/金狗`。
-   - 如果是公链(L1/L2)、DeFi、AI基础设施/Agent工具、DePIN、RWA、游戏、预言机等有实际产品业务的异动项目，必须归类为 `🚀 叙事异动黑马`、`📈 强势赛道龙头` 或 `💎 机构潜伏/底部价值`，绝不能错标为 Meme！
-2. 【精准赛道提炼】：
-   - 根据背调信息给出准确的中文细分赛道名称 `verified_track`（例如：`Solana 链上Meme`、`Base 生态金狗`、`AI Agent 协议`、`RWA 美债协议`、`DePIN 算力网络`、`模块化区块链` 等，严禁输出“全网热搜异动榜”这种笼统假词）。
-3. 【输出格式】：严格输出 JSON，不要夹杂任何解释：
-{
-  "ai_score": 82,
-  "verdict": "强烈推荐 / 建议关注 / 谨慎观望 / 放弃",
+    cio_sys = f"""你是加密基金首席投资官 (CIO)，当前智能体处于【第 Gen #{gen_num} 代高频进化状态】。
+以下是系统根据近期实盘盈亏回测总结出的【本轮强制进化复盘结论与狙击铁律】，你必须严格执行：
+【近期实盘进化复盘】：{evo_reason}
+【本轮强制狙击铁律】：
+{rules_text}
+
+请综合【深度背调档案】与多空辩论，做出冷酷、敏锐的裁决：
+1. 【买点位置与早期度一票否决权】：
+   - 如果项目已经暴涨过高（处于高潮派发期）、或市值过大缺乏十倍赔率、或 1h/24h 卖盘大于买盘冲高回落，`ai_score` 必须打 **50~62 分（直接淘汰）**！
+   - 只有真正处于【极早期启动窗口】、【底部黄金坑右侧刚放量拐点】或【低市值主升浪突破初期】、且买盘强劲的标的，才可给予 **75~95 分**！
+2. 【分类验真铁律】：
+   - 只有文化社区梗、动物币、名人梗、AI纯Meme或链上原生土狗，才归类为 `🐶 链上早期Meme/金狗`。
+   - 有实际协议/产品业务的早期项目，归类为 `🚀 叙事异动黑马`、`📈 强势赛道龙头` 或 `💎 机构潜伏/底部价值`。
+3. 【输出格式】：严格输出纯 JSON：
+{{
+  "ai_score": 84,
+  "verdict": "极早期重仓狙击 / 黄金买点关注 / 位置偏高观望 / 高位接盘放弃",
+  "entry_timing": "🟢 极早期点火窗口 或 💎 底部右侧拐点 或 🚀 突破启动初期 或 ⚠️ 涨幅偏高谨慎",
   "verified_type": "🐶 链上早期Meme/金狗 或 🚀 叙事异动黑马 或 📈 强势赛道龙头 或 💎 机构潜伏/底部价值",
   "verified_track": "精准的中文细分赛道名称(8字以内)",
-  "catalyst": "一句话点明该项目当前最核心的上涨催化剂或基本面亮点(35字以内)",
-  "summary": "综合多空双方与背调档案的最终实战操作建议（含理想介入策略与止损风控，120字以内）"
-}"""
+  "catalyst": "一句话点明为什么现在是最佳进入窗口及核心催化剂(35字以内)",
+  "summary": "明确给出最佳分批建仓区间、止盈目标位与跌破何处无条件止损（120字以内）"
+}}"""
 
     cio_prompt = f"【深度背调档案】:\n{project_json}\n\n【多头观点】:\n{bull_view}\n\n【空头风控】:\n{bear_view}"
     cio_raw = call_llm("cio_agent", cio_sys, cio_prompt, temperature=0.2, json_mode=True)
@@ -250,11 +264,12 @@ def multi_agent_evaluate(project_data):
     except Exception:
         ai_score = 72.0
 
-    verdict = cio_data.get("verdict", "建议关注")
+    verdict = cio_data.get("verdict", "黄金买点关注")
+    entry_timing = cio_data.get("entry_timing") or project_data.get("position_tag", "🟢 早期启动窗口")
     verified_type = cio_data.get("verified_type", "")
     verified_track = cio_data.get("verified_track", "")
-    catalyst = cio_data.get("catalyst", "资金异动明显，具备短期博弈价值")
-    summary = cio_data.get("summary", "请结合盘面量能与止损纪律分批参与。")
+    catalyst = cio_data.get("catalyst", "底部早期放量点火，买盘主动吸筹明显")
+    summary = cio_data.get("summary", "建议在回踩5日均线或池子支撑位分批建仓，跌破前低8%严格止损。")
 
     valid_types = [
         "🐶 链上早期Meme/金狗",
@@ -270,9 +285,9 @@ def multi_agent_evaluate(project_data):
         )
 
     report = (
-        f"🔥【核心催化】: {catalyst}\n"
-        f"🐂【多头逻辑】: {bull_view.strip()}\n"
-        f"🐻【空头风控】: {bear_view.strip()}\n"
+        f"⏱️【窗口诊断 ({entry_timing})】: {catalyst}\n"
+        f"🐂【早期看多】: {bull_view.strip()}\n"
+        f"🐻【位置风控】: {bear_view.strip()}\n"
         f"⚖️【CIO裁决 ({verdict})】: {summary.strip()}"
     )
-    return ai_score, report, verified_type, verified_track, catalyst
+    return ai_score, report, verified_type, verified_track, catalyst, entry_timing
