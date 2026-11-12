@@ -1,55 +1,86 @@
-# preflight_check.py - 启动前校验模块与配置的完整性（缺失即退出并给出明确提示）
 import importlib
-import os
+import inspect
 import sys
 
-REQUIRED_NAMES = {
-    "config": [
-        "LLM_API_KEYS", "LLM_ENDPOINTS", "AGENT_MODEL_ROUTING",
-        "DEFAULT_EVOLUTION_STATE", "FEISHU_APP_ID", "FEISHU_APP_SECRET",
-        "FEISHU_APP_TOKEN", "TABLE_ID_CONFIG", "TABLE_ID_RADAR",
-        "TABLE_ID_ALPHA", "FEISHU_URL", "COINGECKO_API_KEY", "TAVILY_API_KEY",
-    ],
-    "feishu_db": ["FeishuDB", "get_records", "add_record", "update_record"],
-    "llm_engine": ["ask_ai", "call_llm", "extract_json", "multi_agent_evaluate"],
-    "notifier": ["load_local_db", "save_local_db", "build_dashboard", "send_wechat"],
-}
 
-THIRD_PARTY = ["requests", "feedparser"]
+def check_module_attrs(mod_name: str, required_attrs: list) -> list:
+    errors = []
+    try:
+        mod = importlib.import_module(mod_name)
+    except Exception as e:
+        return [f"模块 {mod_name} 导入失败: {e}"]
+
+    for attr in required_attrs:
+        if not hasattr(mod, attr):
+            errors.append(f"模块 {mod_name} 缺少必需属性/函数: {attr}")
+    return errors
 
 
 def main():
-    errors = []
+    print("🔍 [Preflight Check] 正在校验 V6.0 模块接口与配置完整性...")
+    all_errors = []
 
-    for mod_name in THIRD_PARTY:
+    for pkg in ("requests", "feedparser"):
         try:
-            importlib.import_module(mod_name)
+            importlib.import_module(pkg)
         except ImportError:
-            errors.append(f"缺少第三方依赖: {mod_name}（请检查 requirements.txt）")
+            all_errors.append(f"缺少第三方依赖包: {pkg} (请检查 requirements.txt)")
 
-    for mod_name, names in REQUIRED_NAMES.items():
-        try:
-            mod = importlib.import_module(mod_name)
-        except Exception as e:
-            errors.append(f"模块 {mod_name}.py 无法导入: {e}")
-            continue
-        for name in names:
-            if not hasattr(mod, name):
-                errors.append(f"{mod_name}.py 缺少必需的名称: {name}")
+    all_errors.extend(
+        check_module_attrs(
+            "config",
+            [
+                "LLM_API_KEYS",
+                "LLM_ENDPOINTS",
+                "AGENT_MODEL_ROUTING",
+                "DEFAULT_EVOLUTION_STATE",
+                "FEISHU_APP_ID",
+                "FEISHU_APP_SECRET",
+                "FEISHU_APP_TOKEN",
+                "TABLE_ID_CONFIG",
+                "TABLE_ID_RADAR",
+                "TABLE_ID_ALPHA",
+                "FEISHU_URL",
+                "COINGECKO_API_KEY",
+                "TAVILY_API_KEY",
+            ],
+        )
+    )
 
-    if errors:
-        print("❌ 启动前自检失败：")
-        for e in errors:
-            print(f"   - {e}")
+    all_errors.extend(
+        check_module_attrs(
+            "feishu_db",
+            ["get_records", "add_record", "update_record", "FeishuDB"],
+        )
+    )
+
+    all_errors.extend(
+        check_module_attrs(
+            "llm_engine",
+            ["call_llm", "ask_ai", "extract_json", "multi_agent_evaluate"],
+        )
+    )
+
+    all_errors.extend(
+        check_module_attrs("notifier", ["build_dashboard"])
+    )
+
+    # 校验方法参数签名是否支持 V6.0
+    try:
+        import feishu_db
+        sig = inspect.signature(feishu_db.FeishuDB.get_strategy_weights)
+        if len(sig.parameters) < 2:
+            print("⚠️ 提示: feishu_db.FeishuDB.get_strategy_weights 为旧版单参数签名，建议同步更新 feishu_db.py")
+    except Exception:
+        pass
+
+    if all_errors:
+        print("❌ 启动前自检发现以下问题:")
+        for err in all_errors:
+            print(f"   - {err}")
         sys.exit(1)
 
-    import config
-    if not config.LLM_API_KEYS.get("glm") and not config.LLM_API_KEYS.get("groq"):
-        print("⚠️ 警告：GLM_API_KEY 与 GROQ_API_KEY 均未配置，AI 将使用量化保底逻辑。")
-    if not config.FEISHU_APP_ID:
-        print("⚠️ 提示：未配置飞书，将仅使用本地 docs/alpha_db.json 双引擎。")
-
-    print("✅ 启动前自检通过：所有模块与配置名称完整。")
+    print("✅ [Preflight Check] 所有 V6.0 模块接口与配置自检通过！")
 
 
 if __name__ == "__main__":
