@@ -1,4 +1,4 @@
-# notifier.py - V5.0 GitHub Pages 响应式投研看板构建器（双向兼容字段解析）
+# notifier.py - V6.0 GitHub Pages 投研看板（含高频自我进化中枢与建仓位置诊断展示）
 import os
 import json
 from datetime import datetime, timezone, timedelta
@@ -7,6 +7,7 @@ from config import (
     FEISHU_URL,
     LLM_API_KEYS,
     TAVILY_API_KEY,
+    DEFAULT_EVOLUTION_STATE,
 )
 from feishu_db import FeishuDB
 
@@ -23,6 +24,7 @@ def load_local_db():
     return {
         "updated_at": "",
         "api_status": {},
+        "evolution_state": DEFAULT_EVOLUTION_STATE,
         "hot_keywords": [],
         "vc_And_news": [],
         "tracks": [],
@@ -58,7 +60,7 @@ def _normalize_news_items(local_data):
 
 
 def build_dashboard(latest_alert_title="", latest_alert_md=""):
-    print("🌐 正在构建 GitHub Pages 投研看板 V5.0 (docs/index.html)...")
+    print("🌐 正在构建 GitHub Pages 投研看板 V6.0 (docs/index.html)...")
     local_data = load_local_db()
     feishu_ok = False
 
@@ -72,17 +74,21 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
 
     tz_bj = timezone(timedelta(hours=8))
     now_str = local_data.get("updated_at") or datetime.now(tz_bj).strftime("%Y-%m-%d %H:%M:%S (UTC+8)")
+    evo = local_data.get("evolution_state") or DEFAULT_EVOLUTION_STATE
+    guardrails = evo.get("guardrails") or DEFAULT_EVOLUTION_STATE["guardrails"]
+    tactical_rules = evo.get("tactical_rules") or DEFAULT_EVOLUTION_STATE["tactical_rules"]
+
     hot_keywords = local_data.get("hot_keywords") or local_data.get("keywords") or []
     vc_and_news = _normalize_news_items(local_data)
     tracks_data = local_data.get("tracks", [])
     projects_data = local_data.get("projects", [])
 
     api_status = [
-        {"name": "智谱 GLM 引擎", "ok": bool(LLM_API_KEYS.get("glm")), "desc": "主脑投研引擎"},
+        {"name": "智谱 GLM 引擎", "ok": bool(LLM_API_KEYS.get("glm")), "desc": "主脑多智能体辩论"},
         {"name": "Groq 极速引擎", "ok": bool(LLM_API_KEYS.get("groq")), "desc": "容灾备用大模型"},
-        {"name": "飞书多维表格", "ok": feishu_ok, "desc": "云端数据库已连接" if feishu_ok else "本地 JSON 引擎驱动"},
-        {"name": "GeckoTerminal/DEX", "ok": True, "desc": "链上实时金狗雷达"},
-        {"name": "Tavily 深度背调", "ok": bool(TAVILY_API_KEY), "desc": "全网催化剂与VC背调"},
+        {"name": "高频进化中枢", "ok": True, "desc": f"第 Gen #{evo.get('generation', 1)} 代基因在线"},
+        {"name": "链上新池雷达", "ok": True, "desc": "New Pools 极早期监控"},
+        {"name": "飞书/本地双擎", "ok": True, "desc": "云端已连接" if feishu_ok else "本地 JSON 实时闭环"},
     ]
 
     status_html = ""
@@ -102,6 +108,64 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
             <span class="w-3 h-3 rounded-full {dot_color}"></span>
         </div>
         """
+
+    # 构建智能体高频进化中枢面板 HTML
+    avg_roi = float(evo.get("avg_roi_pct", 0.0))
+    roi_cls = "text-emerald-400" if avg_roi >= 0 else "text-rose-400"
+    rules_html = "".join([
+        f'<li class="text-xs text-slate-300 flex items-start gap-2"><span class="text-emerald-400 shrink-0">✔</span><span>{r}</span></li>'
+        for r in tactical_rules[:3]
+    ])
+
+    evolution_html = f"""
+    <section class="glass rounded-2xl p-5 border border-emerald-500/30 bg-gradient-to-r from-slate-900/95 via-indigo-950/30 to-slate-900/95">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-4 border-b border-slate-800/80 pb-3">
+            <div class="flex items-center gap-2.5">
+                <span class="px-2.5 py-1 rounded-lg text-xs font-extrabold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">🧬 Gen #{evo.get('generation', 1)} 代进化脑</span>
+                <h2 class="text-base font-bold text-white">每 4 小时实盘回测自进化中枢（防追高 · 控市值 · 抓极早期点火）</h2>
+            </div>
+            <span class="text-xs text-slate-400">最近进化时间: {evo.get('last_evolved_at', now_str[:16])}</span>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-4">
+            <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-800">
+                <div class="text-xs text-slate-400">实盘正收益胜率</div>
+                <div class="text-base font-extrabold text-emerald-400 mt-0.5">{float(evo.get('win_rate_pct', 0)):.1f}% <span class="text-[11px] text-slate-500 font-normal">({evo.get('total_tested', 0)}样本)</span></div>
+            </div>
+            <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-800">
+                <div class="text-xs text-slate-400">推荐池平均浮盈</div>
+                <div class="text-base font-extrabold {roi_cls} mt-0.5">{avg_roi:+.2f}%</div>
+            </div>
+            <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-800">
+                <div class="text-xs text-slate-400">近期最佳捕获</div>
+                <div class="text-sm font-bold text-amber-300 mt-0.5 truncate">{evo.get('best_pick', '暂无')}</div>
+            </div>
+            <div class="bg-slate-900/90 rounded-xl p-3 border border-indigo-500/30">
+                <div class="text-xs text-slate-400">24h 防追高涨幅红线</div>
+                <div class="text-base font-extrabold text-rose-300 mt-0.5">+{guardrails.get('max_24h_pump_limit', 68)}% <span class="text-[11px] text-slate-400 font-normal">超限拦截</span></div>
+            </div>
+            <div class="bg-slate-900/90 rounded-xl p-3 border border-indigo-500/30">
+                <div class="text-xs text-slate-400">Meme / 叙事市值上限</div>
+                <div class="text-sm font-extrabold text-sky-300 mt-0.5">${guardrails.get('max_meme_mc_wan', 1500):.0f}万 / ${guardrails.get('max_narrative_mc_wan', 5000):.0f}万</div>
+            </div>
+            <div class="bg-slate-900/90 rounded-xl p-3 border border-indigo-500/30">
+                <div class="text-xs text-slate-400">最低链上买盘门槛</div>
+                <div class="text-base font-extrabold text-emerald-300 mt-0.5">≥ {guardrails.get('min_buy_ratio_pct', 53.5)}%</div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 bg-slate-950/70 rounded-xl p-3.5 border border-slate-800/80">
+            <div>
+                <div class="text-xs font-bold text-indigo-300 mb-1.5">🧠 本轮自我反思与调参结论：</div>
+                <p class="text-xs text-slate-300 leading-relaxed">{evo.get('evolution_reason', '')}</p>
+            </div>
+            <div>
+                <div class="text-xs font-bold text-emerald-300 mb-1.5">⚖️ 已注入 CIO 投委会的强制狙击铁律：</div>
+                <ul class="space-y-1">{rules_html}</ul>
+            </div>
+        </div>
+    </section>
+    """
 
     kw_html = ""
     if hot_keywords:
@@ -194,6 +258,9 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
             contract_addr = p.get("contract_address") or ""
             short_addr = f"{contract_addr[:6]}...{contract_addr[-4:]}" if len(contract_addr) > 12 else ""
 
+            entry_timing = p.get("entry_timing", "🟢 极早期点火窗口")
+            age_label = p.get("age_label", "⚡ 早期标的")
+
             chg_1h = float(p.get("change_1h", 0))
             chg_24h = float(p.get("change_24h", 0))
             c1h_cls = "text-emerald-400" if chg_1h >= 0 else "text-rose-400"
@@ -202,10 +269,17 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
             price_val = float(p.get("price", 0))
             price_str = f"${price_val:.6f}" if price_val < 0.01 else f"${price_val:.4f}"
 
+            live_roi = float(p.get("live_roi_pct", 0.0))
+            roi_badge = (
+                f'<span class="text-xs px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold">实盘 {live_roi:+.1f}%</span>'
+                if live_roi != 0
+                else ""
+            )
+
             liq_wan = float(p.get("liquidity_wan", 0))
             buys_24h = int(p.get("buys_24h", 0))
             sells_24h = int(p.get("sells_24h", 0))
-            buy_ratio = float(p.get("buy_ratio", 50.0))
+            buy_ratio = float(p.get("buy_ratio", 52.0))
             commits_4w = int(p.get("commits_4w", 0))
             vc_hits = p.get("vc_hits") or []
 
@@ -232,7 +306,7 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
                     )
                 )
 
-            catalyst_str = p.get("catalyst") or "链上资金与叙事共振异动"
+            catalyst_str = p.get("catalyst") or "处于极早期放量启动窗口，买盘主动吸筹"
             report_html = str(p.get("ai_report", "")).replace("\n", "<br>")
             symbol_clean = str(p.get("symbol", "")).upper()
             dex_url = p.get("dex_url") or f"https://dexscreener.com/search?q={symbol_clean}"
@@ -258,11 +332,15 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
                                 <span class="text-xl font-extrabold text-white tracking-tight">${symbol_clean}</span>
                                 <span class="text-xs px-2 py-0.5 rounded font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">{chain}</span>
                                 <span class="text-xs px-2.5 py-0.5 rounded-full border font-semibold {type_cls}">{opp_type}</span>
+                                <span class="text-xs px-2 py-0.5 rounded-md bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 font-semibold">{entry_timing}</span>
+                                {roi_badge}
                                 {addr_badge}
                             </div>
-                            <div class="flex items-center gap-2 mt-1.5 text-xs">
+                            <div class="flex items-center gap-2 mt-1.5 text-xs flex-wrap">
+                                <span class="text-amber-300 font-semibold">{age_label}</span>
+                                <span class="text-slate-600">|</span>
                                 <span class="text-indigo-400 font-medium">🎯 细分赛道: {p.get('track', '早期Alpha')}</span>
-                                <span class="text-slate-500">|</span>
+                                <span class="text-slate-600">|</span>
                                 <span class="text-slate-400">{p.get('name', '')}</span>
                             </div>
                         </div>
@@ -278,11 +356,11 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
 
                     <div class="grid grid-cols-3 gap-2 my-3 bg-slate-900/90 p-3 rounded-xl border border-slate-800/90 text-xs">
                         <div>
-                            <span class="text-slate-400 block">当前价格</span>
+                            <span class="text-slate-400 block">建仓参考价</span>
                             <span class="text-white font-bold text-sm">{price_str}</span>
                         </div>
                         <div>
-                            <span class="text-slate-400 block">1h / 24h 动量</span>
+                            <span class="text-slate-400 block">1h 点火 / 24h 涨幅</span>
                             <span class="font-bold text-sm"><span class="{c1h_cls}">{chg_1h:+.1f}%</span> / <span class="{c24_cls}">{chg_24h:+.1f}%</span></span>
                         </div>
                         <div>
@@ -290,7 +368,7 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
                             <span class="text-amber-300 font-semibold text-sm">{float(p.get('turnover_24h', 0)):.1f}%</span>
                         </div>
                         <div>
-                            <span class="text-slate-400 block">流通市值</span>
+                            <span class="text-slate-400 block">早期流通市值</span>
                             <span class="text-emerald-300 font-semibold">${float(p.get('market_cap', 0)):.1f}万</span>
                         </div>
                         <div>
@@ -309,7 +387,7 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
                 </div>
 
                 <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
-                    <span>⏱️ 背调时间: {p.get('discovered_at', now_str[:16])}</span>
+                    <span>⏱️ 狙击时间: {p.get('discovered_at', now_str[:16])}</span>
                     <div class="flex items-center gap-2">
                         <a href="{dex_url}" target="_blank" class="px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20 border border-emerald-500/30 transition font-medium">DexScreener ↗</a>
                         <a href="https://x.com/search?q=%24{symbol_clean}&src=typed_query&f=live" target="_blank" class="px-2.5 py-1 rounded-lg bg-sky-500/10 text-sky-300 hover:bg-sky-500/20 border border-sky-500/30 transition font-medium">𝕏 社区舆情 ↗</a>
@@ -321,7 +399,7 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
     else:
         projects_html = """
         <div class="col-span-2 glass rounded-2xl p-8 text-center text-slate-400">
-            正在执行早期 Alpha 与链上金狗深度背调，请稍后刷新页面...
+            正在执行极早期 Alpha 与链上新池金狗深度背调，请稍后刷新页面...
         </div>
         """
 
@@ -336,7 +414,7 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto Alpha Hunter V5.0 | 早期高赔率项目与链上金狗狙击系统</title>
+    <title>Crypto Alpha Hunter V6.0 | 高频自进化与极早期点火狙击系统</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {{ background-color: #070b14; color: #e2e8f0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }}
@@ -353,9 +431,9 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
                 <div>
                     <div class="flex items-center gap-2">
                         <h1 class="text-lg font-bold text-white">Crypto Alpha Hunter</h1>
-                        <span class="text-xs px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold">V5.0 早期狙击版</span>
+                        <span class="text-xs px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold">V6.0 高频进化·极早期狙击版</span>
                     </div>
-                    <p class="text-xs text-slate-400">剔除大市值老白马 · GeckoTerminal/DexScreener 链上金狗雷达 · 强制深度背调验真</p>
+                    <p class="text-xs text-slate-400">每4小时实盘盈亏自进化 · 严禁高位追涨接盘 · 聚焦 $15万~$5000万 极早期点火窗口</p>
                 </div>
             </div>
             <div class="flex items-center gap-3">
@@ -365,18 +443,20 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 mt-6 space-y-8">
+    <main class="max-w-7xl mx-auto px-4 mt-6 space-y-7">
         <section>
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
                 {status_html}
             </div>
         </section>
 
+        {evolution_html}
+
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-5">
             <div class="lg:col-span-2 glass rounded-2xl p-5 border border-slate-800">
                 <div class="flex items-center justify-between mb-3">
-                    <h2 class="text-base font-bold text-white flex items-center gap-2">🔥 全网热点叙事关键词云 (AI 提炼)</h2>
-                    <span class="text-xs text-slate-400">CoinGecko 热搜 + 链上热池 + 媒体共振</span>
+                    <h2 class="text-base font-bold text-white flex items-center gap-2">🔥 全网早期叙事关键词云 (AI 提炼)</h2>
+                    <span class="text-xs text-slate-400">链上新池 + VC 融资 + 热搜共振</span>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {kw_html}
@@ -396,8 +476,8 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
         <section>
             <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
                 <div>
-                    <h2 class="text-lg font-bold text-white">🎯 早期高赔率 Alpha 标的池（已完成深度背调验真）</h2>
-                    <p class="text-xs text-slate-400">已自动排除 Top 大市值老白马，聚焦 $20万 ~ $3亿 市值区间的早期高弹性标的</p>
+                    <h2 class="text-lg font-bold text-white">🎯 极早期最佳买点 Alpha 标的池（已通过防追高与真实买盘审计）</h2>
+                    <p class="text-xs text-slate-400">自动拦截 24h 暴涨超 +{guardrails.get('max_24h_pump_limit', 68)}% 的高位接盘标的，锁定刚开盘/底部刚启动的黄金建仓窗口</p>
                 </div>
                 <div class="flex flex-wrap gap-2">
                     <button onclick="filterProjects('all', this)" class="filter-btn active px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white transition">全部精选 ({len(projects_data)})</button>
@@ -414,7 +494,7 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
 
         <section>
             <div class="flex items-center justify-between mb-3">
-                <h2 class="text-lg font-bold text-white">📡 重点监控叙事赛道雷达</h2>
+                <h2 class="text-lg font-bold text-white">📡 重点监控早期轮动赛道雷达</h2>
                 <span class="text-xs text-slate-400">已过滤稳定币与包装资产噪音</span>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -451,7 +531,7 @@ def build_dashboard(latest_alert_title="", latest_alert_md=""):
     os.makedirs("docs", exist_ok=True)
     with open("docs/index.html", "w", encoding="utf-8") as f:
         f.write(html)
-    print("✅ Web 投研看板 V5.0 已生成: docs/index.html")
+    print("✅ Web 投研看板 V6.0 已生成: docs/index.html")
 
 
 def send_wechat(title, md_content):
