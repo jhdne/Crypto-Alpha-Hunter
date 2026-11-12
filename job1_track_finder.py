@@ -1,4 +1,4 @@
-# job1_track_finder.py - V5.0 真实叙事与反弹赛道雷达（完全统一 V5 数据结构）
+# job1_track_finder.py - V6.0 真实叙事与早期轮动赛道雷达
 from datetime import datetime, timedelta, timezone
 import feedparser
 import requests
@@ -7,35 +7,18 @@ import feishu_db
 import llm_engine
 import notifier
 
-# 严格封杀一切稳定币、包装币、锚定币、微型发射台等垃圾伪分类
 GARBAGE_KEYWORDS = [
-    "stablecoin",
-    "backed",
-    "wrapped",
-    "bridged",
-    "peg",
-    "tokenized",
-    "rstock",
-    "cookie",
-    "index",
-    "portfolio",
-    "alleged-sec",
-    "wormhole",
-    "multichain",
-    "staked",
-    "restaked",
-    "liquid-staking",
-    "fork",
-    "launchpad",
+    "stablecoin", "backed", "wrapped", "bridged", "peg", "tokenized",
+    "rstock", "cookie", "index", "portfolio", "alleged-sec", "wormhole",
+    "multichain", "staked", "restaked", "liquid-staking", "fork", "launchpad",
 ]
 
-# 当 CoinGecko 接口限流时的核心高赔率保底赛道池
 FALLBACK_CORE_SECTORS = [
     {"id": "artificial-intelligence", "name": "AI & Agent 智能体协议", "market_cap_change_24h": 6.8, "volume_24h": 1850000000},
-    {"id": "meme-token", "name": "高动量 Meme 文化叙事", "market_cap_change_24h": 8.4, "volume_24h": 3200000000},
+    {"id": "meme-token", "name": "链上早期 Meme 文化叙事", "market_cap_change_24h": 8.4, "volume_24h": 3200000000},
     {"id": "real-world-assets-rwa", "name": "RWA 真实世界资产协议", "market_cap_change_24h": 5.2, "volume_24h": 920000000},
     {"id": "depin", "name": "DePIN 去中心化硬件网络", "market_cap_change_24h": 4.9, "volume_24h": 680000000},
-    {"id": "solana-ecosystem", "name": "Solana 链上生态高弹性标的", "market_cap_change_24h": 5.6, "volume_24h": 4100000000},
+    {"id": "solana-ecosystem", "name": "Solana 链上高弹性生态", "market_cap_change_24h": 5.6, "volume_24h": 4100000000},
     {"id": "decentralized-finance-defi", "name": "DeFi 新一代收益与衍生品", "market_cap_change_24h": 4.1, "volume_24h": 2400000000},
 ]
 
@@ -70,7 +53,8 @@ def get_active_sectors(db):
             mc = float(c.get("market_cap") or 0)
             vol = float(c.get("volume_24h") or 0)
             chg = c.get("market_cap_change_24h")
-            if mc > 100_000_000 and vol > 30_000_000 and chg is not None:
+            # 优选市值不过分臃肿、处于温和放量启动区间(-2% ~ +25%)的赛道，避免板块整体已处于顶部过热
+            if mc > 80_000_000 and vol > 25_000_000 and chg is not None and -3.0 <= float(chg) <= 35.0:
                 valid.append(c)
 
         top_cats = sorted(
@@ -80,7 +64,7 @@ def get_active_sectors(db):
             top_cats = FALLBACK_CORE_SECTORS
         db["api_status"]["coingecko"] = {
             "ok": True,
-            "msg": f"正常 (已捕获 {len(top_cats)} 个主流升温赛道)",
+            "msg": f"正常 (已捕获 {len(top_cats)} 个早期轮动升温赛道)",
         }
         return top_cats
     except Exception as e:
@@ -95,7 +79,6 @@ def get_market_buzz_and_vc(db):
     if config.COINGECKO_API_KEY:
         headers["x-cg-demo-api-key"] = config.COINGECKO_API_KEY
 
-    # 1. CoinGecko 实时全网热搜代币
     try:
         tr = requests.get(
             "https://api.coingecko.com/api/v3/search/trending",
@@ -115,7 +98,6 @@ def get_market_buzz_and_vc(db):
     except Exception:
         pass
 
-    # 2. DeFiLlama 全球最新 VC 融资披露
     try:
         res = requests.get(
             "https://api.llama.fi/raises", headers=headers, timeout=15
@@ -133,7 +115,6 @@ def get_market_buzz_and_vc(db):
     except Exception:
         pass
 
-    # 3. 加密媒体快讯 RSS
     for rss_url in [
         "https://rss.panewslab.com/zh/tvsq/rss",
         "https://cointelegraph.com/rss",
@@ -165,14 +146,13 @@ def get_market_buzz_and_vc(db):
 
 
 def run():
-    print("📡 执行 V5.0 Job1：清理旧噪音赛道 + 嗅探主流反弹赛道与热词...")
+    print("📡 执行 V6.0 Job1：嗅探刚启动的早期轮动叙事赛道与热词...")
     db = notifier.load_local_db()
     db.setdefault("api_status", {})
 
     cg_cats = get_active_sectors(db)
     buzz_list = get_market_buzz_and_vc(db)
 
-    # 清理历史遗留的垃圾赛道
     existing_tracks = db.get("tracks", [])
     clean_existing = []
     for t in existing_tracks:
@@ -189,23 +169,23 @@ def run():
     buzz_str = "\n".join(buzz_list)
 
     prompt = f"""
-【今日主流反弹与领涨赛道（已剔除稳定币与包装币）】：
+【今日资金刚启动/轮动升温的主流赛道（已剔除稳定币与包装币）】：
 {cats_str}
 
-【全网实时热搜标的、VC融资与媒体快讯】：
+【全网实时热搜标的、VC最新融资与媒体快讯】：
 {buzz_str}
 
-请作为顶级加密宏观交易员，完成以下两项分析并严格输出 JSON 格式：
-1. keywords: 提炼 6 个当前市场最火的【叙事热词或异动方向】（如 #AI Agent反弹、#链上Meme狂潮、#RWA美债、#DePIN算力、#Solana生态等），附带热度分(85-99)和简短逻辑。
-2. tracks: 从上述二级赛道列表中挑选 4 个最值得深挖抄底或追击龙头的赛道（id 必须严格照抄上述列表中的真实 ID）。
+请作为专注于寻找【极早期叙事拐点】的加密宏观猎手，完成以下两项分析并严格输出 JSON 格式：
+1. keywords: 提炼 6 个当前市场最具早期爆发潜力的【叙事热词或新资金方向】，附带热度分(85-99)和早期介入逻辑。
+2. tracks: 从上述二级赛道列表中挑选 4 个最适合潜伏早期小市值黑马或刚启动龙头的赛道（id 必须严格照抄上述列表中的真实 ID）。
 
 严格按以下 JSON 输出：
 {{
   "keywords": [
-    {{"keyword": "#AI Agent 反弹", "heat": 96, "reason": "超跌后资金回流明显，热搜占比高"}}
+    {{"keyword": "#AI Agent 早期协议", "heat": 96, "reason": "一级VC密集注资，链上小市值Agent代币刚放量点火"}}
   ],
   "tracks": [
-    {{"id": "板块真实ID", "name": "赛道中文名", "source": "🔥赛道强势反弹 或 💰一二级共振", "change_24h": 8.5, "reason": "主力资金流入逻辑与操作建议"}}
+    {{"id": "板块真实ID", "name": "赛道中文名", "source": "🔥早期资金点火 或 💰一二级共振", "change_24h": 6.5, "reason": "主力资金刚开始流入该板块小市值标的，具备早期埋伏价值"}}
   ]
 }}
 """
@@ -227,7 +207,7 @@ def run():
                 "keyword": f"#{c['name'][:18]}",
                 "word": f"#{c['name'][:18]}",
                 "heat": 92 - idx * 2,
-                "reason": "24h资金净流入与板块换手率居前",
+                "reason": "板块量能温和放大，早期资金净流入居前",
             }
             for idx, c in enumerate(cg_cats[:6])
         ]
@@ -235,12 +215,12 @@ def run():
         normalized_kw = []
         for kw in ai_keywords:
             if isinstance(kw, dict):
-                w = kw.get("keyword") or kw.get("word") or "#热点叙事"
+                w = kw.get("keyword") or kw.get("word") or "#早期热点叙事"
                 normalized_kw.append({
                     "keyword": w,
                     "word": w,
                     "heat": int(kw.get("heat") or 90),
-                    "reason": str(kw.get("reason") or "资金关注度升温"),
+                    "reason": str(kw.get("reason") or "早期资金关注度升温"),
                 })
         ai_keywords = normalized_kw
 
@@ -249,9 +229,9 @@ def run():
             {
                 "id": c["id"],
                 "name": c["name"],
-                "source": "🔥赛道强势反弹",
+                "source": "🔥早期资金点火",
                 "change_24h": round(float(c.get("market_cap_change_24h") or 0), 2),
-                "reason": "板块成交显著放量，龙头标的资金回流明显",
+                "reason": "板块成交放量启动，中小市值标的弹性极佳",
             }
             for c in cg_cats[:4]
         ]
@@ -259,7 +239,6 @@ def run():
     db["hot_keywords"] = ai_keywords
     db["keywords"] = ai_keywords
 
-    # 更新最新赛道到 db["tracks"] 队首（同时保留中英文键名以兼容所有模块）
     for pick in reversed(ai_tracks):
         if not isinstance(pick, dict) or not pick.get("id"):
             continue
@@ -267,9 +246,9 @@ def run():
         tname = str(pick.get("name") or tid).strip()
         if is_garbage_track(tid, tname):
             continue
-        tsource = str(pick.get("source") or "🔥赛道强势反弹")
+        tsource = str(pick.get("source") or "🔥早期资金点火")
         tchg = round(float(pick.get("change_24h") or 0), 2)
-        treason = str(pick.get("reason") or pick.get("comment") or "具备较强叙事催化与资金关注度")
+        treason = str(pick.get("reason") or pick.get("comment") or "具备早期叙事催化与资金关注度")
 
         unified_track = {
             "id": tid,
@@ -286,8 +265,7 @@ def run():
             "人工状态": "允许深挖",
         }
         db["tracks"] = [
-            t for t in db["tracks"]
-            if (t.get("id") or t.get("赛道ID")) != tid
+            t for t in db["tracks"] if (t.get("id") or t.get("赛道ID")) != tid
         ]
         db["tracks"].insert(0, unified_track)
 
@@ -309,7 +287,7 @@ def run():
     bj_time = (datetime.now(timezone.utc) + timedelta(hours=8)).strftime("%Y-%m-%d %H:%M")
     track_names = [t.get("name") or t.get("赛道名称") or "" for t in db["tracks"][:3]]
     db["alert"] = {
-        "title": "📡 宏观叙事与反弹赛道已更新",
+        "title": "📡 早期轮动叙事赛道已更新",
         "content": f"最新捕获赛道：{', '.join(track_names)}",
         "time": bj_time,
     }
