@@ -9,8 +9,8 @@ on:
         default: 'all'
   schedule:
     - cron: '0 0,12 * * *'   # 每天北京时间 08:00、20:00 嗅探宏观赛道
-    - cron: '15 */4 * * *'   # 每 4 小时深挖并背调早期项目
-    - cron: '0 14 * * 0'     # 每周日北京时间 22:00 自我进化复盘
+    - cron: '15 */4 * * *'   # 每 4 小时高频自我进化 + 极早期项目狙击
+    - cron: '0 14 * * 0'     # 每周日北京时间 22:00 深度全量复盘
 
 permissions:
   contents: write
@@ -30,7 +30,7 @@ jobs:
       - name: 3. 安装依赖库
         run: pip install -r requirements.txt
 
-      - name: 4. 执行 AI 投研任务并生成最新网页看板
+      - name: 4. 执行高频进化与 AI 早期狙击任务
         env:
           GLM_API_KEY: ${{ secrets.GLM_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
@@ -51,29 +51,29 @@ jobs:
           if [ "$JOB_TYPE" = "track" ]; then
             python job1_track_finder.py
             python notifier.py
-          elif [ "$JOB_TYPE" = "project" ]; then
+          elif [ "$JOB_TYPE" = "project" ] || [ "$SCHEDULE_CRON" = "15 */4 * * *" ]; then
+            python job3_self_evolver.py
             python job2_project_hunter.py
             python notifier.py
-          elif [ "$JOB_TYPE" = "evolve" ] || [ "$SCHEDULE_CRON" = "0 14 * * 0" ]; then
+          elif [ "$JOB_TYPE" = "evolve" ]; then
             python job3_self_evolver.py
-            python job1_track_finder.py
-            python job2_project_hunter.py
             python notifier.py
           elif [ "$JOB_TYPE" = "dashboard" ]; then
             python notifier.py
           else
+            python job3_self_evolver.py
             python job1_track_finder.py
             python job2_project_hunter.py
             python notifier.py
           fi
 
-      - name: 5. 自动将最新网页推送至 GitHub Pages
+      - name: 5. 自动将最新网页与进化记忆库推送至 GitHub Pages
         run: |
           git config --global user.name "Crypto-Alpha-Bot"
           git config --global user.email "bot@github.com"
           git add docs/
           if ! git diff --staged --quiet; then
-            git commit -m "📊 Auto-update Web Dashboard"
+            git commit -m "🧬 Auto-evolve & Update Alpha Sniper Dashboard"
             git pull --rebase origin ${{ github.ref_name }} || true
             git push
           else
