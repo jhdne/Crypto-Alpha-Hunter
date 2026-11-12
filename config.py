@@ -1,238 +1,99 @@
-# feishu_db.py - V6.0 双引擎自愈版（支持飞书云端同步 + 本地进化基因无缝融合）
-import copy
-import time
-import requests
-import config
-
-_TOKEN_CACHE = {"token": "", "expire_at": 0}
-_FIELD_TYPES_CACHE = {}
+# config.py - V6.0 完整配置中心（必须包含 LLM_API_KEYS / LLM_ENDPOINTS / AGENT_MODEL_ROUTING / DEFAULT_EVOLUTION_STATE）
+import os
 
 
-def _get_headers():
-    if not config.FEISHU_APP_ID or not config.FEISHU_APP_SECRET:
-        return None
-    now = time.time()
-    if _TOKEN_CACHE["token"] and now < _TOKEN_CACHE["expire_at"]:
-        return {
-            "Authorization": f"Bearer {_TOKEN_CACHE['token']}",
-            "Content-Type": "application/json",
-        }
-    try:
-        url = "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal"
-        res = requests.post(
-            url,
-            json={
-                "app_id": config.FEISHU_APP_ID,
-                "app_secret": config.FEISHU_APP_SECRET,
-            },
-            timeout=10,
-        ).json()
-        token = res.get("tenant_access_token", "")
-        if not token:
-            return None
-        _TOKEN_CACHE["token"] = token
-        _TOKEN_CACHE["expire_at"] = now + int(res.get("expire", 7200)) - 300
-        return {
-            "Authorization": f"Bearer {token}",
-            "Content-Type": "application/json",
-        }
-    except Exception as e:
-        print(f"⚠️ 获取飞书 Token 异常: {e}")
-        return None
+def _env(key, default=""):
+    val = os.getenv(key, default)
+    return val.strip() if isinstance(val, str) else default
 
 
-def get_records(table_id):
-    headers = _get_headers()
-    if not headers or not config.FEISHU_APP_TOKEN or not table_id:
-        return []
-    try:
-        url = f"https://open.feishu.cn/open-apis/bitable/v1/apps/{config.FEISHU_APP_TOKEN}/tables/{table_id}/records?page_size=100"
-        res = requests.get(url, headers=headers, timeout=15).json()
-        return res.get("data", {}).get("items", []) or []
-    except Exception as e:
-        print(f"⚠️ 飞书读取跳过: {e}")
-        return []
+# ================= 1. 大模型配置中心 =================
+LLM_API_KEYS = {
+    "glm": _env("GLM_API_KEY") or _env("ZHIPU_API_KEY"),
+    "groq": _env("GROQ_API_KEY"),
+    "deepseek": _env("DEEPSEEK_API_KEY"),
+    "openai": _env("OPENAI_API_KEY"),
+}
 
+LLM_ENDPOINTS = {
+    "glm": "https://open.bigmodel.cn/api/paas/v4/chat/completions",
+    "groq": "https://api.groq.com/openai/v1/chat/completions",
+    "deepseek": "https://api.deepseek.com/chat/completions",
+    "openai": "https://api.openai.com/v1/chat/completions",
+}
 
-def _prepare_fields(table_id, fields_dict, headers):
-    if table_id not in _FIELD_TYPES_CACHE:
-        url = f"https://open.feishu.cn/open-apis/bitable/v1/apps/{config.FEISHU_APP_TOKEN}/tables/{table_id}/fields?page_size=100"
-        res = requests.get(url, headers=headers, timeout=15).json()
-        items = res.get("data", {}).get("items", []) or []
-        _FIELD_TYPES_CACHE[table_id] = {
-            i["field_name"]: i["type"] for i in items if "field_name" in i
-        }
+AGENT_MODEL_ROUTING = {
+    "default": {"provider": "glm", "model": "glm-4-flash"},
+    "bull_agent": {"provider": "glm", "model": "glm-4-flash"},
+    "bear_agent": {"provider": "glm", "model": "glm-4-flash"},
+    "cio_agent": {"provider": "glm", "model": "glm-4-flash"},
+    "evolver_agent": {"provider": "glm", "model": "glm-4-flash"},
+    "fallback": {"provider": "groq", "model": "llama-3.3-70b-versatile"},
+}
 
-    col_types = _FIELD_TYPES_CACHE[table_id]
-    clean_fields = {}
+LLM_PROVIDERS = {
+    "glm": {
+        "base_url": LLM_ENDPOINTS["glm"],
+        "api_key": LLM_API_KEYS["glm"],
+        "default_model": "glm-4-flash",
+    },
+    "groq": {
+        "base_url": LLM_ENDPOINTS["groq"],
+        "api_key": LLM_API_KEYS["groq"],
+        "default_model": "llama-3.3-70b-versatile",
+    },
+}
 
-    for k, v in fields_dict.items():
-        if v is None:
-            continue
-        if k not in col_types:
-            f_type = 2 if isinstance(v, (int, float)) and not isinstance(v, bool) else 1
-            try:
-                c_res = requests.post(
-                    f"https://open.feishu.cn/open-apis/bitable/v1/apps/{config.FEISHU_APP_TOKEN}/tables/{table_id}/fields",
-                    headers=headers,
-                    json={"field_name": k, "type": f_type},
-                    timeout=10,
-                ).json()
-                if c_res.get("code") == 0:
-                    col_types[k] = f_type
-            except Exception:
-                pass
+ROLE_MODELS = {
+    "default": "glm",
+    "bull_agent": "glm",
+    "bear_agent": "glm",
+    "cio_agent": "glm",
+    "evolver_agent": "glm",
+    "fallback": "groq",
+}
 
-        t = col_types.get(k, 1)
-        if t == 2:
-            try:
-                clean_fields[k] = float(v)
-            except Exception:
-                clean_fields[k] = 0.0
-        else:
-            if isinstance(v, (list, dict)):
-                clean_fields[k] = (
-                    ", ".join(str(x) for x in v) if isinstance(v, list) else str(v)
-                )
-            else:
-                clean_fields[k] = str(v)
-    return clean_fields
+# ================= 2. 进化默认基因参数 =================
+DEFAULT_EVOLUTION_STATE = {
+    "generation": 1,
+    "last_evolved_at": "尚未触发回测",
+    "win_rate_pct": 0.0,
+    "avg_roi_pct": 0.0,
+    "total_tested": 0,
+    "best_pick": "暂无",
+    "worst_pick": "暂无",
+    "guardrails": {
+        "max_meme_mc_wan": 1500.0,
+        "max_narrative_mc_wan": 5000.0,
+        "max_24h_pump_limit": 68.0,
+        "sweet_spot_24h_max": 38.0,
+        "min_buy_ratio_pct": 53.5,
+        "min_score_threshold": 68.0,
+    },
+    "weights": {
+        "early_timing": 0.30,
+        "buy_pressure": 0.25,
+        "mc_odds": 0.20,
+        "track_heat": 0.15,
+        "fundamentals": 0.10,
+    },
+    "evolution_reason": "V6.0 初始基因：严禁追高 24h 暴涨超 68% 的高位派发币，重点狙击市值 $20万~$1500万、上线早期或底部刚放量突破、1h 买盘占比 > 53.5% 的黄金建仓窗口标的。",
+    "tactical_rules": [
+        "【防追高铁律】凡是 24h 涨幅已超过 68% 且 1h 涨幅转负或买单占比下降的标的，一律判定为『错过最佳建仓窗口/庄家派发』，CIO 必须一票否决（打分 < 55）。",
+        "【极早期偏好】优先放行池子刚创建 1h~96h 内、或市值在 $20万~$800万之间、1h 与 6h 温和放量上涨 (+2%~+25%) 的早期点火标的。",
+        "【真买盘验真】链上 24h 买单笔数占比低于 50%（卖盘大于买盘）的冲高回落项目，严禁入选。",
+    ],
+}
 
+# ================= 3. 飞书与外部数据源密钥 =================
+FEISHU_APP_ID = _env("FEISHU_APP_ID")
+FEISHU_APP_SECRET = _env("FEISHU_APP_SECRET")
+FEISHU_APP_TOKEN = _env("FEISHU_APP_TOKEN")
 
-def add_record(table_id, fields_dict):
-    headers = _get_headers()
-    if not headers or not config.FEISHU_APP_TOKEN or not table_id:
-        return {"code": -1, "msg": "飞书未配置"}
-    try:
-        safe_fields = _prepare_fields(table_id, fields_dict, headers)
-        url = f"https://open.feishu.cn/open-apis/bitable/v1/apps/{config.FEISHU_APP_TOKEN}/tables/{table_id}/records"
-        return requests.post(
-            url, headers=headers, json={"fields": safe_fields}, timeout=15
-        ).json()
-    except Exception as e:
-        return {"code": -1, "msg": str(e)}
+TABLE_ID_CONFIG = _env("TABLE_ID_CONFIG")
+TABLE_ID_RADAR = _env("TABLE_ID_RADAR")
+TABLE_ID_ALPHA = _env("TABLE_ID_ALPHA")
+FEISHU_URL = _env("FEISHU_URL", "https://feishu.cn")
 
-
-def update_record(table_id, record_id, fields_dict):
-    headers = _get_headers()
-    if not headers or not config.FEISHU_APP_TOKEN or not table_id:
-        return {"code": -1, "msg": "飞书未配置"}
-    try:
-        safe_fields = _prepare_fields(table_id, fields_dict, headers)
-        url = f"https://open.feishu.cn/open-apis/bitable/v1/apps/{config.FEISHU_APP_TOKEN}/tables/{table_id}/records/{record_id}"
-        return requests.put(
-            url, headers=headers, json={"fields": safe_fields}, timeout=15
-        ).json()
-    except Exception as e:
-        return {"code": -1, "msg": str(e)}
-
-
-def _extract_val(val):
-    if isinstance(val, list):
-        return ", ".join(
-            str(x.get("text", x)) if isinstance(x, dict) else str(x) for x in val
-        )
-    return val
-
-
-class FeishuDB:
-    """V6.0 飞书多维表格客户端封装类"""
-
-    def __init__(self):
-        headers = _get_headers()
-        self.token = _TOKEN_CACHE.get("token", "") if headers else ""
-
-    def get_strategy_weights(self, local_evo_state=None):
-        """优先读取最新高频进化后的权重，兼容飞书表1配置"""
-        base_w = copy.deepcopy(config.DEFAULT_EVOLUTION_STATE["weights"])
-        if isinstance(local_evo_state, dict) and isinstance(local_evo_state.get("weights"), dict):
-            base_w.update(local_evo_state["weights"])
-
-        if not self.token or not config.TABLE_ID_CONFIG:
-            return base_w
-
-        records = get_records(config.TABLE_ID_CONFIG)
-        if not records:
-            return base_w
-
-        fields = records[0].get("fields", {})
-        try:
-            w_timing = float(_extract_val(fields.get("价格安全权重", base_w["early_timing"] * 100)) or 30)
-            w_buy = float(_extract_val(fields.get("营销背书权重", base_w["buy_pressure"] * 100)) or 25)
-            w_mc = float(_extract_val(fields.get("市值赔率权重", base_w["mc_odds"] * 100)) or 20)
-            w_track = float(_extract_val(fields.get("赛道热度权重", base_w["track_heat"] * 100)) or 15)
-            w_tech = float(_extract_val(fields.get("技术实力权重", base_w["fundamentals"] * 100)) or 10)
-            total = w_timing + w_buy + w_mc + w_track + w_tech
-            if total > 0 and not local_evo_state:
-                return {
-                    "early_timing": round(w_timing / total, 4),
-                    "buy_pressure": round(w_buy / total, 4),
-                    "mc_odds": round(w_mc / total, 4),
-                    "track_heat": round(w_track / total, 4),
-                    "fundamentals": round(w_tech / total, 4),
-                }
-        except Exception:
-            pass
-        return base_w
-
-    def get_approved_tracks(self):
-        if not self.token or not config.TABLE_ID_RADAR:
-            return []
-        records = get_records(config.TABLE_ID_RADAR)
-        tracks = []
-        seen_ids = set()
-        for r in records:
-            f = r.get("fields", {})
-            t_id = str(_extract_val(f.get("赛道ID") or f.get("id") or "")).strip()
-            t_name = str(_extract_val(f.get("赛道名称") or f.get("name") or t_id)).strip()
-            status = str(_extract_val(f.get("人工状态") or f.get("status") or "允许深挖")).strip()
-            if not t_id or t_id in seen_ids:
-                continue
-            if any(bad in status for bad in ["拒绝", "忽略", "屏蔽", "禁止"]):
-                continue
-            try:
-                chg = float(
-                    str(_extract_val(f.get("24h涨幅(%)") or f.get("change_24h") or 0)).replace("%", "")
-                )
-            except Exception:
-                chg = 0.0
-            seen_ids.add(t_id)
-            tracks.append({
-                "id": t_id,
-                "name": t_name,
-                "source": str(_extract_val(f.get("发现来源") or f.get("source") or "🔥赛道强势反弹")),
-                "change_24h": chg,
-                "reason": str(_extract_val(f.get("AI赛道简评") or f.get("reason") or "")),
-                "status": status,
-            })
-        return tracks
-
-    def save_alpha_project(self, p_data):
-        if not self.token or not config.TABLE_ID_ALPHA:
-            return {"code": -1, "msg": "飞书未配置"}
-        fields = {
-            "项目ID": str(p_data.get("coingecko_id") or p_data.get("id") or ""),
-            "代币符号": str(p_data.get("symbol", "")),
-            "项目名称": str(p_data.get("name", "")),
-            "公链": str(p_data.get("chain", "MULTI")),
-            "合约地址": str(p_data.get("contract_address", "")),
-            "机会类型": str(p_data.get("opp_type", "")),
-            "建仓窗口评级": str(p_data.get("entry_timing", "")),
-            "上线账龄": str(p_data.get("age_label", "")),
-            "所属赛道": str(p_data.get("track", "")),
-            "核心催化剂": str(p_data.get("catalyst", "")),
-            "推荐时价格": float(p_data.get("price") or 0.0),
-            "1h涨幅(%)": float(p_data.get("change_1h") or 0.0),
-            "24h涨幅(%)": float(p_data.get("change_24h") or 0.0),
-            "24h换手率(%)": float(p_data.get("turnover_24h") or 0.0),
-            "链上买盘占比(%)": float(p_data.get("buy_ratio") or 50.0),
-            "流通市值(万)": float(p_data.get("market_cap") or 0.0),
-            "DEX流动性(万)": float(p_data.get("liquidity_wan") or 0.0),
-            "流通率MC/FDV(%)": float(p_data.get("mc_fdv_ratio") or 0.0),
-            "距高点跌幅(%)": float(p_data.get("ath_drop") or 0.0),
-            "综合总分": float(p_data.get("final_score") or 0.0),
-            "AI投委会研报": str(p_data.get("ai_report", "")),
-            "看线链接": str(p_data.get("dex_url", "")),
-            "发现时间": str(p_data.get("discovered_at", "")),
-        }
-        return add_record(config.TABLE_ID_ALPHA, fields)
+COINGECKO_API_KEY = _env("COINGECKO_API_KEY")
+TAVILY_API_KEY = _env("TAVILY_API_KEY")
