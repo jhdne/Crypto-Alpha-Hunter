@@ -6,7 +6,7 @@
     },
     "vc_media": {
       "ok": true,
-      "msg": "正常 (实时捕获 11 条热搜、TVL与融资情报)"
+      "msg": "正常 (实时捕获 10 条热搜、TVL与融资情报)"
     },
     "llm": {
       "ok": false,
@@ -23,14 +23,14 @@
   },
   "keywords": [
     {
-      "keyword": "#Reality Ecosystem",
-      "word": "#Reality Ecosystem",
+      "keyword": "#Made in USA",
+      "word": "#Made in USA",
       "heat": 92,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Made in USA",
-      "word": "#Made in USA",
+      "keyword": "#Reality Ecosystem",
+      "word": "#Reality Ecosystem",
       "heat": 90,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
@@ -41,63 +41,62 @@
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#bStocks Ecosystem",
-      "word": "#bStocks Ecosystem",
+      "keyword": "#Payment Solutions",
+      "word": "#Payment Solutions",
       "heat": 86,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Payment Solutions",
-      "word": "#Payment Solutions",
+      "keyword": "#bStocks Ecosystem",
+      "word": "#bStocks Ecosystem",
       "heat": 84,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Layer 0 (L0)",
-      "word": "#Layer 0 (L0)",
+      "keyword": "#NFT Marketplace",
+      "word": "#NFT Marketplace",
       "heat": 82,
       "reason": "板块量能温和放大，早期资金净流入居前"
     }
   ],
   "vc_news": [
-    "🔥 [全网热搜飙升] Monad($MON), Pudgy Penguins($PENGU), Bitcoin($BTC), Pearl($PEARL), Venice Token($VVV), Zcash($ZEC), Injective($INJ), Uniswap($UNI)",
-    "🌊 [链上TVL异动] Blast Bridge (Canonical Bridge) TVL 7日激增 +1644.7% 至 $26.2M",
-    "🌊 [链上TVL异动] Unichain Bridge (Canonical Bridge) TVL 7日激增 +1450.5% 至 $32.8M",
-    "🌊 [链上TVL异动] TheDeep (Liquidity Manager) TVL 7日激增 +174.6% 至 $10.3M",
-    "🌊 [链上TVL异动] SunSwap V4 (Dexs) TVL 7日激增 +89.1% 至 $117.5M",
-    "📰 [媒体快讯] 灰度：比特币等主要资产已被超卖，近期走势更多取决于AI相关风险",
-    "📰 [媒体快讯] 以太坊现货 ETF 昨日总净流出 8496.33 万美元，持续 7 日净流出",
-    "📰 [媒体快讯] 比特币现货 ETF 昨日总净流出 5.70 亿美元，持续 5 日净流出",
+    "🔥 [全网热搜飙升] Pudgy Penguins($PENGU), Monad($MON), Pearl($PEARL), LayerZero($ZRO), Bitcoin($BTC), Morpho($MORPHO), Venice Token($VVV), Hyperliquid($HYPE)",
+    "🌊 [链上TVL异动] Blast Bridge (Canonical Bridge) TVL 7日激增 +1637.1% 至 $26.2M",
+    "🌊 [链上TVL异动] Unichain Bridge (Canonical Bridge) TVL 7日激增 +1415.6% 至 $32.8M",
+    "🌊 [链上TVL异动] TheDeep (Liquidity Manager) TVL 7日激增 +173.8% 至 $10.3M",
+    "🌊 [链上TVL异动] CommunityV3 (Dexs) TVL 7日激增 +71.6% 至 $32.7M",
+    "📰 [媒体快讯] 分析师：山寨币市值自9月峰值蒸发4080亿美元，Meme币份额已降至2%",
+    "📰 [媒体快讯] Bitcoin ETFs keep bleeding as BlackRock’s IBIT shares gain nearly 5%",
     "📰 [媒体快讯] Why 42 Macro says it’s waiting to buy the Bitcoin dip",
     "📰 [媒体快讯] Google wants to make you the star of your own AI slop movies",
     "📰 [媒体快讯] BTCS offloads $44M in ETH to reduce DeFi debt amid market downturn"
   ],
   "tracks": [
     {
-      "id": "reality-ecosystem",
-      "name": "Reality Ecosystem",
-      "source": "🔥早期资金点火",
-      "change_24h": 12.72,
-      "reason": "板块成交放量启动，中小市值标的弹性极佳",
-      "status": "已批准",
-      "赛道ID": "reality-ecosystem",
-      "赛道名称": "Reality Ecosystem",
-      "发现来源": "🔥早期资金点火",
-      "24h涨幅(%)": 12.72,
-      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
-      "人工状态": "允许深挖"
-    },
-    {
       "id": "made-in-usa",
       "name": "Made in USA",
       "source": "🔥早期资金点火",
-      "change_24h": 12.35,
+      "change_24h": 11.89,
       "reason": "板块成交放量启动，中小市值标的弹性极佳",
       "status": "已批准",
       "赛道ID": "made-in-usa",
       "赛道名称": "Made in USA",
       "发现来源": "🔥早期资金点火",
-      "24h涨幅(%)": 12.35,
+      "24h涨幅(%)": 11.89,
+      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
+      "人工状态": "允许深挖"
+    },
+    {
+      "id": "reality-ecosystem",
+      "name": "Reality Ecosystem",
+      "source": "🔥早期资金点火",
+      "change_24h": 8.99,
+      "reason": "板块成交放量启动，中小市值标的弹性极佳",
+      "status": "已批准",
+      "赛道ID": "reality-ecosystem",
+      "赛道名称": "Reality Ecosystem",
+      "发现来源": "🔥早期资金点火",
+      "24h涨幅(%)": 8.99,
       "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
       "人工状态": "允许深挖"
     },
@@ -105,13 +104,27 @@
       "id": "identity",
       "name": "Decentralized Identifier (DID)",
       "source": "🔥早期资金点火",
-      "change_24h": 6.52,
+      "change_24h": 6.02,
       "reason": "板块成交放量启动，中小市值标的弹性极佳",
       "status": "已批准",
       "赛道ID": "identity",
       "赛道名称": "Decentralized Identifier (DID)",
       "发现来源": "🔥早期资金点火",
-      "24h涨幅(%)": 6.52,
+      "24h涨幅(%)": 6.02,
+      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
+      "人工状态": "允许深挖"
+    },
+    {
+      "id": "payment-solutions",
+      "name": "Payment Solutions",
+      "source": "🔥早期资金点火",
+      "change_24h": 4.98,
+      "reason": "板块成交放量启动，中小市值标的弹性极佳",
+      "status": "已批准",
+      "赛道ID": "payment-solutions",
+      "赛道名称": "Payment Solutions",
+      "发现来源": "🔥早期资金点火",
+      "24h涨幅(%)": 4.98,
       "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
       "人工状态": "允许深挖"
     },
@@ -169,20 +182,6 @@
       "发现来源": "💰一二级共振",
       "24h涨幅(%)": 3.01,
       "AI赛道简评": "Binance作为加密货币领域的巨头，其钱包IDO项目受到市场关注，值得追击龙头",
-      "人工状态": "允许深挖"
-    },
-    {
-      "id": "ai-agents",
-      "name": "AI代理",
-      "source": "🔥赛道强势反弹",
-      "change_24h": 2.61,
-      "reason": "AI代理技术发展迅速，市场关注度提升，可以考虑抄底龙头项目",
-      "status": "已批准",
-      "赛道ID": "ai-agents",
-      "赛道名称": "AI代理",
-      "发现来源": "🔥赛道强势反弹",
-      "24h涨幅(%)": 2.61,
-      "AI赛道简评": "AI代理技术发展迅速，市场关注度提升，可以考虑抄底龙头项目",
       "人工状态": "允许深挖"
     }
   ],
@@ -2260,41 +2259,37 @@
   ],
   "alert": {
     "title": "📡 趋势推演与龙头/黑马配置清单已更新",
-    "content": "最新捕获赛道：Reality Ecosystem, Made in USA, Decentralized Identifier (DID)",
-    "time": "2026-11-24 14:18"
+    "content": "最新捕获赛道：Made in USA, Reality Ecosystem, Decentralized Identifier (DID)",
+    "time": "2026-11-24 16:28"
   },
   "vc_And_news": [
     {
       "type": "🔥 热搜飙升",
-      "title": "全网热搜飙升: Monad($MON), Pudgy Penguins($PENGU), Bitcoin($BTC), Pearl($PEARL), Venice Token($VVV), Zcash($ZEC), Injective($INJ), Uniswap($UNI)"
+      "title": "全网热搜飙升: Pudgy Penguins($PENGU), Monad($MON), Pearl($PEARL), LayerZero($ZRO), Bitcoin($BTC), Morpho($MORPHO), Venice Token($VVV), Hyperliquid($HYPE)"
     },
     {
       "type": "🌊 TVL异动",
-      "title": "Blast Bridge (Canonical Bridge) TVL 7日激增 +1644.7% 至 $26.2M"
+      "title": "Blast Bridge (Canonical Bridge) TVL 7日激增 +1637.1% 至 $26.2M"
     },
     {
       "type": "🌊 TVL异动",
-      "title": "Unichain Bridge (Canonical Bridge) TVL 7日激增 +1450.5% 至 $32.8M"
+      "title": "Unichain Bridge (Canonical Bridge) TVL 7日激增 +1415.6% 至 $32.8M"
     },
     {
       "type": "🌊 TVL异动",
-      "title": "TheDeep (Liquidity Manager) TVL 7日激增 +174.6% 至 $10.3M"
+      "title": "TheDeep (Liquidity Manager) TVL 7日激增 +173.8% 至 $10.3M"
     },
     {
       "type": "🌊 TVL异动",
-      "title": "SunSwap V4 (Dexs) TVL 7日激增 +89.1% 至 $117.5M"
+      "title": "CommunityV3 (Dexs) TVL 7日激增 +71.6% 至 $32.7M"
     },
     {
       "type": "📰 媒体快讯",
-      "title": "灰度：比特币等主要资产已被超卖，近期走势更多取决于AI相关风险"
+      "title": "分析师：山寨币市值自9月峰值蒸发4080亿美元，Meme币份额已降至2%"
     },
     {
       "type": "📰 媒体快讯",
-      "title": "以太坊现货 ETF 昨日总净流出 8496.33 万美元，持续 7 日净流出"
-    },
-    {
-      "type": "📰 媒体快讯",
-      "title": "比特币现货 ETF 昨日总净流出 5.70 亿美元，持续 5 日净流出"
+      "title": "Bitcoin ETFs keep bleeding as BlackRock’s IBIT shares gain nearly 5%"
     },
     {
       "type": "📰 媒体快讯",
@@ -2311,14 +2306,14 @@
   ],
   "hot_keywords": [
     {
-      "keyword": "#Reality Ecosystem",
-      "word": "#Reality Ecosystem",
+      "keyword": "#Made in USA",
+      "word": "#Made in USA",
       "heat": 92,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Made in USA",
-      "word": "#Made in USA",
+      "keyword": "#Reality Ecosystem",
+      "word": "#Reality Ecosystem",
       "heat": 90,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
@@ -2329,25 +2324,25 @@
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#bStocks Ecosystem",
-      "word": "#bStocks Ecosystem",
+      "keyword": "#Payment Solutions",
+      "word": "#Payment Solutions",
       "heat": 86,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Payment Solutions",
-      "word": "#Payment Solutions",
+      "keyword": "#bStocks Ecosystem",
+      "word": "#bStocks Ecosystem",
       "heat": 84,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Layer 0 (L0)",
-      "word": "#Layer 0 (L0)",
+      "keyword": "#NFT Marketplace",
+      "word": "#NFT Marketplace",
       "heat": 82,
       "reason": "板块量能温和放大，早期资金净流入居前"
     }
   ],
-  "updated_at": "2026-11-24 14:18",
+  "updated_at": "2026-11-24 16:28:30 (UTC+8)",
   "evolution_state": {
     "generation": 2,
     "last_evolved_at": "2026-11-24 14:16",
@@ -2383,28 +2378,28 @@
     ]
   },
   "trending_symbols": [
-    "MON",
     "PENGU",
-    "BTC",
+    "MON",
     "PEARL",
+    "ZRO",
+    "BTC",
+    "MORPHO",
     "VVV",
-    "ZEC",
-    "INJ",
-    "UNI"
+    "HYPE"
   ],
   "vc_entities": [],
   "allocation_matrix": [
     {
-      "track": "Reality Ecosystem",
+      "track": "Made in USA",
       "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
-      "leader": "Reality Ecosystem 头部高流动性核心协议",
+      "leader": "Made in USA 头部高流动性核心协议",
       "dark_horse": "市值 <$500万 且买盘占比 >55% 的早期新池标的",
       "ratio_hint": "龙头 55% / 黑马 45%"
     },
     {
-      "track": "Made in USA",
+      "track": "Reality Ecosystem",
       "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
-      "leader": "Made in USA 头部高流动性核心协议",
+      "leader": "Reality Ecosystem 头部高流动性核心协议",
       "dark_horse": "市值 <$500万 且买盘占比 >55% 的早期新池标的",
       "ratio_hint": "龙头 55% / 黑马 45%"
     },
@@ -2416,9 +2411,9 @@
       "ratio_hint": "龙头 55% / 黑马 45%"
     },
     {
-      "track": "bStocks Ecosystem",
+      "track": "Payment Solutions",
       "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
-      "leader": "bStocks Ecosystem 头部高流动性核心协议",
+      "leader": "Payment Solutions 头部高流动性核心协议",
       "dark_horse": "市值 <$500万 且买盘占比 >55% 的早期新池标的",
       "ratio_hint": "龙头 55% / 黑马 45%"
     }
