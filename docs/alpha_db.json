@@ -2,15 +2,15 @@
   "api_status": {
     "coingecko": {
       "ok": true,
-      "msg": "正常 (已捕获 12 个主流升温赛道)"
+      "msg": "正常 (已捕获 12 个早期轮动升温赛道)"
     },
     "vc_media": {
       "ok": true,
-      "msg": "正常 (实时捕获 5 条热搜与融资情报)"
+      "msg": "正常 (实时捕获 8 条热搜、TVL与融资情报)"
     },
     "llm": {
-      "ok": true,
-      "msg": "正常 (GLM/Groq 实时推理在线)"
+      "ok": false,
+      "msg": "LLM 返回为空，使用量化推演保底"
     },
     "feishu": {
       "ok": true,
@@ -23,50 +23,109 @@
   },
   "keywords": [
     {
-      "keyword": "#AI Agent 反弹",
-      "word": "#AI Agent 反弹",
-      "heat": 96,
-      "reason": "超跌后资金回流明显，热搜占比高"
-    },
-    {
-      "keyword": "#链上Meme狂潮",
-      "word": "#链上Meme狂潮",
-      "heat": 95,
-      "reason": "社区参与度高，市场情绪推动涨势"
-    },
-    {
-      "keyword": "#DePIN算力",
-      "word": "#DePIN算力",
-      "heat": 93,
-      "reason": "随着DeFi和NFT的兴起，算力需求增加，市场关注度提升"
-    },
-    {
-      "keyword": "#Lending/Borrowing Protocols",
-      "word": "#Lending/Borrowing Protocols",
+      "keyword": "#bStocks Ecosystem",
+      "word": "#bStocks Ecosystem",
       "heat": 92,
-      "reason": "借贷协议的流动性增强，吸引投资者关注"
+      "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Cat-Themed Coins",
-      "word": "#Cat-Themed Coins",
-      "heat": 91,
-      "reason": "宠物主题币种受到市场追捧，趣味性与投资性并存"
+      "keyword": "#Made in USA",
+      "word": "#Made in USA",
+      "heat": 90,
+      "reason": "板块量能温和放大，早期资金净流入居前"
+    },
+    {
+      "keyword": "#Adventure Games",
+      "word": "#Adventure Games",
+      "heat": 88,
+      "reason": "板块量能温和放大，早期资金净流入居前"
+    },
+    {
+      "keyword": "#LSDFi",
+      "word": "#LSDFi",
+      "heat": 86,
+      "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
       "keyword": "#Reality Ecosystem",
       "word": "#Reality Ecosystem",
-      "heat": 90,
-      "reason": "虚拟现实和增强现实技术发展，相关生态项目受关注"
+      "heat": 84,
+      "reason": "板块量能温和放大，早期资金净流入居前"
+    },
+    {
+      "keyword": "#Entertainment",
+      "word": "#Entertainment",
+      "heat": 82,
+      "reason": "板块量能温和放大，早期资金净流入居前"
     }
   ],
   "vc_news": [
-    "🔥 [全网热搜飙升] ZIG Finance($ZIG), Bitcoin($BTC), Avalanche($AVAX), Pearl($PEARL), Gram (prev. Toncoin)($GRAM), Lighter($LIT), Pudgy Penguins($PENGU), NEAR Protocol($NEAR)",
-    "📰 [媒体快讯] Fractile完成7.2亿美元C轮融资，投后估值70亿美元",
-    "📰 [媒体快讯] 美联航将禁止个人AI代理代客预订机票",
-    "📰 [媒体快讯] US data center restrictions could give Bitcoin miners an edge in AI, though chal",
-    "📰 [媒体快讯] Deutsche Bank launches crypto custody for companies and institutions"
+    "🔥 [全网热搜飙升] Bitcoin($BTC), Pudgy Penguins($PENGU), Pearl($PEARL), XRP($XRP), Solana($SOL), Venice Token($VVV), Hyperliquid($HYPE), Zcash($ZEC)",
+    "🌊 [链上TVL异动] Blast Bridge (Canonical Bridge) TVL 7日激增 +1653.2% 至 $26.3M",
+    "🌊 [链上TVL异动] Unichain Bridge (Canonical Bridge) TVL 7日激增 +1472.4% 至 $32.8M",
+    "🌊 [链上TVL异动] TheDeep (Liquidity Manager) TVL 7日激增 +176.8% 至 $10.4M",
+    "🌊 [链上TVL异动] SunSwap V4 (Dexs) TVL 7日激增 +89.2% 至 $117.6M",
+    "📰 [媒体快讯] 具身机器人公司至简动力融资1亿美元，蚂蚁集团领投",
+    "📰 [媒体快讯] 机器人AI初创公司Embo完成1.1亿美元种子轮融资，a16z领投，英伟达等跟投",
+    "📰 [媒体快讯] BTCS offloads $44M in ETH to reduce DeFi debt amid market downturn"
   ],
   "tracks": [
+    {
+      "id": "bstocks-ecosystem",
+      "name": "bStocks Ecosystem",
+      "source": "🔥早期资金点火",
+      "change_24h": 15.48,
+      "reason": "板块成交放量启动，中小市值标的弹性极佳",
+      "status": "已批准",
+      "赛道ID": "bstocks-ecosystem",
+      "赛道名称": "bStocks Ecosystem",
+      "发现来源": "🔥早期资金点火",
+      "24h涨幅(%)": 15.48,
+      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
+      "人工状态": "允许深挖"
+    },
+    {
+      "id": "made-in-usa",
+      "name": "Made in USA",
+      "source": "🔥早期资金点火",
+      "change_24h": 13.8,
+      "reason": "板块成交放量启动，中小市值标的弹性极佳",
+      "status": "已批准",
+      "赛道ID": "made-in-usa",
+      "赛道名称": "Made in USA",
+      "发现来源": "🔥早期资金点火",
+      "24h涨幅(%)": 13.8,
+      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
+      "人工状态": "允许深挖"
+    },
+    {
+      "id": "adventure-games",
+      "name": "Adventure Games",
+      "source": "🔥早期资金点火",
+      "change_24h": 13.02,
+      "reason": "板块成交放量启动，中小市值标的弹性极佳",
+      "status": "已批准",
+      "赛道ID": "adventure-games",
+      "赛道名称": "Adventure Games",
+      "发现来源": "🔥早期资金点火",
+      "24h涨幅(%)": 13.02,
+      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
+      "人工状态": "允许深挖"
+    },
+    {
+      "id": "lsdfi",
+      "name": "LSDFi",
+      "source": "🔥早期资金点火",
+      "change_24h": 12.58,
+      "reason": "板块成交放量启动，中小市值标的弹性极佳",
+      "status": "已批准",
+      "赛道ID": "lsdfi",
+      "赛道名称": "LSDFi",
+      "发现来源": "🔥早期资金点火",
+      "24h涨幅(%)": 12.58,
+      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
+      "人工状态": "允许深挖"
+    },
     {
       "id": "lending-borrowing",
       "name": "借贷协议",
@@ -122,65 +181,193 @@
       "24h涨幅(%)": 2.61,
       "AI赛道简评": "AI代理技术发展迅速，市场关注度提升，可以考虑抄底龙头项目",
       "人工状态": "允许深挖"
-    },
-    {
-      "id": "payment-solutions",
-      "name": "支付解决方案",
-      "source": "🔥赛道强势反弹",
-      "change_24h": 3.59,
-      "reason": "支付解决方案是区块链应用的重要方向，随着数字货币的普及，支付赛道有望迎来新的增长点，建议关注技术创新和用户增长情况",
-      "status": "已批准",
-      "赛道ID": "payment-solutions",
-      "赛道名称": "支付解决方案",
-      "发现来源": "🔥赛道强势反弹",
-      "24h涨幅(%)": 3.59,
-      "AI赛道简评": "支付解决方案是区块链应用的重要方向，随着数字货币的普及，支付赛道有望迎来新的增长点，建议关注技术创新和用户增长情况",
-      "人工状态": "允许深挖"
-    },
-    {
-      "id": "layer-0-l0",
-      "name": "Layer 0 (L0)",
-      "source": "💰一二级共振",
-      "change_24h": 3.42,
-      "reason": "Layer 0作为区块链底层技术，其性能和安全性对整个生态至关重要，关注Layer 0技术的发展和应用落地情况",
-      "status": "已批准",
-      "赛道ID": "layer-0-l0",
-      "赛道名称": "Layer 0 (L0)",
-      "发现来源": "💰一二级共振",
-      "24h涨幅(%)": 3.42,
-      "AI赛道简评": "Layer 0作为区块链底层技术，其性能和安全性对整个生态至关重要，关注Layer 0技术的发展和应用落地情况",
-      "人工状态": "允许深挖"
-    },
-    {
-      "id": "socialfi",
-      "name": "SocialFi",
-      "source": "🔥赛道强势反弹",
-      "change_24h": 4.89,
-      "reason": "SocialFi结合了社交和金融，有望成为下一个市场热点，关注项目创新和用户活跃度",
-      "status": "已批准",
-      "赛道ID": "socialfi",
-      "赛道名称": "SocialFi",
-      "发现来源": "🔥赛道强势反弹",
-      "24h涨幅(%)": 4.89,
-      "AI赛道简评": "SocialFi结合了社交和金融，有望成为下一个市场热点，关注项目创新和用户活跃度",
-      "人工状态": "允许深挖"
-    },
-    {
-      "id": "bstocks-ecosystem",
-      "name": "bStocks Ecosystem",
-      "source": "🔥赛道强势反弹",
-      "change_24h": 10.24,
-      "reason": "资金流入明显，市场情绪积极，可考虑抄底",
-      "status": "已批准",
-      "赛道ID": "bstocks-ecosystem",
-      "赛道名称": "bStocks Ecosystem",
-      "发现来源": "🔥赛道强势反弹",
-      "24h涨幅(%)": 10.24,
-      "AI赛道简评": "资金流入明显，市场情绪积极，可考虑抄底",
-      "人工状态": "允许深挖"
     }
   ],
   "projects": [
+    {
+      "name": "Jensen Is Back",
+      "symbol": "JENSEN",
+      "chain": "solana",
+      "contract": "HKiMA2mKQHU2cjfZ4Kbmru5GBGCauSNqPtpu8cfmpump",
+      "price": 0.0007387,
+      "mc_usd": 735365.0,
+      "mc_fdv_ratio": 100.0,
+      "liq_usd": 64343.52,
+      "vol_24h": 2203967.71,
+      "vol_1h": 34216.82,
+      "chg_1h": 8.28,
+      "chg_6h": -34.77,
+      "chg_24h": 746.0,
+      "buys_24h": 59034,
+      "sells_24h": 34093,
+      "buy_ratio": 63.4,
+      "pool_age_hours": 8.521933788392278,
+      "age_label": "8.5小时(首日新盘)",
+      "matched_kw": "",
+      "source": "DexScreener",
+      "dex_url": "https://dexscreener.com/solana/dqpqkbbqr3wmty5ryjoq3nzrrzwbh7h9x2gj7osn9mhh",
+      "project_type": "🏛️ 叙事价值",
+      "track": "Solana 早期新盘",
+      "entry_timing": "⚡ 强势接力加速",
+      "timing_score": 77.0,
+      "mc_wan": 73.54,
+      "liq_wan": 6.43,
+      "vol_wan": 220.4,
+      "turnover_24h": 299.7,
+      "quant_score": 90.2,
+      "vc_hits": [],
+      "security_status": "RugCheck安全通过",
+      "news_context": "Jensen Huang (Meme) Price, JENSEN Price, Live Charts, and Marketcap: jensen huang meme coin, jensen huang memecoin, jens",
+      "cv_score": 82.0,
+      "cv_signals": [
+        "链上真实放量买盘",
+        "多平台热点共振",
+        "合约安全审计通过"
+      ],
+      "cv_confidence": "高置信度(3维交叉)",
+      "position_tier": "轻仓试错(1%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 80.0,
+      "score": 86.4,
+      "report": "首日强势，链上真实放量，多平台热点共振，安全审计通过，但高位派发风险需警惕，轻仓试错，止盈止损位明确。",
+      "catalyst": "Solana新盘首日强势，链上真实放量",
+      "found_at": "2026-11-24 10:20",
+      "recommended_price": 0.0007387,
+      "live_price": 0.0007387,
+      "peak_price": 0.0007387,
+      "peak_roi_pct": 0.0,
+      "live_roi_pct": 0.0,
+      "max_drawdown_pct": 0.0,
+      "roi_history": [
+        0.0
+      ],
+      "trend_status": "新入选",
+      "ath_drop": 0.0,
+      "commits_4w": 0
+    },
+    {
+      "name": "Umbra Cash",
+      "symbol": "UCASH",
+      "chain": "solana",
+      "contract": "7cFiqdT46zs7ooHWLFiLSaSQKLMibtokh9dBinsspump",
+      "price": 0.001447,
+      "mc_usd": 1442373.0,
+      "mc_fdv_ratio": 100.0,
+      "liq_usd": 102162.67,
+      "vol_24h": 5323908.81,
+      "vol_1h": 242790.77,
+      "chg_1h": 18.0,
+      "chg_6h": 75.83,
+      "chg_24h": -12.85,
+      "buys_24h": 175786,
+      "sells_24h": 47502,
+      "buy_ratio": 78.7,
+      "pool_age_hours": 39.09082267933422,
+      "age_label": "1.6天(早期发酵)",
+      "matched_kw": "",
+      "source": "DexScreener",
+      "dex_url": "https://dexscreener.com/solana/4h7r5jzaq6pgnjfud12aeuqjrqygwz2yhpsra6sh1rxt",
+      "project_type": "🏛️ 叙事价值",
+      "track": "Solana 早期新盘",
+      "entry_timing": "🟢 刚开盘极早期点火",
+      "timing_score": 74.0,
+      "mc_wan": 144.24,
+      "liq_wan": 10.22,
+      "vol_wan": 532.39,
+      "turnover_24h": 369.1,
+      "quant_score": 86.4,
+      "vc_hits": [],
+      "security_status": "RugCheck安全通过",
+      "news_context": "Umbra (UMBRA) Price Today | Buy & Swap | OpenSea | Umbra Price | UMBRA Price Today, Live Chart, USD converter, Market Ca",
+      "cv_score": 90.0,
+      "cv_signals": [
+        "链上真实放量买盘",
+        "多平台热点共振",
+        "合约安全审计通过",
+        "外部催化/开发活跃"
+      ],
+      "cv_confidence": "高置信度(4维交叉)",
+      "position_tier": "轻仓试错(1%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 80.0,
+      "score": 86.2,
+      "report": "早期右侧跟进UCASH，链上真实放量，多平台共振，安全审计，潜力巨大，但需警惕高位派发风险。",
+      "catalyst": "链上真实放量，多平台热点共振",
+      "found_at": "2026-11-24 10:20",
+      "recommended_price": 0.001447,
+      "live_price": 0.001447,
+      "peak_price": 0.001447,
+      "peak_roi_pct": 0.0,
+      "live_roi_pct": 0.0,
+      "max_drawdown_pct": 0.0,
+      "roi_history": [
+        0.0
+      ],
+      "trend_status": "新入选",
+      "ath_drop": 0.0,
+      "commits_4w": 0
+    },
+    {
+      "name": "Claudia",
+      "symbol": "CLAUDIA",
+      "chain": "eth",
+      "contract": "0xc6acf921fd47757230a05d6d05b686479cdfc87c",
+      "price": 0.00392333380521786,
+      "mc_usd": 3923333.805,
+      "mc_fdv_ratio": 100.0,
+      "liq_usd": 161706.7292,
+      "vol_24h": 1446161.40942637,
+      "vol_1h": 19406.9942134613,
+      "chg_1h": 3.171,
+      "chg_6h": 34.948,
+      "chg_24h": 131.525,
+      "buys_24h": 1511,
+      "sells_24h": 1117,
+      "buy_ratio": 57.5,
+      "pool_age_hours": 50.031948102778856,
+      "age_label": "2.1天(早期发酵)",
+      "source": "Gecko_trending_pools",
+      "dex_url": "https://www.geckoterminal.com/eth/pools/0xc745bafe87aa0dac53f21e94a62f9d4e40e9f5f7de607976cf535f3ce704aef0",
+      "project_type": "🏛️ 叙事价值",
+      "track": "Eth 早期新盘",
+      "entry_timing": "⚡ 强势接力加速",
+      "timing_score": 77.0,
+      "mc_wan": 392.33,
+      "liq_wan": 16.17,
+      "vol_wan": 144.62,
+      "turnover_24h": 36.9,
+      "quant_score": 77.8,
+      "vc_hits": [],
+      "coingecko_id": "claudia-2",
+      "ath_drop": -28.9,
+      "commits_4w": 0,
+      "security_status": "GoPlus安全通过",
+      "news_context": "Claudia (CLAUDIA) live coin price, charts, markets & liquidity | Claudia Price, CLAUDIA Price, Live Charts, and Marketca",
+      "cv_score": 78.0,
+      "cv_signals": [
+        "链上真实放量买盘",
+        "合约安全审计通过",
+        "外部催化/开发活跃"
+      ],
+      "cv_confidence": "高置信度(3维交叉)",
+      "position_tier": "轻仓试错(1%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 80.0,
+      "score": 81.4,
+      "report": "结合多空辩论，Claudia (CLAUDIA) 作为Eth早期新盘，虽无VC背书，但强动量和真实买盘表明潜力巨大，建议轻仓试错，关注高位派发风险和流动性问题。",
+      "catalyst": "早期Eth新盘，强动量，真实买盘",
+      "found_at": "2026-11-24 10:20",
+      "recommended_price": 0.00392333380521786,
+      "live_price": 0.00392333380521786,
+      "peak_price": 0.00392333380521786,
+      "peak_roi_pct": 0.0,
+      "live_roi_pct": 0.0,
+      "max_drawdown_pct": 0.0,
+      "roi_history": [
+        0.0
+      ],
+      "trend_status": "新入选"
+    },
     {
       "name": "SpaceX Inu",
       "symbol": "SI",
@@ -215,8 +402,26 @@
       "catalyst": "SpaceX Inu Price, SI Price, Live Charts, and ",
       "found_at": "2026-11-22 20:34",
       "recommended_price": 1.61405647681083e-09,
-      "live_price": 1.61405647681083e-09,
-      "live_roi_pct": 0.0
+      "live_price": 1.645e-09,
+      "live_roi_pct": 1.92,
+      "peak_price": 1.645e-09,
+      "peak_roi_pct": 1.92,
+      "max_drawdown_pct": 0.0,
+      "roi_history": [
+        1.92
+      ],
+      "trend_status": "窄幅震荡",
+      "turnover_24h": 8.9,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "Singularity",
@@ -252,8 +457,26 @@
       "catalyst": "早期温和放量，买盘占比高",
       "found_at": "2026-11-22 20:34",
       "recommended_price": 0.0007008488917718866,
-      "live_price": 0.0007008488917718866,
-      "live_roi_pct": 0.0
+      "live_price": 0.000233,
+      "live_roi_pct": -66.75,
+      "peak_price": 0.0007008488917718866,
+      "peak_roi_pct": 0.0,
+      "max_drawdown_pct": -66.75,
+      "roi_history": [
+        -66.75
+      ],
+      "trend_status": "破位回撤",
+      "turnover_24h": 295.9,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "DacityCoin",
@@ -289,8 +512,26 @@
       "catalyst": "Solana Compass 推荐及温和放量突破",
       "found_at": "2026-11-22 20:34",
       "recommended_price": 0.0028476049332956978,
-      "live_price": 0.0028476049332956978,
-      "live_roi_pct": 0.0
+      "live_price": 0.001619,
+      "live_roi_pct": -43.15,
+      "peak_price": 0.0028476049332956978,
+      "peak_roi_pct": 0.0,
+      "max_drawdown_pct": -43.15,
+      "roi_history": [
+        -43.15
+      ],
+      "trend_status": "破位回撤",
+      "turnover_24h": 68.2,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "NVIDIA Corporation",
@@ -326,8 +567,26 @@
       "catalyst": "Base公链新盘，NVIDIA关联，温和放量",
       "found_at": "2026-11-22 06:45",
       "recommended_price": 129.777275335408,
-      "live_price": 129.777275335408,
-      "live_roi_pct": 0.0
+      "live_price": 164.82,
+      "live_roi_pct": 27.0,
+      "peak_price": 164.82,
+      "peak_roi_pct": 27.0,
+      "max_drawdown_pct": 0.0,
+      "roi_history": [
+        27.0
+      ],
+      "trend_status": "主升浪",
+      "turnover_24h": 174.1,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "Ah Shit, Here We Go Again",
@@ -364,8 +623,26 @@
       "catalyst": "Solana Compass & GSD Price Today, Live",
       "found_at": "2026-11-21 21:38",
       "recommended_price": 0.001955,
-      "live_price": 0.001955,
-      "live_roi_pct": 0.0
+      "live_price": 3.76e-05,
+      "live_roi_pct": -98.08,
+      "peak_price": 0.001955,
+      "peak_roi_pct": 0.0,
+      "max_drawdown_pct": -98.08,
+      "roi_history": [
+        -98.08
+      ],
+      "trend_status": "破位回撤",
+      "turnover_24h": 168.1,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "GTA6CAT",
@@ -402,8 +679,26 @@
       "catalyst": "早期温和放量，买盘占比高",
       "found_at": "2026-11-21 21:38",
       "recommended_price": 0.002457,
-      "live_price": 0.002457,
-      "live_roi_pct": 0.0
+      "live_price": 0.001485,
+      "live_roi_pct": -39.56,
+      "peak_price": 0.002457,
+      "peak_roi_pct": 0.0,
+      "max_drawdown_pct": -39.56,
+      "roi_history": [
+        -39.56
+      ],
+      "trend_status": "破位回撤",
+      "turnover_24h": 16.0,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "CyberLeek",
@@ -439,8 +734,26 @@
       "catalyst": "Solana Compass 上线，市场关注度提升",
       "found_at": "2026-11-21 12:38",
       "recommended_price": 0.001797990732075786,
-      "live_price": 0.001797990732075786,
-      "live_roi_pct": 0.0
+      "live_price": 0.001351,
+      "live_roi_pct": -24.86,
+      "peak_price": 0.001797990732075786,
+      "peak_roi_pct": 0.0,
+      "max_drawdown_pct": -24.86,
+      "roi_history": [
+        -24.86
+      ],
+      "trend_status": "破位回撤",
+      "turnover_24h": 48.5,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "OFFICIALGTA",
@@ -477,8 +790,26 @@
       "catalyst": "首日新盘强势点火，每日交易量达20美元",
       "found_at": "2026-11-20 16:57",
       "recommended_price": 0.0001641,
-      "live_price": 0.0001641,
-      "live_roi_pct": 0.0
+      "live_price": 2.214e-06,
+      "live_roi_pct": -98.65,
+      "peak_price": 0.0001641,
+      "peak_roi_pct": 0.0,
+      "max_drawdown_pct": -98.65,
+      "roi_history": [
+        -98.65
+      ],
+      "trend_status": "破位回撤",
+      "turnover_24h": 2240.7,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "Harmonic Agent",
@@ -515,8 +846,26 @@
       "catalyst": "AI Agent概念，早期温和上涨，买盘强劲",
       "found_at": "2026-11-20 07:13",
       "recommended_price": 0.0008115,
-      "live_price": 0.0008115,
-      "live_roi_pct": 0.0
+      "live_price": 0.000939,
+      "live_roi_pct": 15.71,
+      "peak_price": 0.000939,
+      "peak_roi_pct": 15.71,
+      "max_drawdown_pct": 0.0,
+      "roi_history": [
+        15.71
+      ],
+      "trend_status": "稳步走强",
+      "turnover_24h": 6.5,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "ni hao cat",
@@ -552,8 +901,26 @@
       "catalyst": "Solana Compass & KCEX 推荐及 #Crypto101 热议",
       "found_at": "2026-11-19 23:03",
       "recommended_price": 0.00854772390285298,
-      "live_price": 0.00854772390285298,
-      "live_roi_pct": 0.0
+      "live_price": 0.007096,
+      "live_roi_pct": -16.98,
+      "peak_price": 0.00854772390285298,
+      "peak_roi_pct": 0.0,
+      "max_drawdown_pct": -16.98,
+      "roi_history": [
+        -16.98
+      ],
+      "trend_status": "破位回撤",
+      "turnover_24h": 107.4,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "Take-Two Interactive Software - Backpack Securities",
@@ -589,8 +956,26 @@
       "catalyst": "Take-Two Interactive Stock Tokenization on So",
       "found_at": "2026-11-19 23:03",
       "recommended_price": 210.38928239425832,
-      "live_price": 210.38928239425832,
-      "live_roi_pct": 0.0
+      "live_price": 0.003759,
+      "live_roi_pct": -100.0,
+      "peak_price": 210.38928239425832,
+      "peak_roi_pct": 0.0,
+      "max_drawdown_pct": -100.0,
+      "roi_history": [
+        -100.0
+      ],
+      "trend_status": "破位回撤",
+      "turnover_24h": 1065.5,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "Priors Agents",
@@ -627,8 +1012,26 @@
       "catalyst": "早期AI赛道潜力，温和放量上涨",
       "found_at": "2026-11-19 23:03",
       "recommended_price": 0.004871,
-      "live_price": 0.004871,
-      "live_roi_pct": 0.0
+      "live_price": 0.003384,
+      "live_roi_pct": -30.53,
+      "peak_price": 0.004871,
+      "peak_roi_pct": 0.0,
+      "max_drawdown_pct": -30.53,
+      "roi_history": [
+        -30.53
+      ],
+      "trend_status": "破位回撤",
+      "turnover_24h": 0.7,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "Agentic Cat",
@@ -665,8 +1068,26 @@
       "catalyst": "AI Agent 2025趋势，Virtuals生态深度解析",
       "found_at": "2026-11-19 13:02",
       "recommended_price": 0.0001475,
-      "live_price": 0.0001475,
-      "live_roi_pct": 0.0
+      "live_price": 5.63e-05,
+      "live_roi_pct": -61.83,
+      "peak_price": 0.0001475,
+      "peak_roi_pct": 0.0,
+      "max_drawdown_pct": -61.83,
+      "roi_history": [
+        -61.83
+      ],
+      "trend_status": "破位回撤",
+      "turnover_24h": 37.1,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "THUG LIFE INC",
@@ -703,8 +1124,26 @@
       "catalyst": "Solana Compass 推荐及社区热度",
       "found_at": "2026-11-19 01:52",
       "recommended_price": 0.0001574,
-      "live_price": 0.0001574,
-      "live_roi_pct": 0.0
+      "live_price": 6.929e-05,
+      "live_roi_pct": -55.98,
+      "peak_price": 0.0001574,
+      "peak_roi_pct": 0.0,
+      "max_drawdown_pct": -55.98,
+      "roi_history": [
+        -55.98
+      ],
+      "trend_status": "破位回撤",
+      "turnover_24h": 46.1,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "Claudia",
@@ -740,8 +1179,26 @@
       "catalyst": "Solana AI Agent 新币上线，社区热度高",
       "found_at": "2026-11-19 01:52",
       "recommended_price": 0.006881567337829071,
-      "live_price": 0.006881567337829071,
-      "live_roi_pct": 0.0
+      "live_price": 90.5,
+      "live_roi_pct": 1315007.38,
+      "peak_price": 90.5,
+      "peak_roi_pct": 1315007.38,
+      "max_drawdown_pct": 0.0,
+      "roi_history": [
+        1315007.38
+      ],
+      "trend_status": "主升浪",
+      "turnover_24h": 26.9,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "Cartoon Money",
@@ -778,8 +1235,26 @@
       "catalyst": "Dr Nishant Kumar 推荐及 Solana Explore 新币空投",
       "found_at": "2026-11-19 01:52",
       "recommended_price": 0.003431,
-      "live_price": 0.003431,
-      "live_roi_pct": 0.0
+      "live_price": 0.00412,
+      "live_roi_pct": 20.08,
+      "peak_price": 0.00412,
+      "peak_roi_pct": 20.08,
+      "max_drawdown_pct": 0.0,
+      "roi_history": [
+        20.08
+      ],
+      "trend_status": "稳步走强",
+      "turnover_24h": 8.6,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "AiDiglet",
@@ -816,8 +1291,26 @@
       "catalyst": "AI Agent概念升温，市场关注度提升",
       "found_at": "2026-11-17 23:30",
       "recommended_price": 0.0002809,
-      "live_price": 0.0002809,
-      "live_roi_pct": 0.0
+      "live_price": 0.0001904,
+      "live_roi_pct": -32.22,
+      "peak_price": 0.0002809,
+      "peak_roi_pct": 0.0,
+      "max_drawdown_pct": -32.22,
+      "roi_history": [
+        -32.22
+      ],
+      "trend_status": "破位回撤",
+      "turnover_24h": 326.7,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "Marvin The Martian",
@@ -853,8 +1346,26 @@
       "catalyst": "新币上线，叙事潜力强",
       "found_at": "2026-11-16 18:31",
       "recommended_price": 0.000303182708043264,
-      "live_price": 0.000303182708043264,
-      "live_roi_pct": 0.0
+      "live_price": 2.311e-06,
+      "live_roi_pct": -99.24,
+      "peak_price": 0.000303182708043264,
+      "peak_roi_pct": 0.0,
+      "max_drawdown_pct": -99.24,
+      "roi_history": [
+        -99.24
+      ],
+      "trend_status": "破位回撤",
+      "turnover_24h": 1050.4,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "Popo The Turtle",
@@ -890,8 +1401,26 @@
       "catalyst": "新盘上线，温和放量上涨，AI分析支持",
       "found_at": "2026-11-16 18:31",
       "recommended_price": 1.49214481240008e-09,
-      "live_price": 1.49214481240008e-09,
-      "live_roi_pct": 0.0
+      "live_price": 2.792e-10,
+      "live_roi_pct": -81.29,
+      "peak_price": 1.49214481240008e-09,
+      "peak_roi_pct": 0.0,
+      "max_drawdown_pct": -81.29,
+      "roi_history": [
+        -81.29
+      ],
+      "trend_status": "破位回撤",
+      "turnover_24h": 26.3,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "DebtReliefBot",
@@ -927,8 +1456,26 @@
       "catalyst": "AI Debt Relief Tool Launch",
       "found_at": "2026-11-16 06:26",
       "recommended_price": 8.15969463872887e-05,
-      "live_price": 8.15969463872887e-05,
-      "live_roi_pct": 0.0
+      "live_price": 9.593e-05,
+      "live_roi_pct": 17.57,
+      "peak_price": 9.593e-05,
+      "peak_roi_pct": 17.57,
+      "max_drawdown_pct": 0.0,
+      "roi_history": [
+        17.57
+      ],
+      "trend_status": "稳步走强",
+      "turnover_24h": 1.2,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "gtacoin",
@@ -965,8 +1512,26 @@
       "catalyst": "Solana 新币GTA代币上线，早期发酵",
       "found_at": "2026-11-15 21:02",
       "recommended_price": 0.0002728,
-      "live_price": 0.0002728,
-      "live_roi_pct": 0.0
+      "live_price": 0.258,
+      "live_roi_pct": 94474.78,
+      "peak_price": 0.258,
+      "peak_roi_pct": 94474.78,
+      "max_drawdown_pct": 0.0,
+      "roi_history": [
+        94474.78
+      ],
+      "trend_status": "主升浪",
+      "turnover_24h": 301.4,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "bill",
@@ -1002,8 +1567,26 @@
       "catalyst": "Solana 早期新盘，温和放量上涨",
       "found_at": "2026-11-15 21:02",
       "recommended_price": 0.00039683354322626733,
-      "live_price": 0.00039683354322626733,
-      "live_roi_pct": 0.0
+      "live_price": 0.1175,
+      "live_roi_pct": 29509.39,
+      "peak_price": 0.1175,
+      "peak_roi_pct": 29509.39,
+      "max_drawdown_pct": 0.0,
+      "roi_history": [
+        29509.39
+      ],
+      "trend_status": "主升浪",
+      "turnover_24h": 1078.1,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "WASTED",
@@ -1039,8 +1622,26 @@
       "catalyst": "早期发酵，温和放量上涨",
       "found_at": "2026-11-14 23:55",
       "recommended_price": 0.00416170357120757,
-      "live_price": 0.00416170357120757,
-      "live_roi_pct": 0.0
+      "live_price": 1e-06,
+      "live_roi_pct": -99.98,
+      "peak_price": 0.00416170357120757,
+      "peak_roi_pct": 0.0,
+      "max_drawdown_pct": -99.98,
+      "roi_history": [
+        -99.98
+      ],
+      "trend_status": "破位回撤",
+      "turnover_24h": 94.9,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "Macca The Gator",
@@ -1076,8 +1677,26 @@
       "catalyst": "新币叙事，温和放量突破",
       "found_at": "2026-11-14 23:55",
       "recommended_price": 0.002455716797514274,
-      "live_price": 0.002455716797514274,
-      "live_roi_pct": 0.0
+      "live_price": 0.0001574,
+      "live_roi_pct": -93.59,
+      "peak_price": 0.002455716797514274,
+      "peak_roi_pct": 0.0,
+      "max_drawdown_pct": -93.59,
+      "roi_history": [
+        -93.59
+      ],
+      "trend_status": "破位回撤",
+      "turnover_24h": 21.9,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "Foodcoin",
@@ -1113,8 +1732,26 @@
       "catalyst": "早期温和放量，买盘强劲",
       "found_at": "2026-11-14 11:27",
       "recommended_price": 0.0010824948623174102,
-      "live_price": 0.0010824948623174102,
-      "live_roi_pct": 0.0
+      "live_price": 0.0001168,
+      "live_roi_pct": -89.21,
+      "peak_price": 0.0010824948623174102,
+      "peak_roi_pct": 0.0,
+      "max_drawdown_pct": -89.21,
+      "roi_history": [
+        -89.21
+      ],
+      "trend_status": "破位回撤",
+      "turnover_24h": 347.3,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "Victors Company",
@@ -1150,8 +1787,26 @@
       "catalyst": "新币极早期点火，叙事潜力强",
       "found_at": "2026-11-14 00:53",
       "recommended_price": 0.00158924079528065,
-      "live_price": 0.00158924079528065,
-      "live_roi_pct": 0.0
+      "live_price": 0.001299,
+      "live_roi_pct": -18.26,
+      "peak_price": 0.00158924079528065,
+      "peak_roi_pct": 0.0,
+      "max_drawdown_pct": -18.26,
+      "roi_history": [
+        -18.26
+      ],
+      "trend_status": "破位回撤",
+      "turnover_24h": 0.9,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "paws at you",
@@ -1187,8 +1842,26 @@
       "catalyst": "Solana 新币热度，DexTrading 流动性提升",
       "found_at": "2026-11-14 00:53",
       "recommended_price": 0.0010333894231471588,
-      "live_price": 0.0010333894231471588,
-      "live_roi_pct": 0.0
+      "live_price": 0.0004407,
+      "live_roi_pct": -57.35,
+      "peak_price": 0.0010333894231471588,
+      "peak_roi_pct": 0.0,
+      "max_drawdown_pct": -57.35,
+      "roi_history": [
+        -57.35
+      ],
+      "trend_status": "破位回撤",
+      "turnover_24h": 62.5,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "Nullmask",
@@ -1224,8 +1897,26 @@
       "catalyst": "Solana生态新项目，Phantom钱包支持",
       "found_at": "2026-11-14 00:53",
       "recommended_price": 0.019579518624442162,
-      "live_price": 0.019579518624442162,
-      "live_roi_pct": 0.0
+      "live_price": 0.0145,
+      "live_roi_pct": -25.94,
+      "peak_price": 0.019579518624442162,
+      "peak_roi_pct": 0.0,
+      "max_drawdown_pct": -25.94,
+      "roi_history": [
+        -25.94
+      ],
+      "trend_status": "破位回撤",
+      "turnover_24h": 1.7,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "Max coin",
@@ -1261,8 +1952,26 @@
       "catalyst": "新Solana Meme Token，初筛信息积极",
       "found_at": "2026-11-13 16:21",
       "recommended_price": 0.0018816462693285313,
-      "live_price": 0.0018816462693285313,
-      "live_roi_pct": 0.0
+      "live_price": 0.0003258,
+      "live_roi_pct": -82.69,
+      "peak_price": 0.0018816462693285313,
+      "peak_roi_pct": 0.0,
+      "max_drawdown_pct": -82.69,
+      "roi_history": [
+        -82.69
+      ],
+      "trend_status": "破位回撤",
+      "turnover_24h": 142.6,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "State of Leonida",
@@ -1299,8 +2008,26 @@
       "catalyst": "Solana 新币，关联资产资本市场叙事",
       "found_at": "2026-11-13 16:21",
       "recommended_price": 0.0006554,
-      "live_price": 0.0006554,
-      "live_roi_pct": 0.0
+      "live_price": 9.331e-06,
+      "live_roi_pct": -98.58,
+      "peak_price": 0.0006554,
+      "peak_roi_pct": 0.0,
+      "max_drawdown_pct": -98.58,
+      "roi_history": [
+        -98.58
+      ],
+      "trend_status": "破位回撤",
+      "turnover_24h": 24.0,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "name": "Zolva Agent",
@@ -1337,15 +2064,33 @@
       "catalyst": "AI Agent概念新币，市场关注度提升",
       "found_at": "2026-11-12 12:42",
       "recommended_price": 0.0001143,
-      "live_price": 0.0001143,
-      "live_roi_pct": 0.0
+      "live_price": 1.629e-05,
+      "live_roi_pct": -85.75,
+      "peak_price": 0.0001143,
+      "peak_roi_pct": 0.0,
+      "max_drawdown_pct": -85.75,
+      "roi_history": [
+        -85.75
+      ],
+      "trend_status": "破位回撤",
+      "turnover_24h": 84.3,
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "mc_fdv_ratio": 0.0,
+      "ath_drop": 0.0,
+      "commits_4w": 0,
+      "vc_hits": [],
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "id": "audacity",
       "coingecko_id": "audacity",
       "symbol": "DACITYCOIN",
       "name": "AudaCity",
-      "chain": "SOLANA",
+      "chain": "solana",
       "contract_address": "DKYcjobF7HPtL9RyQBRdeRQ2iWvizpfbgWwPWNXdpump",
       "opp_type": "🐶 链上早期Meme/金狗",
       "track": "Solana Meme",
@@ -1367,14 +2112,47 @@
       "final_score": 89.2,
       "ai_report": "🔥【核心催化】: GTA VI文化梗引发关注，社区文化梗传播力强。\n🐂【多头逻辑】: 1. **社区文化梗强**：AudaCity与GTA VI紧密关联，社区文化梗传播力强，吸引大量关注。\n2. **买盘强度高**：链上数据显示，买盘比例高达57.3%，表明市场对AudaCity有强烈买入意愿。\n3. **短期爆发性**：24小时换手率高达100.2%，市场活跃度极高，存在短期爆发潜力。\n🐻【空头风控】: 1. **短期涨幅过热**：24小时涨幅114.06%，短期涨幅过热，存在回调风险。\n2. **流动性不足**：流动性池子仅35.1万美元，流动性风险高，可能引发价格剧烈波动。\n3. **庄家拉高出货疑虑**：短期内卖单激增，存在庄家拉高出货，后续阴跌的风险。\n⚖️【CIO裁决 (建议关注)】: AudaCity社区文化梗强，买盘强度高，短期爆发潜力大。但需注意短期涨幅过热和流动性不足风险，建议谨慎关注，可小仓位试水，设好止损点。",
       "dex_url": "https://dexscreener.com/solana/DKYcjobF7HPtL9RyQBRdeRQ2iWvizpfbgWwPWNXdpump",
-      "discovered_at": "2026-11-12 06:43"
+      "discovered_at": "2026-11-12 06:43",
+      "contract": "DKYcjobF7HPtL9RyQBRdeRQ2iWvizpfbgWwPWNXdpump",
+      "recommended_price": 0.006119104297913503,
+      "live_price": 0.00015233,
+      "peak_price": 0.006119104297913503,
+      "peak_roi_pct": 0.0,
+      "live_roi_pct": -97.51,
+      "max_drawdown_pct": -97.51,
+      "roi_history": [
+        -97.51
+      ],
+      "trend_status": "破位回撤",
+      "mc_usd": 5695100.0,
+      "mc_wan": 569.51,
+      "liq_usd": 0.0,
+      "liq_wan": 35.05,
+      "vol_24h": 0.0,
+      "vol_wan": 0.0,
+      "chg_1h": -11.91,
+      "chg_6h": 0.0,
+      "chg_24h": 114.06,
+      "pool_age_hours": 48.0,
+      "age_label": "⚡ 早期标的",
+      "score": 89.2,
+      "project_type": "🐶 链上早期Meme/金狗",
+      "entry_timing": "🟢 早期启动",
+      "report": "🔥【核心催化】: GTA VI文化梗引发关注，社区文化梗传播力强。\n🐂【多头逻辑】: 1. **社区文化梗强**：AudaCity与GTA VI紧密关联，社区文化梗传播力强，吸引大量关注。\n2. **买盘强度高**：链上数据显示，买盘比例高达57.3%，表明市场对AudaCity有强烈买入意愿。\n3. **短期爆发性**：24小时换手率高达100.2%，市场活跃度极高，存在短期爆发潜力。\n🐻【空头风控】: 1. **短期涨幅过热**：24小时涨幅114.06%，短期涨幅过热，存在回调风险。\n2. **流动性不足**：流动性池子仅35.1万美元，流动性风险高，可能引发价格剧烈波动。\n3. **庄家拉高出货疑虑**：短期内卖单激增，存在庄家拉高出货，后续阴跌的风险。\n⚖️【CIO裁决 (建议关注)】: AudaCity社区文化梗强，买盘强度高，短期爆发潜力大。但需注意短期涨幅过热和流动性不足风险，建议谨慎关注，可小仓位试水，设好止损点。",
+      "found_at": "2026-11-12 06:43",
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "id": "dex_eth_gta6",
       "coingecko_id": "",
       "symbol": "GTA6",
       "name": "GTA VI",
-      "chain": "ETH",
+      "chain": "eth",
       "contract_address": "0x90839c778100503b51fd2f4bd82912b29e69c4b9",
       "opp_type": "🐶 链上早期Meme/金狗",
       "track": "ETH 链上Meme",
@@ -1396,14 +2174,47 @@
       "final_score": 88.4,
       "ai_report": "🔥【核心催化】: GTA VI游戏热度带动Meme币上涨\n🐂【多头逻辑】: 1. **社区热度高**：GTA VI作为热门游戏，社区广泛讨论，自发形成Meme币，叙事传播力强。\n2. **买盘强劲**：链上数据显示，买盘远超卖盘，买盘占比高达77.5%，筹码换手频繁。\n3. **短期爆发力**：24小时内换手率高达45.8%，价格在1小时内上涨25.62%，24小时内上涨471667.08%，市场潜力巨大。\n🐻【空头风控】: GTA VI项目风险点如下：\n1. **流动性风险**：池子流动性仅为28.3万USD，不足以支撑短期巨幅波动，可能引发流动性危机。\n2. **市值虚高**：FDV市值比高达100%，市场泡沫风险显著。\n3. **庄家操纵风险**：短期内涨幅过热，存在庄家拉高出货的可能，需警惕阴跌或卖单激增风险。\n⚖️【CIO裁决 (谨慎观望)】: 项目社区热度高，短期爆发力强，但流动性风险和市值虚高需警惕，建议谨慎观望，关注市场动态及风险控制。",
       "dex_url": "https://dexscreener.com/eth/0x90839c778100503b51fd2f4bd82912b29e69c4b9",
-      "discovered_at": "2026-11-12 06:43"
+      "discovered_at": "2026-11-12 06:43",
+      "contract": "0x90839c778100503b51fd2f4bd82912b29e69c4b9",
+      "recommended_price": 0.00892101317621763,
+      "live_price": 0.01206,
+      "peak_price": 0.01206,
+      "peak_roi_pct": 35.19,
+      "live_roi_pct": 35.19,
+      "max_drawdown_pct": 0.0,
+      "roi_history": [
+        35.19
+      ],
+      "trend_status": "主升浪",
+      "mc_usd": 9866000.0,
+      "mc_wan": 986.6,
+      "liq_usd": 0.0,
+      "liq_wan": 28.3,
+      "vol_24h": 0.0,
+      "vol_wan": 0.0,
+      "chg_1h": 25.62,
+      "chg_6h": 0.0,
+      "chg_24h": 471667.08,
+      "pool_age_hours": 48.0,
+      "age_label": "⚡ 早期标的",
+      "score": 88.4,
+      "project_type": "🐶 链上早期Meme/金狗",
+      "entry_timing": "🟢 早期启动",
+      "report": "🔥【核心催化】: GTA VI游戏热度带动Meme币上涨\n🐂【多头逻辑】: 1. **社区热度高**：GTA VI作为热门游戏，社区广泛讨论，自发形成Meme币，叙事传播力强。\n2. **买盘强劲**：链上数据显示，买盘远超卖盘，买盘占比高达77.5%，筹码换手频繁。\n3. **短期爆发力**：24小时内换手率高达45.8%，价格在1小时内上涨25.62%，24小时内上涨471667.08%，市场潜力巨大。\n🐻【空头风控】: GTA VI项目风险点如下：\n1. **流动性风险**：池子流动性仅为28.3万USD，不足以支撑短期巨幅波动，可能引发流动性危机。\n2. **市值虚高**：FDV市值比高达100%，市场泡沫风险显著。\n3. **庄家操纵风险**：短期内涨幅过热，存在庄家拉高出货的可能，需警惕阴跌或卖单激增风险。\n⚖️【CIO裁决 (谨慎观望)】: 项目社区热度高，短期爆发力强，但流动性风险和市值虚高需警惕，建议谨慎观望，关注市场动态及风险控制。",
+      "found_at": "2026-11-12 06:43",
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "id": "seppuku",
       "coingecko_id": "seppuku",
       "symbol": "SEPPUKU",
       "name": "Seppuku",
-      "chain": "ETHEREUM",
+      "chain": "ethereum",
       "contract_address": "0x35ebe010cdd541284fcfd2f85992a392a488f989",
       "opp_type": "🐶 链上早期Meme/金狗",
       "track": "以太坊社区梗",
@@ -1425,14 +2236,47 @@
       "final_score": 86.9,
       "ai_report": "🔥【核心催化】: 社区文化梗传播力强，买盘强度高\n🐂【多头逻辑】: 1. **社区文化梗传播力强**：Seppuku的叙事背景独特，结合真实案例和动漫元素，社区文化梗传播力强，吸引大量关注。\n2. **买盘强度高**：链上数据显示，24小时内买盘数量远超卖盘，买盘占比高达70.5%，显示市场对SEPPUKU的信心。\n3. **筹码换手活跃**：24小时换手率21.4%，表明市场活跃，筹码在流动，有利于价格上涨。\n🐻【空头风控】: 最大风险点：\n1. **流动性风险**：池子流动性仅为37.3万USD，不足以支撑其1701.9万USD的市场资本，一旦大量抛售，可能引发流动性危机。\n2. **庄家操纵风险**：短时涨幅过热，24小时涨幅达27.86%，且存在买盘激增迹象，疑似庄家拉高出货，存在阴跌风险。\n3. **市场情绪波动**：社区文化梗传播虽强，但Meme币价格易受市场情绪影响，一旦社区热度下降，价格可能迅速下跌。\n⚖️【CIO裁决 (建议关注)】: 关注社区文化梗传播，谨慎介入，注意流动性风险和庄家操纵，设定止损点以控制风险。",
       "dex_url": "https://dexscreener.com/eth/0x35ebe010cdd541284fcfd2f85992a392a488f989",
-      "discovered_at": "2026-11-12 06:43"
+      "discovered_at": "2026-11-12 06:43",
+      "contract": "0x35ebe010cdd541284fcfd2f85992a392a488f989",
+      "recommended_price": 0.0171026813938972,
+      "live_price": 3.66e-06,
+      "peak_price": 0.0171026813938972,
+      "peak_roi_pct": 0.0,
+      "live_roi_pct": -99.98,
+      "max_drawdown_pct": -99.98,
+      "roi_history": [
+        -99.98
+      ],
+      "trend_status": "破位回撤",
+      "mc_usd": 17019000.0,
+      "mc_wan": 1701.9,
+      "liq_usd": 0.0,
+      "liq_wan": 37.26,
+      "vol_24h": 0.0,
+      "vol_wan": 0.0,
+      "chg_1h": 2.98,
+      "chg_6h": 0.0,
+      "chg_24h": 27.86,
+      "pool_age_hours": 48.0,
+      "age_label": "⚡ 早期标的",
+      "score": 86.9,
+      "project_type": "🐶 链上早期Meme/金狗",
+      "entry_timing": "🟢 早期启动",
+      "report": "🔥【核心催化】: 社区文化梗传播力强，买盘强度高\n🐂【多头逻辑】: 1. **社区文化梗传播力强**：Seppuku的叙事背景独特，结合真实案例和动漫元素，社区文化梗传播力强，吸引大量关注。\n2. **买盘强度高**：链上数据显示，24小时内买盘数量远超卖盘，买盘占比高达70.5%，显示市场对SEPPUKU的信心。\n3. **筹码换手活跃**：24小时换手率21.4%，表明市场活跃，筹码在流动，有利于价格上涨。\n🐻【空头风控】: 最大风险点：\n1. **流动性风险**：池子流动性仅为37.3万USD，不足以支撑其1701.9万USD的市场资本，一旦大量抛售，可能引发流动性危机。\n2. **庄家操纵风险**：短时涨幅过热，24小时涨幅达27.86%，且存在买盘激增迹象，疑似庄家拉高出货，存在阴跌风险。\n3. **市场情绪波动**：社区文化梗传播虽强，但Meme币价格易受市场情绪影响，一旦社区热度下降，价格可能迅速下跌。\n⚖️【CIO裁决 (建议关注)】: 关注社区文化梗传播，谨慎介入，注意流动性风险和庄家操纵，设定止损点以控制风险。",
+      "found_at": "2026-11-12 06:43",
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "id": "delta",
       "coingecko_id": "delta",
       "symbol": "DELTA",
       "name": "Delta",
-      "chain": "ROBINHOOD",
+      "chain": "robinhood",
       "contract_address": "0xe8ffd7e24187f72afb08d75b1bb13088a989a791",
       "opp_type": "🚀 叙事异动黑马",
       "track": "DeFi Robinhood 生态",
@@ -1454,14 +2298,47 @@
       "final_score": 81.1,
       "ai_report": "🔥【核心催化】: 创新基金支持，DeFi生态合作潜力大\n🐂【多头逻辑】: 1. **创新基金催化**：Delta Blockchain Fund支持创新项目，推动DeFi和Robinhood生态发展，近期合作项目可能带来突破性进展。\n2. **市值赔率空间大**：市值赔率高达90.6%，潜在增长空间巨大，市场认可度高。\n3. **活跃度与机构背书**：尽管GitHub活跃度低，但近期机构背书和催化剂新闻频出，表明项目受到关注，有望迎来爆发。\n🐻【空头风控】: 核心隐患：\n1. 流通率过高，MC/FDV高达90.6%，短期抛压巨大，可能引发价格剧烈波动。\n2. GitHub近四周无代码提交，技术更新停滞，可能影响项目长期发展。\n3. 赛道竞争激烈，DeFi领域新项目层出不穷，Delta需持续创新保持竞争力。\n⚖️【CIO裁决 (建议关注)】: 关注创新基金合作进展，短期关注流动性风险，长期关注技术更新与市场竞争力，可考虑在合理价格区间内布局，设好止损点。",
       "dex_url": "https://dexscreener.com/robinhood/0xe8ffd7e24187f72afb08d75b1bb13088a989a791",
-      "discovered_at": "2026-11-12 06:43"
+      "discovered_at": "2026-11-12 06:43",
+      "contract": "0xe8ffd7e24187f72afb08d75b1bb13088a989a791",
+      "recommended_price": 0.00473679172750509,
+      "live_price": 0.002404,
+      "peak_price": 0.00473679172750509,
+      "peak_roi_pct": 0.0,
+      "live_roi_pct": -49.25,
+      "max_drawdown_pct": -49.25,
+      "roi_history": [
+        -49.25
+      ],
+      "trend_status": "破位回撤",
+      "mc_usd": 4223500.0,
+      "mc_wan": 422.35,
+      "liq_usd": 0.0,
+      "liq_wan": 43.28,
+      "vol_24h": 0.0,
+      "vol_wan": 0.0,
+      "chg_1h": 1.49,
+      "chg_6h": 0.0,
+      "chg_24h": 39.15,
+      "pool_age_hours": 48.0,
+      "age_label": "⚡ 早期标的",
+      "score": 81.1,
+      "project_type": "🚀 叙事异动黑马",
+      "entry_timing": "🟢 早期启动",
+      "report": "🔥【核心催化】: 创新基金支持，DeFi生态合作潜力大\n🐂【多头逻辑】: 1. **创新基金催化**：Delta Blockchain Fund支持创新项目，推动DeFi和Robinhood生态发展，近期合作项目可能带来突破性进展。\n2. **市值赔率空间大**：市值赔率高达90.6%，潜在增长空间巨大，市场认可度高。\n3. **活跃度与机构背书**：尽管GitHub活跃度低，但近期机构背书和催化剂新闻频出，表明项目受到关注，有望迎来爆发。\n🐻【空头风控】: 核心隐患：\n1. 流通率过高，MC/FDV高达90.6%，短期抛压巨大，可能引发价格剧烈波动。\n2. GitHub近四周无代码提交，技术更新停滞，可能影响项目长期发展。\n3. 赛道竞争激烈，DeFi领域新项目层出不穷，Delta需持续创新保持竞争力。\n⚖️【CIO裁决 (建议关注)】: 关注创新基金合作进展，短期关注流动性风险，长期关注技术更新与市场竞争力，可考虑在合理价格区间内布局，设好止损点。",
+      "found_at": "2026-11-12 06:43",
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     },
     {
       "id": "the-black-bull",
       "coingecko_id": "the-black-bull",
       "symbol": "ANSEM",
       "name": "The Black Bull",
-      "chain": "SOLANA",
+      "chain": "solana",
       "contract_address": "9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump",
       "opp_type": "🐶 链上早期Meme/金狗",
       "track": "Solana Meme",
@@ -1483,89 +2360,138 @@
       "final_score": 80.2,
       "ai_report": "🔥【核心催化】: 社区驱动，数据透明，市场情绪积极\n🐂【多头逻辑】: 1. **社区驱动与透明度高**：ANSEM由社区驱动，项目数据完全透明，网站实时显示链上数据，易于审计，增强信任。\n2. **买卖单比积极**：24小时内买盘占比较卖盘高，显示买盘强劲，市场情绪积极。\n3. **叙事传播力强**：项目围绕“无论何时都要前进”的信念，社区活跃，有潜力形成强大的Meme叙事，吸引更多关注和交易。\n🐻【空头风控】: 最大风险点：\n1. **流动性风险**：池子流动性仅为141.4万美元，相对较低，可能面临大额交易时流动性不足的风险。\n2. **市值与FDV比过高**：市值与FDV比达到100%，表明市场预期可能过高，存在泡沫破裂的风险。\n3. **短期涨幅过热**：24小时涨幅24.42%，短期涨幅过快，可能存在庄家拉高出货的风险，需警惕阴跌或卖单激增。\n⚖️【CIO裁决 (建议关注)】: 关注社区活跃度和市场情绪，谨慎介入，设定止损点，警惕短期涨幅过热风险。",
       "dex_url": "https://dexscreener.com/solana/9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump",
-      "discovered_at": "2026-11-12 06:43"
+      "discovered_at": "2026-11-12 06:43",
+      "contract": "9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump",
+      "recommended_price": 0.0608090111757044,
+      "live_price": 0.03698,
+      "peak_price": 0.0608090111757044,
+      "peak_roi_pct": 0.0,
+      "live_roi_pct": -39.19,
+      "max_drawdown_pct": -39.19,
+      "roi_history": [
+        -39.19
+      ],
+      "trend_status": "破位回撤",
+      "mc_usd": 61094300.0,
+      "mc_wan": 6109.43,
+      "liq_usd": 0.0,
+      "liq_wan": 141.42,
+      "vol_24h": 0.0,
+      "vol_wan": 0.0,
+      "chg_1h": -0.9,
+      "chg_6h": 0.0,
+      "chg_24h": 24.42,
+      "pool_age_hours": 48.0,
+      "age_label": "⚡ 早期标的",
+      "score": 80.2,
+      "project_type": "🐶 链上早期Meme/金狗",
+      "entry_timing": "🟢 早期启动",
+      "report": "🔥【核心催化】: 社区驱动，数据透明，市场情绪积极\n🐂【多头逻辑】: 1. **社区驱动与透明度高**：ANSEM由社区驱动，项目数据完全透明，网站实时显示链上数据，易于审计，增强信任。\n2. **买卖单比积极**：24小时内买盘占比较卖盘高，显示买盘强劲，市场情绪积极。\n3. **叙事传播力强**：项目围绕“无论何时都要前进”的信念，社区活跃，有潜力形成强大的Meme叙事，吸引更多关注和交易。\n🐻【空头风控】: 最大风险点：\n1. **流动性风险**：池子流动性仅为141.4万美元，相对较低，可能面临大额交易时流动性不足的风险。\n2. **市值与FDV比过高**：市值与FDV比达到100%，表明市场预期可能过高，存在泡沫破裂的风险。\n3. **短期涨幅过热**：24小时涨幅24.42%，短期涨幅过快，可能存在庄家拉高出货的风险，需警惕阴跌或卖单激增。\n⚖️【CIO裁决 (建议关注)】: 关注社区活跃度和市场情绪，谨慎介入，设定止损点，警惕短期涨幅过热风险。",
+      "found_at": "2026-11-12 06:43",
+      "cv_score": 65.0,
+      "cv_signals": [],
+      "cv_confidence": "中置信度",
+      "position_tier": "轻仓试错(1-2%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 60.0
     }
   ],
   "alert": {
-    "title": "📡 宏观叙事与反弹赛道已更新",
-    "content": "最新捕获赛道：借贷协议, 宠物主题币, Binance Wallet IDO",
-    "time": "2026-11-12 06:43"
+    "title": "📡 趋势推演与龙头/黑马配置清单已更新",
+    "content": "最新捕获赛道：bStocks Ecosystem, Made in USA, Adventure Games",
+    "time": "2026-11-24 10:20"
   },
   "vc_And_news": [
     {
       "type": "🔥 热搜飙升",
-      "title": "全网热搜飙升: ZIG Finance($ZIG), Bitcoin($BTC), Avalanche($AVAX), Pearl($PEARL), Gram (prev. Toncoin)($GRAM), Lighter($LIT), Pudgy Penguins($PENGU), NEAR Protocol($NEAR)"
+      "title": "全网热搜飙升: Bitcoin($BTC), Pudgy Penguins($PENGU), Pearl($PEARL), XRP($XRP), Solana($SOL), Venice Token($VVV), Hyperliquid($HYPE), Zcash($ZEC)"
+    },
+    {
+      "type": "🌊 TVL异动",
+      "title": "Blast Bridge (Canonical Bridge) TVL 7日激增 +1653.2% 至 $26.3M"
+    },
+    {
+      "type": "🌊 TVL异动",
+      "title": "Unichain Bridge (Canonical Bridge) TVL 7日激增 +1472.4% 至 $32.8M"
+    },
+    {
+      "type": "🌊 TVL异动",
+      "title": "TheDeep (Liquidity Manager) TVL 7日激增 +176.8% 至 $10.4M"
+    },
+    {
+      "type": "🌊 TVL异动",
+      "title": "SunSwap V4 (Dexs) TVL 7日激增 +89.2% 至 $117.6M"
     },
     {
       "type": "📰 媒体快讯",
-      "title": "Fractile完成7.2亿美元C轮融资，投后估值70亿美元"
+      "title": "具身机器人公司至简动力融资1亿美元，蚂蚁集团领投"
     },
     {
       "type": "📰 媒体快讯",
-      "title": "美联航将禁止个人AI代理代客预订机票"
+      "title": "机器人AI初创公司Embo完成1.1亿美元种子轮融资，a16z领投，英伟达等跟投"
     },
     {
       "type": "📰 媒体快讯",
-      "title": "US data center restrictions could give Bitcoin miners an edge in AI, though chal"
-    },
-    {
-      "type": "📰 媒体快讯",
-      "title": "Deutsche Bank launches crypto custody for companies and institutions"
+      "title": "BTCS offloads $44M in ETH to reduce DeFi debt amid market downturn"
     }
   ],
   "hot_keywords": [
     {
-      "keyword": "#AI Agent 反弹",
-      "word": "#AI Agent 反弹",
-      "heat": 96,
-      "reason": "超跌后资金回流明显，热搜占比高"
-    },
-    {
-      "keyword": "#链上Meme狂潮",
-      "word": "#链上Meme狂潮",
-      "heat": 95,
-      "reason": "社区参与度高，市场情绪推动涨势"
-    },
-    {
-      "keyword": "#DePIN算力",
-      "word": "#DePIN算力",
-      "heat": 93,
-      "reason": "随着DeFi和NFT的兴起，算力需求增加，市场关注度提升"
-    },
-    {
-      "keyword": "#Lending/Borrowing Protocols",
-      "word": "#Lending/Borrowing Protocols",
+      "keyword": "#bStocks Ecosystem",
+      "word": "#bStocks Ecosystem",
       "heat": 92,
-      "reason": "借贷协议的流动性增强，吸引投资者关注"
+      "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Cat-Themed Coins",
-      "word": "#Cat-Themed Coins",
-      "heat": 91,
-      "reason": "宠物主题币种受到市场追捧，趣味性与投资性并存"
+      "keyword": "#Made in USA",
+      "word": "#Made in USA",
+      "heat": 90,
+      "reason": "板块量能温和放大，早期资金净流入居前"
+    },
+    {
+      "keyword": "#Adventure Games",
+      "word": "#Adventure Games",
+      "heat": 88,
+      "reason": "板块量能温和放大，早期资金净流入居前"
+    },
+    {
+      "keyword": "#LSDFi",
+      "word": "#LSDFi",
+      "heat": 86,
+      "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
       "keyword": "#Reality Ecosystem",
       "word": "#Reality Ecosystem",
-      "heat": 90,
-      "reason": "虚拟现实和增强现实技术发展，相关生态项目受关注"
+      "heat": 84,
+      "reason": "板块量能温和放大，早期资金净流入居前"
+    },
+    {
+      "keyword": "#Entertainment",
+      "word": "#Entertainment",
+      "heat": 82,
+      "reason": "板块量能温和放大，早期资金净流入居前"
     }
   ],
-  "updated_at": "2026-11-23 14:36",
+  "updated_at": "2026-11-24 10:20",
   "evolution_state": {
-    "generation": 1,
-    "last_evolved_at": "尚未触发回测",
-    "win_rate_pct": 0.0,
-    "avg_roi_pct": 0.0,
-    "total_tested": 0,
-    "best_pick": "暂无",
-    "worst_pick": "暂无",
+    "generation": 2,
+    "last_evolved_at": "2026-11-24 10:18",
+    "win_rate_pct": 22.2,
+    "avg_roi_pct": 39925.63,
+    "payoff_ratio": 2718.87,
+    "expectancy_pct": 39925.57,
+    "total_tested": 36,
+    "best_pick": "$CLAUDIA (+1315007.4%)",
+    "worst_pick": "$TTWO (-100.0%)",
+    "attribution_summary": "🏛️ 叙事价值: 31笔, 胜率22.6%, 均益+46373.3%, 盈亏比3151.27 | 🐶 链上早期Meme/金狗: 4笔, 胜率25.0%, 均益-50.4%, 盈亏比0.45 | 🚀 叙事异动黑马: 1笔, 胜率0.0%, 均益-49.2%, 盈亏比0.5",
     "guardrails": {
-      "max_meme_mc_wan": 1500.0,
-      "max_narrative_mc_wan": 5000.0,
-      "max_24h_pump_limit": 68.0,
-      "sweet_spot_24h_max": 38.0,
-      "min_buy_ratio_pct": 53.5,
+      "min_mc_wan": 5.0,
+      "max_meme_mc_wan": 500.0,
+      "max_narrative_mc_wan": 500.0,
+      "max_24h_pump_limit": 120.0,
+      "sweet_spot_24h_max": 48.0,
+      "min_buy_ratio_pct": 53.0,
       "min_score_threshold": 68.0
     },
     "weights": {
@@ -1575,11 +2501,52 @@
       "track_heat": 0.15,
       "fundamentals": 0.1
     },
-    "evolution_reason": "V6.0 初始基因：严禁追高 24h 暴涨超 68% 的高位派发币，重点狙击市值 $20万~$1500万、上线早期或底部刚放量突破、1h 买盘占比 > 53.5% 的黄金建仓窗口标的。",
+    "evolution_reason": "本轮策略归因于叙事价值和早期Meme/金狗的捕捉，盈亏比提升通过调整市值区间和弹性动量上限实现。",
     "tactical_rules": [
-      "【防追高铁律】凡是 24h 涨幅已超过 68% 且 1h 涨幅转负或买单占比下降的标的，一律判定为『错过最佳建仓窗口/庄家派发』，CIO 必须一票否决（打分 < 55）。",
-      "【极早期偏好】优先放行池子刚创建 1h~96h 内、或市值在 $20万~$800万之间、1h 与 6h 温和放量上涨 (+2%~+25%) 的早期点火标的。",
-      "【真买盘验真】链上 24h 买单笔数占比低于 50%（卖盘大于买盘）的冲高回落项目，严禁入选。"
+      "铁律1：优先关注市值和动量平衡的优质项目。",
+      "铁律2：严格控制市值区间和动量上限以降低风险。",
+      "铁律3：强化对叙事价值和早期信号的识别能力。"
     ]
-  }
+  },
+  "trending_symbols": [
+    "BTC",
+    "PENGU",
+    "PEARL",
+    "XRP",
+    "SOL",
+    "VVV",
+    "HYPE",
+    "ZEC"
+  ],
+  "vc_entities": [],
+  "allocation_matrix": [
+    {
+      "track": "bStocks Ecosystem",
+      "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
+      "leader": "bStocks Ecosystem 头部高流动性核心协议",
+      "dark_horse": "市值 <$500万 且买盘占比 >55% 的早期新池标的",
+      "ratio_hint": "龙头 55% / 黑马 45%"
+    },
+    {
+      "track": "Made in USA",
+      "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
+      "leader": "Made in USA 头部高流动性核心协议",
+      "dark_horse": "市值 <$500万 且买盘占比 >55% 的早期新池标的",
+      "ratio_hint": "龙头 55% / 黑马 45%"
+    },
+    {
+      "track": "Adventure Games",
+      "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
+      "leader": "Adventure Games 头部高流动性核心协议",
+      "dark_horse": "市值 <$500万 且买盘占比 >55% 的早期新池标的",
+      "ratio_hint": "龙头 55% / 黑马 45%"
+    },
+    {
+      "track": "LSDFi",
+      "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
+      "leader": "LSDFi 头部高流动性核心协议",
+      "dark_horse": "市值 <$500万 且买盘占比 >55% 的早期新池标的",
+      "ratio_hint": "龙头 55% / 黑马 45%"
+    }
+  ]
 }
