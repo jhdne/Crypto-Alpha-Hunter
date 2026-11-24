@@ -16,8 +16,22 @@ def check_module_attrs(mod_name: str, required_attrs: list) -> list:
     return errors
 
 
+def check_func_params(mod_name: str, func_name: str, required_params: list) -> list:
+    errors = []
+    try:
+        mod = importlib.import_module(mod_name)
+        func = getattr(mod, func_name)
+        sig = inspect.signature(func)
+        for p in required_params:
+            if p not in sig.parameters:
+                errors.append(f"{mod_name}.{func_name} 缺少参数: {p}")
+    except Exception as e:
+        errors.append(f"校验 {mod_name}.{func_name} 签名失败: {e}")
+    return errors
+
+
 def main():
-    print("🔍 [Preflight Check] 正在校验 V6.0 模块接口与配置完整性...")
+    print("🔍 [Preflight Check] 正在校验 V6.1 模块接口、函数签名与配置完整性...")
     all_errors = []
 
     for pkg in ("requests", "feedparser"):
@@ -40,39 +54,42 @@ def main():
                 "TABLE_ID_CONFIG",
                 "TABLE_ID_RADAR",
                 "TABLE_ID_ALPHA",
-                "FEISHU_URL",
+                "FEISHU_DASHBOARD_URL",
+                "FEISHU_WEBHOOK_URL",
                 "COINGECKO_API_KEY",
                 "TAVILY_API_KEY",
             ],
         )
     )
 
+    all_errors.extend(check_module_attrs("logger", ["get_logger"]))
+    all_errors.extend(check_module_attrs("models", ["normalize_project", "project_unique_key"]))
     all_errors.extend(
         check_module_attrs(
             "feishu_db",
             ["get_records", "add_record", "update_record", "FeishuDB"],
         )
     )
-
     all_errors.extend(
         check_module_attrs(
             "llm_engine",
             ["call_llm", "ask_ai", "extract_json", "multi_agent_evaluate"],
         )
     )
+    all_errors.extend(check_module_attrs("notifier", ["build_dashboard", "load_local_db", "save_local_db"]))
 
-    all_errors.extend(
-        check_module_attrs("notifier", ["build_dashboard"])
-    )
+    # 校验关键函数签名
+    all_errors.extend(check_func_params("llm_engine", "ask_ai", ["prompt", "role", "json_mode"]))
+    all_errors.extend(check_func_params("llm_engine", "call_llm", ["agent_role", "json_mode"]))
+    all_errors.extend(check_func_params("llm_engine", "multi_agent_evaluate", ["project_data", "evolution_state"]))
 
-    # 校验方法参数签名是否支持 V6.0
     try:
         import feishu_db
         sig = inspect.signature(feishu_db.FeishuDB.get_strategy_weights)
         if len(sig.parameters) < 2:
-            print("⚠️ 提示: feishu_db.FeishuDB.get_strategy_weights 为旧版单参数签名，建议同步更新 feishu_db.py")
-    except Exception:
-        pass
+            all_errors.append("feishu_db.FeishuDB.get_strategy_weights 缺少 local_evo_state 参数")
+    except Exception as e:
+        all_errors.append(f"校验 FeishuDB.get_strategy_weights 失败: {e}")
 
     if all_errors:
         print("❌ 启动前自检发现以下问题:")
@@ -80,7 +97,7 @@ def main():
             print(f"   - {err}")
         sys.exit(1)
 
-    print("✅ [Preflight Check] 所有 V6.0 模块接口与配置自检通过！")
+    print("✅ [Preflight Check] 所有 V6.1 模块接口、签名与配置自检通过！")
 
 
 if __name__ == "__main__":
