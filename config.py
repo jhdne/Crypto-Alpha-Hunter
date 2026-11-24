@@ -1,4 +1,4 @@
-# config.py - V7.0 统一配置中心
+# config.py - V7.1 统一配置中心（$5W-$500W 早期高赔率窗口 + 自适应动量风控）
 import os
 
 
@@ -33,7 +33,7 @@ AGENT_MODEL_ROUTING = {
     "fallback": {"provider": "groq", "model": "llama-3.3-70b-versatile"},
 }
 
-# ================= 2. 进化默认基因参数 =================
+# ================= 2. 进化默认基因参数（V7.1: 5W-500W 早期击球区） =================
 DEFAULT_EVOLUTION_STATE = {
     "generation": 1,
     "last_evolved_at": "尚未触发回测",
@@ -46,11 +46,12 @@ DEFAULT_EVOLUTION_STATE = {
     "worst_pick": "暂无",
     "attribution_summary": "等待首轮实盘样本积累后生成策略归因。",
     "guardrails": {
-        "max_meme_mc_wan": 1500.0,
-        "max_narrative_mc_wan": 5000.0,
-        "max_24h_pump_limit": 68.0,
-        "sweet_spot_24h_max": 38.0,
-        "min_buy_ratio_pct": 53.5,
+        "min_mc_wan": 5.0,
+        "max_meme_mc_wan": 500.0,
+        "max_narrative_mc_wan": 500.0,
+        "max_24h_pump_limit": 120.0,
+        "sweet_spot_24h_max": 48.0,
+        "min_buy_ratio_pct": 53.0,
         "min_score_threshold": 68.0,
     },
     "weights": {
@@ -60,11 +61,11 @@ DEFAULT_EVOLUTION_STATE = {
         "track_heat": 0.15,
         "fundamentals": 0.10,
     },
-    "evolution_reason": "V7.0 初始基因：全周期 Alpha 捕获，严禁追高 24h 暴涨超 68% 的高位派发币，重点狙击早期高赔率点火标的与低估值价值击球区。",
+    "evolution_reason": "V7.1 初始基因：聚焦 $5万~$500万 极早期高赔率击球区，采用结构化动量评估替代死板涨幅拦截，优先捕捉买盘持续、量价健康的早期启动标的。",
     "tactical_rules": [
-        "【防追高铁律】凡是 24h 涨幅已超过 68% 且 1h 涨幅转负或买单占比下降的标的，一律判定为『错过最佳建仓窗口/庄家派发』，CIO 必须一票否决（打分 < 55）。",
-        "【极早期偏好】优先放行池子刚创建 1h~96h 内、或市值在 $20万~$800万之间、1h 与 6h 温和放量上涨 (+2%~+25%) 的早期点火标的。",
-        "【多维交叉验真】优先选择同时命中 2 个以上独立数据源（链上放量 + 热搜/VC/外部催化剂 + 合约安全通过）的高置信度标的。",
+        "【微盘高赔率区间】核心聚焦市值 $5万~$500万 的极早期新盘与价值黑马，后续由进化引擎根据实盘胜率与盈亏比动态微调区间。",
+        "【弹性动量评估】24h 涨幅高并非绝对否决项；仅当 24h 涨幅过热且伴随 1h 转跌或买盘占比跌破 55% 的派发迹象时才一票否决。",
+        "【多维交叉验真】优先放行同时命中链上真实放量、安全审计通过、热搜/VC 资金面共振的高置信度标的。",
     ],
 }
 

@@ -332,7 +332,7 @@ def classify_project_and_track(item: dict, approved_tracks: list, hot_keywords: 
 
     for track_name, kw_list in narrative_rules:
         if any(k in text for k in kw_list):
-            if item.get("mc_usd", 0) >= 1500000 and item.get("liq_usd", 0) >= 80000:
+            if item.get("mc_usd", 0) >= 800000 and item.get("liq_usd", 0) >= 40000:
                 return "🏛️ 叙事价值", track_name
             return "🌪️ 高波Meme", f"{track_name}概念"
 
@@ -349,7 +349,10 @@ def classify_project_and_track(item: dict, approved_tracks: list, hot_keywords: 
 
 
 def assess_entry_position(item: dict, guardrails: dict, is_meme: bool) -> tuple:
-    """V7.0 全周期买点识别与防追高/防刷单闸门"""
+    """
+    V7.1 弹性动量与结构化买点识别器：
+    取消死板的 68% 一刀切拦截，改为【动量结构 + 买盘强度 + 市值位置】综合评估。
+    """
     chg_1h = item.get("chg_1h", 0.0)
     chg_6h = item.get("chg_6h", 0.0)
     chg_24h = item.get("chg_24h", 0.0)
@@ -360,54 +363,57 @@ def assess_entry_position(item: dict, guardrails: dict, is_meme: bool) -> tuple:
     tx_count = int(item.get("buys_24h", 0)) + int(item.get("sells_24h", 0))
     pool_age_h = item.get("pool_age_hours", 72.0)
 
-    max_24h_pump = float(guardrails.get("max_24h_pump_limit", 68.0))
-    sweet_24h_max = float(guardrails.get("sweet_spot_24h_max", 38.0))
-    min_buy_ratio = float(guardrails.get("min_buy_ratio_pct", 53.5))
+    max_24h_pump = float(guardrails.get("max_24h_pump_limit", 120.0))
+    sweet_24h_max = float(guardrails.get("sweet_spot_24h_max", 48.0))
+    min_buy_ratio = float(guardrails.get("min_buy_ratio_pct", 53.0))
 
+    # 0. 防刷单验真
     if tx_count >= 200 and vol_24h > 0 and (vol_24h / tx_count) < 15.0:
         return False, "", 0.0, f"疑似微额刷单(均笔${vol_24h / tx_count:.1f} < $15)"
     if pool_age_h > 2.0 and vol_1h <= 0 and vol_24h > 0:
         return False, "", 0.0, "近1h无有效成交量(流动性停滞)"
 
+    # 1. 买盘占比不足
     if buy_ratio < min_buy_ratio:
         return False, "", 0.0, f"买盘占比偏弱({buy_ratio:.1f}% < {min_buy_ratio}%)"
 
-    if chg_24h > 25.0 and chg_1h < -4.0:
+    # 2. 高位派发结构（1h 转跌且 24h 涨幅已高）
+    if chg_24h > 30.0 and chg_1h < -4.0:
         return False, "", 0.0, f"高位放量派发迹象(24h+{chg_24h:.1f}%, 1h{chg_1h:.1f}%)"
 
-    is_ultra_early_ignition = (
-        pool_age_h <= 24.0
-        and mc_usd <= 3000000
-        and buy_ratio >= 58.0
-        and 1.0 <= chg_1h <= 28.0
-        and chg_24h <= (max_24h_pump * 1.35)
-    )
-    if chg_24h > max_24h_pump and not is_ultra_early_ignition:
-        return False, "", 0.0, f"24h涨幅过高(+{chg_24h:.1f}% > +{max_24h_pump:.0f}%)，拒绝追高接盘"
+    # 3. 弹性动量评估：高涨幅仅在伴随走弱/买盘不足或极端透支时拦截
+    if chg_24h > max_24h_pump and (chg_1h < 0.0 or buy_ratio < 56.0):
+        return False, "", 0.0, f"涨幅过热且买盘衰减(24h+{chg_24h:.1f}%, 1h{chg_1h:+.1f}%, 买盘{buy_ratio:.1f}%)"
+    if chg_24h > (max_24h_pump * 2.0) and mc_usd > 2000000:
+        return False, "", 0.0, f"24h极端暴涨(+{chg_24h:.1f}%)且市值偏大，防流动性退出"
 
-    if chg_1h > 35.0:
+    # 4. 1h 垂直插针过猛
+    if chg_1h > 45.0:
         return False, "", 0.0, f"1h短线急拉过猛(+{chg_1h:.1f}%)，防冲高回落"
 
-    if chg_24h < -22.0 or (chg_6h < -12.0 and chg_1h < 0):
+    # 5. 持续阴跌无承接
+    if chg_24h < -25.0 or (chg_6h < -15.0 and chg_1h < 0):
         return False, "", 0.0, f"趋势走弱阴跌(24h {chg_24h:.1f}%)"
 
+    # ========== 黄金买点分类与结构化打分 ==========
     if pool_age_h <= 48.0 and -5.0 <= chg_24h <= sweet_24h_max and chg_1h >= 0.8 and buy_ratio >= 55.0:
-        return True, "🟢 新币极早期点火窗口", 95.0, ""
+        return True, "🟢 极早期点火窗口", 95.0, ""
 
-    if -2.0 <= chg_24h <= 25.0 and 1.2 <= chg_1h <= 18.0 and buy_ratio >= 54.5:
-        return True, "🟢 底部刚启动首阳买点", 92.0, ""
+    if -2.0 <= chg_24h <= 30.0 and 1.2 <= chg_1h <= 20.0 and buy_ratio >= 54.5:
+        return True, "🟢 底部放量首阳", 92.0, ""
 
-    if -12.0 <= chg_24h <= 30.0 and -10.0 <= chg_6h <= 2.0 and 0.5 <= chg_1h <= 12.0 and buy_ratio >= 55.0:
-        return True, "💎 缩量回调企稳黄金坑", 88.0, ""
+    if -12.0 <= chg_24h <= 35.0 and -10.0 <= chg_6h <= 2.0 and 0.5 <= chg_1h <= 14.0 and buy_ratio >= 55.0:
+        return True, "💎 缩量回调企稳", 88.0, ""
 
-    if 0.0 <= chg_24h <= sweet_24h_max and 0.5 <= chg_1h <= 22.0:
-        return True, "🚀 右侧温和放量突破期", 84.0, ""
+    if 0.0 <= chg_24h <= sweet_24h_max and 0.5 <= chg_1h <= 25.0:
+        return True, "🚀 右侧温和突破", 84.0, ""
 
-    if is_ultra_early_ignition:
-        return True, "🔥 首日新盘强势点火期", 82.0, ""
+    if chg_24h > sweet_24h_max and chg_1h >= 0.5 and buy_ratio >= 56.0:
+        # 强势接力加速期：允许高涨幅但给予略保守的位置分
+        return True, "⚡ 强势接力加速", 77.0, ""
 
-    if chg_1h >= 0.0 and chg_24h <= max_24h_pump:
-        return True, "🟢 早期右侧温和跟进", 74.0, ""
+    if chg_1h >= 0.0:
+        return True, "🟢 早期右侧跟进", 74.0, ""
 
     return False, "", 0.0, "未出现明确早期启动或企稳信号"
 
@@ -460,10 +466,6 @@ def check_token_security(chain: str, contract: str) -> tuple:
 
 
 def enrich_value_fundamentals(p_data: dict, vc_entities: list) -> dict:
-    """
-    V7.0 价值挖掘基本面穿透：
-    补充 CoinGecko 流通率/距ATH回撤/GitHub月提交数，并匹配一级市场 VC 融资实体。
-    """
     headers = {"Accept": "application/json", "User-Agent": "Mozilla/5.0"}
     if COINGECKO_API_KEY:
         headers["x-cg-demo-api-key"] = COINGECKO_API_KEY
@@ -473,7 +475,6 @@ def enrich_value_fundamentals(p_data: dict, vc_entities: list) -> dict:
     vc_hits = [vc for vc in vc_entities if vc and (vc in name_lower or name_lower in vc)]
     p_data["vc_hits"] = vc_hits[:3]
 
-    # 仅对较大市值或叙事价值标的尝试 CoinGecko 基本面穿透，避免限流
     if p_data.get("mc_usd", 0) >= 800000:
         try:
             s_resp = _SESSION.get(
@@ -519,37 +520,27 @@ def cross_validate_signal(
     sec_ok: bool,
     news_ctx: str,
 ) -> tuple:
-    """
-    V7.0 多维全景交叉验证引擎：
-    从 链上量价 / 市场热搜 / 赛道与VC资金面 / 合约安全 / 外部新闻情报 5 个维度交叉验真。
-    返回: (cv_score: float, cv_signals: list, cv_confidence: str)
-    """
     signals = []
     score = 45.0
 
-    # 1. 链上量价与买盘共振
-    if p_data.get("buy_ratio", 50.0) >= 54.0 and p_data.get("vol_24h", 0) >= 50000:
+    if p_data.get("buy_ratio", 50.0) >= 54.0 and p_data.get("vol_24h", 0) >= 35000:
         signals.append("链上真实放量买盘")
         score += 15.0
 
-    # 2. 全网热搜或 DexScreener Boost 共振
     sym = p_data.get("symbol", "").upper()
     if sym in trending_symbols or p_data.get("source") == "DexScreener":
         signals.append("多平台热点共振")
         score += 12.0
 
-    # 3. 赛道或一级 VC 资金面命中
     text = f"{p_data.get('name', '')} {sym} {p_data.get('track', '')}".lower()
     if p_data.get("vc_hits") or any(t.lower() in text for t in approved_tracks) or any(k.lower() in text for k in hot_keywords):
         signals.append("赛道/VC资金面对齐")
         score += 12.0
 
-    # 4. 合约安全审计通过
     if sec_ok and "通过" in str(p_data.get("security_status", "")):
         signals.append("合约安全审计通过")
         score += 10.0
 
-    # 5. 外部舆情/新闻催化或基本面开发活跃
     if (news_ctx and "|" in news_ctx) or int(p_data.get("commits_4w") or 0) >= 10:
         signals.append("外部催化/开发活跃")
         score += 8.0
@@ -587,23 +578,16 @@ def calculate_quant_score(
     vol_mc_ratio = item.get("vol_24h", 0.0) / max(item.get("mc_usd", 1.0), 1.0)
     s_buy = min(100.0, 50.0 + (buy_ratio - 50.0) * 3.2 + min(vol_mc_ratio * 15.0, 22.0))
 
+    # V7.1 微盘高赔率打分曲线（聚焦 5W ~ 500W 黄金击球区）
     mc_wan = item.get("mc_usd", 0.0) / 10000.0
-    if is_meme:
-        if 15.0 <= mc_wan <= 300.0:
-            s_mc = 95.0
-        elif 300.0 < mc_wan <= 700.0:
-            s_mc = 85.0
-        elif 700.0 < mc_wan <= 1200.0:
-            s_mc = 72.0
-        else:
-            s_mc = 58.0
+    if 10.0 <= mc_wan <= 150.0:
+        s_mc = 96.0
+    elif (5.0 <= mc_wan < 10.0) or (150.0 < mc_wan <= 350.0):
+        s_mc = 86.0
+    elif 350.0 < mc_wan <= 500.0:
+        s_mc = 74.0
     else:
-        if 50.0 <= mc_wan <= 1200.0:
-            s_mc = 94.0
-        elif 1200.0 < mc_wan <= 2800.0:
-            s_mc = 82.0
-        else:
-            s_mc = 65.0
+        s_mc = 60.0
 
     text = f"{item.get('name', '')} {item.get('symbol', '')} {item.get('track', '')}".lower()
     s_track = 70.0
@@ -663,7 +647,7 @@ def send_feishu_card(projects: list, evo_state: dict):
     gen = evo_state.get("generation", 1)
     guard = evo_state.get("guardrails", {})
     lines = [
-        f"🧬 **进化代数**: Gen #{gen} | **胜率/盈亏比**: {evo_state.get('win_rate_pct', 0)}% / {evo_state.get('payoff_ratio', 1.0)} | **防追高红线**: 24h ≤ +{guard.get('max_24h_pump_limit', 68)}%\n---"
+        f"🧬 **进化代数**: Gen #{gen} | **胜率/盈亏比**: {evo_state.get('win_rate_pct', 0)}% / {evo_state.get('payoff_ratio', 1.0)} | **市值区间**: ${guard.get('min_mc_wan', 5)}万~${guard.get('max_meme_mc_wan', 500)}万\n---"
     ]
     for idx, p in enumerate(projects, 1):
         lines.append(
@@ -682,7 +666,7 @@ def send_feishu_card(projects: list, evo_state: dict):
             "header": {
                 "title": {
                     "tag": "plain_text",
-                    "content": f"🎯 V7.0 全周期 Alpha 狙击战报 ({len(projects)}个标的)",
+                    "content": f"🎯 V7.1 极早期高赔率 Alpha 战报 ({len(projects)}个标的)",
                 },
                 "template": "turquoise",
             },
@@ -698,7 +682,7 @@ def send_feishu_card(projects: list, evo_state: dict):
 
 
 def run_job2():
-    log.info("[Job 2 V7.0] 启动全周期 Alpha 捕获 + 多维交叉验证 + 多空辩论投委会...")
+    log.info("[Job 2 V7.1] 启动 1H 高频 Alpha 狙击引擎 ($5W-$500W 黄金区间 + 弹性动量风控)...")
     db = FeishuDB()
     local_db = load_local_db()
     evo_state = get_active_evolution_state(local_db)
@@ -751,8 +735,9 @@ def run_job2():
         if key not in dedup_map or item.get("vol_24h", 0) > dedup_map[key].get("vol_24h", 0):
             dedup_map[key] = item
 
-    max_meme_mc_usd = float(guardrails.get("max_meme_mc_wan", 1500.0)) * 10000.0
-    max_narr_mc_usd = float(guardrails.get("max_narrative_mc_wan", 5000.0)) * 10000.0
+    min_mc_usd = float(guardrails.get("min_mc_wan", 5.0)) * 10000.0
+    max_meme_mc_usd = float(guardrails.get("max_meme_mc_wan", 500.0)) * 10000.0
+    max_narr_mc_usd = float(guardrails.get("max_narrative_mc_wan", 500.0)) * 10000.0
     min_score_threshold = float(guardrails.get("min_score_threshold", 68.0))
 
     existing_projects = [normalize_project(p) for p in (local_db.get("projects") or [])]
@@ -776,9 +761,9 @@ def run_job2():
         liq_usd = item.get("liq_usd", 0.0)
         vol_24h = item.get("vol_24h", 0.0)
 
-        min_liq = 18000.0 if is_meme else 45000.0
+        min_liq = 10000.0 if mc_usd < 200000.0 else (18000.0 if is_meme else 30000.0)
         max_mc = max_meme_mc_usd if is_meme else max_narr_mc_usd
-        if mc_usd < 80000.0 or mc_usd > max_mc or liq_usd < min_liq or vol_24h < 25000.0:
+        if mc_usd < min_mc_usd or mc_usd > max_mc or liq_usd < min_liq or vol_24h < 15000.0:
             reject_stats["mc_liq"] += 1
             continue
 
@@ -805,7 +790,8 @@ def run_job2():
     qualified.sort(key=lambda x: x["quant_score"], reverse=True)
     shortlist = qualified[:6]
     final_picks = []
-    now_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+    tz_bj = datetime.timezone(datetime.timedelta(hours=8))
+    now_str = datetime.datetime.now(tz_bj).strftime("%Y-%m-%d %H:%M")
 
     def _enrich(p_data):
         sec_ok, sec_msg = check_token_security(p_data["chain"], p_data["contract"])
@@ -837,7 +823,6 @@ def run_job2():
         else:
             continue
 
-        # 融合量化分(35%) + 多维交叉验证(15%) + CIO终审(50%)
         final_score = round(p_data["quant_score"] * 0.35 + cv_score * 0.15 + float(ai_score) * 0.50, 1)
 
         if float(ai_score) < 62.0 or final_score < min_score_threshold:
@@ -854,16 +839,19 @@ def run_job2():
         p_data["recommended_price"] = p_data["price"]
         p_data["live_price"] = p_data["price"]
         p_data["peak_price"] = p_data["price"]
+        p_data["peak_roi_pct"] = 0.0
         p_data["live_roi_pct"] = 0.0
         p_data["max_drawdown_pct"] = 0.0
+        p_data["roi_history"] = [0.0]
+        p_data["trend_status"] = "新入选"
 
         canonical = normalize_project(p_data)
         final_picks.append(canonical)
         db.save_alpha_project(canonical)
         log.info(
-            "✅ [入选 Alpha] %s (%s) | %s | %s | 市值:$%s万 | 综合分:%s",
+            "✅ [入选 Alpha] %s (%s) | %s | 市值:$%s万 | 综合分:%s",
             canonical["name"], canonical["symbol"], canonical["entry_timing"],
-            cv_conf, canonical["mc_wan"], final_score,
+            canonical["mc_wan"], final_score,
         )
 
     merged_projects = final_picks + existing_projects
@@ -876,7 +864,7 @@ def run_job2():
             dedup_projects.append(p)
 
     local_db["updated_at"] = now_str
-    local_db["projects"] = dedup_projects[:36]
+    local_db["projects"] = dedup_projects[:80]
     local_db["evolution_state"] = evo_state
 
     os.makedirs(os.path.dirname(LOCAL_DB_PATH), exist_ok=True)
@@ -884,13 +872,13 @@ def run_job2():
         json.dump(local_db, f, ensure_ascii=False, indent=2)
 
     build_dashboard(
-        f"🎯 V7.0 全周期 Alpha 更新 ({len(final_picks)} 个新标的)" if final_picks else "",
+        f"🎯 V7.1 Alpha 扫描更新 ({len(final_picks)} 个新标的)" if final_picks else "",
         f"本轮入选: {', '.join(p['symbol'] for p in final_picks)}" if final_picks else "",
     )
     if final_picks:
         send_feishu_card(final_picks, evo_state)
     else:
-        log.info("本轮未发现同时满足高赔率与交叉验证标准的新标的，宁缺毋滥。")
+        log.info("本轮未发现满足 $5W-$500W 高赔率标准的新标的，宁缺毋滥。")
 
 
 if __name__ == "__main__":

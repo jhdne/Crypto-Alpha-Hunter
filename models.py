@@ -89,9 +89,13 @@ def normalize_project(raw: Dict[str, Any]) -> Dict[str, Any]:
 
     live_roi_pct = _to_float(p.get("live_roi_pct"), 0.0)
     peak_price = _to_float(p.get("peak_price"), max(recommended_price, live_price))
+    peak_roi_pct = _to_float(p.get("peak_roi_pct"), 0.0)
+    if peak_roi_pct == 0.0 and recommended_price > 0 and peak_price > 0:
+        peak_roi_pct = round((peak_price - recommended_price) / recommended_price * 100.0, 2)
     max_drawdown_pct = _to_float(p.get("max_drawdown_pct"), 0.0)
+    roi_history = p.get("roi_history") if isinstance(p.get("roi_history"), list) else []
+    trend_status = str(p.get("trend_status") or ("待跟踪" if live_roi_pct == 0 else ("走强" if live_roi_pct > 0 else "回撤")))
 
-    # V7.0 多维交叉验证与基本面穿透字段
     cv_score = _to_float(p.get("cv_score"), 65.0)
     cv_signals = p.get("cv_signals") if isinstance(p.get("cv_signals"), list) else []
     cv_confidence = str(p.get("cv_confidence") or "中置信度")
@@ -120,8 +124,11 @@ def normalize_project(raw: Dict[str, Any]) -> Dict[str, Any]:
         "recommended_price": recommended_price,
         "live_price": live_price,
         "peak_price": peak_price,
+        "peak_roi_pct": peak_roi_pct,
         "live_roi_pct": live_roi_pct,
         "max_drawdown_pct": max_drawdown_pct,
+        "roi_history": roi_history,
+        "trend_status": trend_status,
         "mc_usd": mc_usd,
         "mc_wan": mc_wan,
         "liq_usd": liq_usd,

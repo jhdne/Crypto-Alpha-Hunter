@@ -1,4 +1,4 @@
-# job3_self_evolver.py - V7.0 类脑级策略归因与胜率/盈亏比自主进化引擎
+# job3_self_evolver.py - V7.1 1H 高频跟踪走势、策略归因与自适应参数进化引擎
 from concurrent.futures import ThreadPoolExecutor
 import copy
 from datetime import datetime, timezone, timedelta
@@ -122,8 +122,19 @@ def _age_bucket(found_at_str: str) -> str:
         return "未知窗口"
 
 
+def _classify_trend_status(roi: float, roi_history: list) -> str:
+    if roi >= 25.0:
+        return "主升浪"
+    if roi >= 5.0:
+        return "稳步走强"
+    if len(roi_history) >= 2 and roi > roi_history[-2] and roi > -6.0:
+        return "企稳反弹"
+    if roi <= -8.0:
+        return "破位回撤"
+    return "窄幅震荡"
+
+
 def compute_portfolio_metrics(rois: list) -> dict:
-    """计算胜率、平均收益、盈亏比 (Payoff Ratio) 与单笔期望收益 (Expectancy)"""
     if not rois:
         return {
             "win_rate_pct": 0.0,
@@ -150,7 +161,7 @@ def compute_portfolio_metrics(rois: list) -> dict:
 
 
 def run():
-    log.info("[Job3 V7.0] 启动类脑级策略归因、盈亏比核算与自主进化引擎...")
+    log.info("[Job3 V7.1] 启动 1H 高频走势跟踪、策略归因与自适应参数进化引擎...")
     local_data = notifier.load_local_db()
     evo_state = local_data.get("evolution_state") or copy.deepcopy(config.DEFAULT_EVOLUTION_STATE)
     projects = [normalize_project(p) for p in (local_data.get("projects") or [])]
@@ -203,7 +214,13 @@ def run():
             peak_price = max(p["peak_price"], live_price, entry_price)
             p["peak_price"] = peak_price
             peak_roi = round((peak_price - entry_price) / entry_price * 100, 2)
+            p["peak_roi_pct"] = peak_roi
             p["max_drawdown_pct"] = round(min(p["max_drawdown_pct"], min(0.0, roi)), 2)
+
+            hist = list(p.get("roi_history") or [])
+            hist.append(roi)
+            p["roi_history"] = hist[-12:]
+            p["trend_status"] = _classify_trend_status(roi, p["roi_history"])
 
             rois.append(roi)
             type_buckets.setdefault(p["project_type"], []).append(roi)
@@ -214,10 +231,10 @@ def run():
                 worst_pick = (f"${sym} ({roi:+.1f}%)", roi)
 
             bucket = _age_bucket(p["found_at"])
-            outcome_tag = "🏆盈利金狗" if roi >= 10 else ("🩸追高回撤/亏损" if roi <= -6 else "⏳震荡蓄势")
+            outcome_tag = "🏆盈利金狗" if roi >= 10 else ("🩸回撤亏损" if roi <= -6 else "⏳震荡蓄势")
             performance_summary.append(
                 f"- [{outcome_tag}|{bucket}] ${sym} ({p['project_type']}): 当前 {roi:+.2f}% (峰值 {peak_roi:+.1f}% / 回撤 {p['max_drawdown_pct']:+.1f}%) | "
-                f"入选24h涨幅: {p['chg_24h']:+.1f}% | 市值: ${p['mc_wan']:.1f}万 | 买盘: {p['buy_ratio']:.1f}% | 窗口: {p['entry_timing']}"
+                f"入选24h涨幅: {p['chg_24h']:+.1f}% | 市值: ${p['mc_wan']:.1f}万 | 买盘: {p['buy_ratio']:.1f}%"
             )
 
     for r in alpha_records[:15]:
@@ -246,7 +263,7 @@ def run():
     now_str = datetime.now(tz_bj).strftime("%Y-%m-%d %H:%M")
 
     if not performance_summary:
-        log.info("尚无历史持仓样本可回测，初始化 V7.0 进化参数。")
+        log.info("尚无历史持仓样本可回测，初始化 V7.1 进化参数。")
         local_data["projects"] = projects
         local_data["evolution_state"] = evo_state
         notifier.save_local_db(local_data)
@@ -264,7 +281,7 @@ def run():
 
     prompt = f"""
 你是加密量化基金的首席进化架构师 (Self-Evolver Agent)。
-目标：在实战中持续进行策略归因与自我迭代，追求**高胜率与高盈亏比（赔率）的完美平衡**！
+目标：在实战中持续进行策略归因与自我迭代，动态调整市值区间（初始 5万~500万）与弹性动量上限，追求**高胜率与高盈亏比（赔率）的完美平衡**！
 
 【实盘回测核心指标】
 - 回测样本：{len(rois)} 个 | 胜率：{metrics['win_rate_pct']}% | 平均收益：{metrics['avg_roi_pct']:+.2f}%
@@ -279,27 +296,28 @@ def run():
 当前五维权重：{curr_weights}
 
 请深度归因并输出纯 JSON 格式：
-1. 动态调整 `guardrails`（边界：max_meme_mc_wan 400~2000，max_narrative_mc_wan 1500~6000，max_24h_pump_limit 35~80，sweet_spot_24h_max 18~42，min_buy_ratio_pct 52.0~58.0，min_score_threshold 66.0~75.0）。
+1. 动态调整 `guardrails`（边界：min_mc_wan 3~25，max_meme_mc_wan 200~1500，max_narrative_mc_wan 300~2000，max_24h_pump_limit 50~250，sweet_spot_24h_max 25~65，min_buy_ratio_pct 51.0~58.0，min_score_threshold 65.0~75.0）。
 2. 微调 5 项评分权重（之和必须为 1.00）。
 3. 提炼 3 条一针见血的 `tactical_rules`。
 
 {{
   "guardrails": {{
-    "max_meme_mc_wan": 1000.0,
-    "max_narrative_mc_wan": 4000.0,
-    "max_24h_pump_limit": 52.0,
-    "sweet_spot_24h_max": 30.0,
-    "min_buy_ratio_pct": 54.5,
-    "min_score_threshold": 69.0
+    "min_mc_wan": 5.0,
+    "max_meme_mc_wan": 500.0,
+    "max_narrative_mc_wan": 500.0,
+    "max_24h_pump_limit": 120.0,
+    "sweet_spot_24h_max": 48.0,
+    "min_buy_ratio_pct": 53.0,
+    "min_score_threshold": 68.0
   }},
   "weights": {{
-    "early_timing": 0.32,
-    "buy_pressure": 0.26,
-    "mc_odds": 0.22,
-    "track_heat": 0.12,
-    "fundamentals": 0.08
+    "early_timing": 0.30,
+    "buy_pressure": 0.25,
+    "mc_odds": 0.20,
+    "track_heat": 0.15,
+    "fundamentals": 0.10
   }},
-  "evolution_reason": "用90字以内总结本轮策略归因、盈亏比变化及参数进化逻辑",
+  "evolution_reason": "用90字以内总结本轮策略归因、盈亏比变化及市值/动量参数自我反思调整逻辑",
   "tactical_rules": [
     "铁律1：...",
     "铁律2：...",
@@ -314,12 +332,13 @@ def run():
     if isinstance(parsed, dict) and isinstance(parsed.get("guardrails"), dict):
         g = parsed["guardrails"]
         evo_state["guardrails"] = {
-            "max_meme_mc_wan": _clamp(g.get("max_meme_mc_wan", 1200), 400, 2000),
-            "max_narrative_mc_wan": _clamp(g.get("max_narrative_mc_wan", 4000), 1500, 6000),
-            "max_24h_pump_limit": _clamp(g.get("max_24h_pump_limit", 58), 35, 80),
-            "sweet_spot_24h_max": _clamp(g.get("sweet_spot_24h_max", 32), 18, 42),
-            "min_buy_ratio_pct": _clamp(g.get("min_buy_ratio_pct", 54.0), 52.0, 58.0),
-            "min_score_threshold": _clamp(g.get("min_score_threshold", 68.5), 66.0, 75.0),
+            "min_mc_wan": _clamp(g.get("min_mc_wan", 5.0), 3.0, 25.0),
+            "max_meme_mc_wan": _clamp(g.get("max_meme_mc_wan", 500.0), 200.0, 1500.0),
+            "max_narrative_mc_wan": _clamp(g.get("max_narrative_mc_wan", 500.0), 300.0, 2000.0),
+            "max_24h_pump_limit": _clamp(g.get("max_24h_pump_limit", 120.0), 50.0, 250.0),
+            "sweet_spot_24h_max": _clamp(g.get("sweet_spot_24h_max", 48.0), 25.0, 65.0),
+            "min_buy_ratio_pct": _clamp(g.get("min_buy_ratio_pct", 53.0), 51.0, 58.0),
+            "min_score_threshold": _clamp(g.get("min_score_threshold", 68.0), 65.0, 75.0),
         }
 
         if isinstance(parsed.get("weights"), dict):
@@ -339,7 +358,7 @@ def run():
         evo_state["generation"] = int(evo_state.get("generation", 1)) + 1
         evolved_successfully = True
     else:
-        log.warning("LLM 进化参数解析失败或未配置 API Key，保留当前 Gen #%s 参数，仅更新回测归因指标。", evo_state.get("generation", 1))
+        log.warning("LLM 进化参数解析失败或未配置 API Key，保留当前 Gen #%s 参数，仅更新走势与回测归因。", evo_state.get("generation", 1))
 
     evo_state["last_evolved_at"] = now_str
     evo_state["win_rate_pct"] = metrics["win_rate_pct"]
