@@ -6,7 +6,7 @@
     },
     "vc_media": {
       "ok": true,
-      "msg": "正常 (实时捕获 8 条热搜、TVL与融资情报)"
+      "msg": "正常 (实时捕获 11 条热搜、TVL与融资情报)"
     },
     "llm": {
       "ok": false,
@@ -53,20 +53,23 @@
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Entertainment",
-      "word": "#Entertainment",
+      "keyword": "#Robinhood Chain St",
+      "word": "#Robinhood Chain St",
       "heat": 82,
       "reason": "板块量能温和放大，早期资金净流入居前"
     }
   ],
   "vc_news": [
-    "🔥 [全网热搜飙升] Bitcoin($BTC), Pudgy Penguins($PENGU), Pearl($PEARL), XRP($XRP), Solana($SOL), Venice Token($VVV), Hyperliquid($HYPE), Zcash($ZEC)",
-    "🌊 [链上TVL异动] Blast Bridge (Canonical Bridge) TVL 7日激增 +1653.2% 至 $26.3M",
-    "🌊 [链上TVL异动] Unichain Bridge (Canonical Bridge) TVL 7日激增 +1472.4% 至 $32.8M",
+    "🔥 [全网热搜飙升] Bitcoin($BTC), Pudgy Penguins($PENGU), Pearl($PEARL), Shiba Inu($SHIB), Zcash($ZEC), Solana($SOL), Venice Token($VVV), XRP($XRP)",
+    "🌊 [链上TVL异动] Blast Bridge (Canonical Bridge) TVL 7日激增 +1672.0% 至 $26.4M",
+    "🌊 [链上TVL异动] Unichain Bridge (Canonical Bridge) TVL 7日激增 +1486.2% 至 $33.1M",
     "🌊 [链上TVL异动] TheDeep (Liquidity Manager) TVL 7日激增 +176.8% 至 $10.4M",
     "🌊 [链上TVL异动] SunSwap V4 (Dexs) TVL 7日激增 +89.2% 至 $117.6M",
-    "📰 [媒体快讯] 具身机器人公司至简动力融资1亿美元，蚂蚁集团领投",
-    "📰 [媒体快讯] 机器人AI初创公司Embo完成1.1亿美元种子轮融资，a16z领投，英伟达等跟投",
+    "📰 [媒体快讯] 以太坊基金会将协议安全团队规模扩大一倍，以应对量子与AI威胁",
+    "📰 [媒体快讯] 加密市场小幅上涨，Meme板块涨超3%，仅AI 板块小幅下跌",
+    "📰 [媒体快讯] 美国 ZEC 现货 ETF 单日净流入 462.62 万美元，NEAR 净流出 62.80 万美元",
+    "📰 [媒体快讯] 美国 XRP 现货 ETF 单日总净流出 249.00 万美元",
+    "📰 [媒体快讯] 美国 SOL 现货 ETF 单日总净流出 382.80 万美元",
     "📰 [媒体快讯] BTCS offloads $44M in ETH to reduce DeFi debt amid market downturn"
   ],
   "tracks": [
@@ -74,13 +77,13 @@
       "id": "bstocks-ecosystem",
       "name": "bStocks Ecosystem",
       "source": "🔥早期资金点火",
-      "change_24h": 15.48,
+      "change_24h": 16.65,
       "reason": "板块成交放量启动，中小市值标的弹性极佳",
       "status": "已批准",
       "赛道ID": "bstocks-ecosystem",
       "赛道名称": "bStocks Ecosystem",
       "发现来源": "🔥早期资金点火",
-      "24h涨幅(%)": 15.48,
+      "24h涨幅(%)": 16.65,
       "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
       "人工状态": "允许深挖"
     },
@@ -88,13 +91,13 @@
       "id": "made-in-usa",
       "name": "Made in USA",
       "source": "🔥早期资金点火",
-      "change_24h": 13.8,
+      "change_24h": 13.62,
       "reason": "板块成交放量启动，中小市值标的弹性极佳",
       "status": "已批准",
       "赛道ID": "made-in-usa",
       "赛道名称": "Made in USA",
       "发现来源": "🔥早期资金点火",
-      "24h涨幅(%)": 13.8,
+      "24h涨幅(%)": 13.62,
       "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
       "人工状态": "允许深挖"
     },
@@ -102,13 +105,13 @@
       "id": "adventure-games",
       "name": "Adventure Games",
       "source": "🔥早期资金点火",
-      "change_24h": 13.02,
+      "change_24h": 12.5,
       "reason": "板块成交放量启动，中小市值标的弹性极佳",
       "status": "已批准",
       "赛道ID": "adventure-games",
       "赛道名称": "Adventure Games",
       "发现来源": "🔥早期资金点火",
-      "24h涨幅(%)": 13.02,
+      "24h涨幅(%)": 12.5,
       "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
       "人工状态": "允许深挖"
     },
@@ -116,13 +119,13 @@
       "id": "lsdfi",
       "name": "LSDFi",
       "source": "🔥早期资金点火",
-      "change_24h": 12.58,
+      "change_24h": 11.38,
       "reason": "板块成交放量启动，中小市值标的弹性极佳",
       "status": "已批准",
       "赛道ID": "lsdfi",
       "赛道名称": "LSDFi",
       "发现来源": "🔥早期资金点火",
-      "24h涨幅(%)": 12.58,
+      "24h涨幅(%)": 11.38,
       "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
       "人工状态": "允许深挖"
     },
@@ -185,6 +188,67 @@
   ],
   "projects": [
     {
+      "name": "Fiona the Hippo",
+      "symbol": "FIONA",
+      "chain": "solana",
+      "contract": "B34nXKzCgsJb9ChLuSHPRpXLE3WFSWyeT8Cqkzzmpump",
+      "price": 0.003985238982280595,
+      "mc_usd": 3921486.10362049,
+      "mc_fdv_ratio": 100.0,
+      "liq_usd": 211676.4119,
+      "vol_24h": 3989878.48633661,
+      "vol_1h": 244868.292654002,
+      "chg_1h": 15.384,
+      "chg_6h": 42.541,
+      "chg_24h": 227.461,
+      "buys_24h": 32621,
+      "sells_24h": 24738,
+      "buy_ratio": 56.9,
+      "pool_age_hours": 101.78732714871566,
+      "age_label": "4.2天(次新轮动)",
+      "source": "Gecko_trending_pools",
+      "dex_url": "https://www.geckoterminal.com/solana/pools/DjbLtX1HRGZZrJgJ7CwTX6SN3D7tBLiytkGwomBUwTVB",
+      "project_type": "🏛️ 叙事价值",
+      "track": "Solana 早期新盘",
+      "entry_timing": "💎 强势接力加速",
+      "timing_score": 77.0,
+      "mc_wan": 392.15,
+      "liq_wan": 21.17,
+      "vol_wan": 398.99,
+      "turnover_24h": 101.7,
+      "quant_score": 78.5,
+      "vc_hits": [],
+      "coingecko_id": "fiona-the-hippo",
+      "ath_drop": -15.8,
+      "commits_4w": 0,
+      "security_status": "RugCheck安全通过",
+      "news_context": "Fiona the Hippo Coin Price and Market Cap: Trade FIONA on Solana | Solana Compass | Fiona the Hippo Price Today: Live FI",
+      "cv_score": 78.0,
+      "cv_signals": [
+        "链上真实放量买盘",
+        "合约安全审计通过",
+        "外部催化/开发活跃"
+      ],
+      "cv_confidence": "高置信度(3维交叉)",
+      "position_tier": "轻仓试错(1%)",
+      "stop_loss_pct": -18.0,
+      "take_profit_pct": 80.0,
+      "score": 81.7,
+      "report": "FIONA新盘强接力，合约安全，但流动性低，需警惕高位派发风险，轻仓试错，止盈止损位明确。",
+      "catalyst": "Solana新盘，强接力加速，真实买盘",
+      "found_at": "2026-11-24 10:40",
+      "recommended_price": 0.003985238982280595,
+      "live_price": 0.003985238982280595,
+      "peak_price": 0.003985238982280595,
+      "peak_roi_pct": 0.0,
+      "live_roi_pct": 0.0,
+      "max_drawdown_pct": 0.0,
+      "roi_history": [
+        0.0
+      ],
+      "trend_status": "新入选"
+    },
+    {
       "name": "Jensen Is Back",
       "symbol": "JENSEN",
       "chain": "solana",
@@ -233,15 +297,16 @@
       "catalyst": "Solana新盘首日强势，链上真实放量",
       "found_at": "2026-11-24 10:20",
       "recommended_price": 0.0007387,
-      "live_price": 0.0007387,
-      "peak_price": 0.0007387,
-      "peak_roi_pct": 0.0,
-      "live_roi_pct": 0.0,
+      "live_price": 0.000841,
+      "peak_price": 0.000841,
+      "peak_roi_pct": 13.85,
+      "live_roi_pct": 13.85,
       "max_drawdown_pct": 0.0,
       "roi_history": [
-        0.0
+        0.0,
+        13.85
       ],
-      "trend_status": "新入选",
+      "trend_status": "稳步走强",
       "ath_drop": 0.0,
       "commits_4w": 0
     },
@@ -295,15 +360,16 @@
       "catalyst": "链上真实放量，多平台热点共振",
       "found_at": "2026-11-24 10:20",
       "recommended_price": 0.001447,
-      "live_price": 0.001447,
-      "peak_price": 0.001447,
-      "peak_roi_pct": 0.0,
-      "live_roi_pct": 0.0,
+      "live_price": 0.001494,
+      "peak_price": 0.001494,
+      "peak_roi_pct": 3.25,
+      "live_roi_pct": 3.25,
       "max_drawdown_pct": 0.0,
       "roi_history": [
-        0.0
+        0.0,
+        3.25
       ],
-      "trend_status": "新入选",
+      "trend_status": "企稳反弹",
       "ath_drop": 0.0,
       "commits_4w": 0
     },
@@ -358,15 +424,16 @@
       "catalyst": "早期Eth新盘，强动量，真实买盘",
       "found_at": "2026-11-24 10:20",
       "recommended_price": 0.00392333380521786,
-      "live_price": 0.00392333380521786,
+      "live_price": 0.003828253689,
       "peak_price": 0.00392333380521786,
       "peak_roi_pct": 0.0,
-      "live_roi_pct": 0.0,
-      "max_drawdown_pct": 0.0,
+      "live_roi_pct": -2.42,
+      "max_drawdown_pct": -2.42,
       "roi_history": [
-        0.0
+        0.0,
+        -2.42
       ],
-      "trend_status": "新入选"
+      "trend_status": "窄幅震荡"
     },
     {
       "name": "SpaceX Inu",
@@ -402,13 +469,14 @@
       "catalyst": "SpaceX Inu Price, SI Price, Live Charts, and ",
       "found_at": "2026-11-22 20:34",
       "recommended_price": 1.61405647681083e-09,
-      "live_price": 1.645e-09,
-      "live_roi_pct": 1.92,
+      "live_price": 1.624e-09,
+      "live_roi_pct": 0.62,
       "peak_price": 1.645e-09,
       "peak_roi_pct": 1.92,
       "max_drawdown_pct": 0.0,
       "roi_history": [
-        1.92
+        1.92,
+        0.62
       ],
       "trend_status": "窄幅震荡",
       "turnover_24h": 8.9,
@@ -457,13 +525,14 @@
       "catalyst": "早期温和放量，买盘占比高",
       "found_at": "2026-11-22 20:34",
       "recommended_price": 0.0007008488917718866,
-      "live_price": 0.000233,
-      "live_roi_pct": -66.75,
+      "live_price": 0.0002415,
+      "live_roi_pct": -65.54,
       "peak_price": 0.0007008488917718866,
       "peak_roi_pct": 0.0,
       "max_drawdown_pct": -66.75,
       "roi_history": [
-        -66.75
+        -66.75,
+        -65.54
       ],
       "trend_status": "破位回撤",
       "turnover_24h": 295.9,
@@ -512,13 +581,14 @@
       "catalyst": "Solana Compass 推荐及温和放量突破",
       "found_at": "2026-11-22 20:34",
       "recommended_price": 0.0028476049332956978,
-      "live_price": 0.001619,
-      "live_roi_pct": -43.15,
+      "live_price": 0.001604,
+      "live_roi_pct": -43.67,
       "peak_price": 0.0028476049332956978,
       "peak_roi_pct": 0.0,
-      "max_drawdown_pct": -43.15,
+      "max_drawdown_pct": -43.67,
       "roi_history": [
-        -43.15
+        -43.15,
+        -43.67
       ],
       "trend_status": "破位回撤",
       "turnover_24h": 68.2,
@@ -567,13 +637,14 @@
       "catalyst": "Base公链新盘，NVIDIA关联，温和放量",
       "found_at": "2026-11-22 06:45",
       "recommended_price": 129.777275335408,
-      "live_price": 164.82,
-      "live_roi_pct": 27.0,
-      "peak_price": 164.82,
-      "peak_roi_pct": 27.0,
+      "live_price": 165.25,
+      "live_roi_pct": 27.33,
+      "peak_price": 165.25,
+      "peak_roi_pct": 27.33,
       "max_drawdown_pct": 0.0,
       "roi_history": [
-        27.0
+        27.0,
+        27.33
       ],
       "trend_status": "主升浪",
       "turnover_24h": 174.1,
@@ -623,13 +694,14 @@
       "catalyst": "Solana Compass & GSD Price Today, Live",
       "found_at": "2026-11-21 21:38",
       "recommended_price": 0.001955,
-      "live_price": 3.76e-05,
-      "live_roi_pct": -98.08,
+      "live_price": 3.368286631e-06,
+      "live_roi_pct": -99.83,
       "peak_price": 0.001955,
       "peak_roi_pct": 0.0,
-      "max_drawdown_pct": -98.08,
+      "max_drawdown_pct": -99.83,
       "roi_history": [
-        -98.08
+        -98.08,
+        -99.83
       ],
       "trend_status": "破位回撤",
       "turnover_24h": 168.1,
@@ -679,13 +751,14 @@
       "catalyst": "早期温和放量，买盘占比高",
       "found_at": "2026-11-21 21:38",
       "recommended_price": 0.002457,
-      "live_price": 0.001485,
-      "live_roi_pct": -39.56,
+      "live_price": 0.001478,
+      "live_roi_pct": -39.85,
       "peak_price": 0.002457,
       "peak_roi_pct": 0.0,
-      "max_drawdown_pct": -39.56,
+      "max_drawdown_pct": -39.85,
       "roi_history": [
-        -39.56
+        -39.56,
+        -39.85
       ],
       "trend_status": "破位回撤",
       "turnover_24h": 16.0,
@@ -734,13 +807,14 @@
       "catalyst": "Solana Compass 上线，市场关注度提升",
       "found_at": "2026-11-21 12:38",
       "recommended_price": 0.001797990732075786,
-      "live_price": 0.001351,
-      "live_roi_pct": -24.86,
+      "live_price": 0.001327,
+      "live_roi_pct": -26.2,
       "peak_price": 0.001797990732075786,
       "peak_roi_pct": 0.0,
-      "max_drawdown_pct": -24.86,
+      "max_drawdown_pct": -26.2,
       "roi_history": [
-        -24.86
+        -24.86,
+        -26.2
       ],
       "trend_status": "破位回撤",
       "turnover_24h": 48.5,
@@ -790,13 +864,14 @@
       "catalyst": "首日新盘强势点火，每日交易量达20美元",
       "found_at": "2026-11-20 16:57",
       "recommended_price": 0.0001641,
-      "live_price": 2.214e-06,
-      "live_roi_pct": -98.65,
+      "live_price": 2.178958901e-06,
+      "live_roi_pct": -98.67,
       "peak_price": 0.0001641,
       "peak_roi_pct": 0.0,
-      "max_drawdown_pct": -98.65,
+      "max_drawdown_pct": -98.67,
       "roi_history": [
-        -98.65
+        -98.65,
+        -98.67
       ],
       "trend_status": "破位回撤",
       "turnover_24h": 2240.7,
@@ -846,13 +921,14 @@
       "catalyst": "AI Agent概念，早期温和上涨，买盘强劲",
       "found_at": "2026-11-20 07:13",
       "recommended_price": 0.0008115,
-      "live_price": 0.000939,
-      "live_roi_pct": 15.71,
+      "live_price": 0.0009369,
+      "live_roi_pct": 15.45,
       "peak_price": 0.000939,
       "peak_roi_pct": 15.71,
       "max_drawdown_pct": 0.0,
       "roi_history": [
-        15.71
+        15.71,
+        15.45
       ],
       "trend_status": "稳步走强",
       "turnover_24h": 6.5,
@@ -907,6 +983,7 @@
       "peak_roi_pct": 0.0,
       "max_drawdown_pct": -16.98,
       "roi_history": [
+        -16.98,
         -16.98
       ],
       "trend_status": "破位回撤",
@@ -1012,13 +1089,14 @@
       "catalyst": "早期AI赛道潜力，温和放量上涨",
       "found_at": "2026-11-19 23:03",
       "recommended_price": 0.004871,
-      "live_price": 0.003384,
-      "live_roi_pct": -30.53,
+      "live_price": 0.003382,
+      "live_roi_pct": -30.57,
       "peak_price": 0.004871,
       "peak_roi_pct": 0.0,
-      "max_drawdown_pct": -30.53,
+      "max_drawdown_pct": -30.57,
       "roi_history": [
-        -30.53
+        -30.53,
+        -30.57
       ],
       "trend_status": "破位回撤",
       "turnover_24h": 0.7,
@@ -1068,13 +1146,14 @@
       "catalyst": "AI Agent 2025趋势，Virtuals生态深度解析",
       "found_at": "2026-11-19 13:02",
       "recommended_price": 0.0001475,
-      "live_price": 5.63e-05,
-      "live_roi_pct": -61.83,
+      "live_price": 5.461e-05,
+      "live_roi_pct": -62.98,
       "peak_price": 0.0001475,
       "peak_roi_pct": 0.0,
-      "max_drawdown_pct": -61.83,
+      "max_drawdown_pct": -62.98,
       "roi_history": [
-        -61.83
+        -61.83,
+        -62.98
       ],
       "trend_status": "破位回撤",
       "turnover_24h": 37.1,
@@ -1124,13 +1203,14 @@
       "catalyst": "Solana Compass 推荐及社区热度",
       "found_at": "2026-11-19 01:52",
       "recommended_price": 0.0001574,
-      "live_price": 6.929e-05,
-      "live_roi_pct": -55.98,
+      "live_price": 8.457260138e-06,
+      "live_roi_pct": -94.63,
       "peak_price": 0.0001574,
       "peak_roi_pct": 0.0,
-      "max_drawdown_pct": -55.98,
+      "max_drawdown_pct": -94.63,
       "roi_history": [
-        -55.98
+        -55.98,
+        -94.63
       ],
       "trend_status": "破位回撤",
       "turnover_24h": 46.1,
@@ -1179,13 +1259,14 @@
       "catalyst": "Solana AI Agent 新币上线，社区热度高",
       "found_at": "2026-11-19 01:52",
       "recommended_price": 0.006881567337829071,
-      "live_price": 90.5,
-      "live_roi_pct": 1315007.38,
-      "peak_price": 90.5,
-      "peak_roi_pct": 1315007.38,
+      "live_price": 0.009211,
+      "live_roi_pct": 33.85,
+      "peak_price": 0.009211,
+      "peak_roi_pct": 33.85,
       "max_drawdown_pct": 0.0,
       "roi_history": [
-        1315007.38
+        0.0,
+        33.85
       ],
       "trend_status": "主升浪",
       "turnover_24h": 26.9,
@@ -1235,15 +1316,16 @@
       "catalyst": "Dr Nishant Kumar 推荐及 Solana Explore 新币空投",
       "found_at": "2026-11-19 01:52",
       "recommended_price": 0.003431,
-      "live_price": 0.00412,
-      "live_roi_pct": 20.08,
-      "peak_price": 0.00412,
-      "peak_roi_pct": 20.08,
+      "live_price": 0.004369,
+      "live_roi_pct": 27.34,
+      "peak_price": 0.004369,
+      "peak_roi_pct": 27.34,
       "max_drawdown_pct": 0.0,
       "roi_history": [
-        20.08
+        20.08,
+        27.34
       ],
-      "trend_status": "稳步走强",
+      "trend_status": "主升浪",
       "turnover_24h": 8.6,
       "cv_score": 65.0,
       "cv_signals": [],
@@ -1291,13 +1373,14 @@
       "catalyst": "AI Agent概念升温，市场关注度提升",
       "found_at": "2026-11-17 23:30",
       "recommended_price": 0.0002809,
-      "live_price": 0.0001904,
-      "live_roi_pct": -32.22,
+      "live_price": 0.000185,
+      "live_roi_pct": -34.14,
       "peak_price": 0.0002809,
       "peak_roi_pct": 0.0,
-      "max_drawdown_pct": -32.22,
+      "max_drawdown_pct": -34.14,
       "roi_history": [
-        -32.22
+        -32.22,
+        -34.14
       ],
       "trend_status": "破位回撤",
       "turnover_24h": 326.7,
@@ -1456,13 +1539,14 @@
       "catalyst": "AI Debt Relief Tool Launch",
       "found_at": "2026-11-16 06:26",
       "recommended_price": 8.15969463872887e-05,
-      "live_price": 9.593e-05,
-      "live_roi_pct": 17.57,
+      "live_price": 9.559e-05,
+      "live_roi_pct": 17.15,
       "peak_price": 9.593e-05,
       "peak_roi_pct": 17.57,
       "max_drawdown_pct": 0.0,
       "roi_history": [
-        17.57
+        17.57,
+        17.15
       ],
       "trend_status": "稳步走强",
       "turnover_24h": 1.2,
@@ -1514,11 +1598,11 @@
       "recommended_price": 0.0002728,
       "live_price": 0.258,
       "live_roi_pct": 94474.78,
-      "peak_price": 0.258,
-      "peak_roi_pct": 94474.78,
+      "peak_price": 0.0002728,
+      "peak_roi_pct": 0.0,
       "max_drawdown_pct": 0.0,
       "roi_history": [
-        94474.78
+        0.0
       ],
       "trend_status": "主升浪",
       "turnover_24h": 301.4,
@@ -1569,11 +1653,11 @@
       "recommended_price": 0.00039683354322626733,
       "live_price": 0.1175,
       "live_roi_pct": 29509.39,
-      "peak_price": 0.1175,
-      "peak_roi_pct": 29509.39,
+      "peak_price": 0.00039683354322626733,
+      "peak_roi_pct": 0.0,
       "max_drawdown_pct": 0.0,
       "roi_history": [
-        29509.39
+        0.0
       ],
       "trend_status": "主升浪",
       "turnover_24h": 1078.1,
@@ -1732,13 +1816,14 @@
       "catalyst": "早期温和放量，买盘强劲",
       "found_at": "2026-11-14 11:27",
       "recommended_price": 0.0010824948623174102,
-      "live_price": 0.0001168,
-      "live_roi_pct": -89.21,
+      "live_price": 0.0001157,
+      "live_roi_pct": -89.31,
       "peak_price": 0.0010824948623174102,
       "peak_roi_pct": 0.0,
-      "max_drawdown_pct": -89.21,
+      "max_drawdown_pct": -89.31,
       "roi_history": [
-        -89.21
+        -89.21,
+        -89.31
       ],
       "trend_status": "破位回撤",
       "turnover_24h": 347.3,
@@ -1842,13 +1927,14 @@
       "catalyst": "Solana 新币热度，DexTrading 流动性提升",
       "found_at": "2026-11-14 00:53",
       "recommended_price": 0.0010333894231471588,
-      "live_price": 0.0004407,
-      "live_roi_pct": -57.35,
+      "live_price": 0.0004361,
+      "live_roi_pct": -57.8,
       "peak_price": 0.0010333894231471588,
       "peak_roi_pct": 0.0,
-      "max_drawdown_pct": -57.35,
+      "max_drawdown_pct": -57.8,
       "roi_history": [
-        -57.35
+        -57.35,
+        -57.8
       ],
       "trend_status": "破位回撤",
       "turnover_24h": 62.5,
@@ -1897,13 +1983,14 @@
       "catalyst": "Solana生态新项目，Phantom钱包支持",
       "found_at": "2026-11-14 00:53",
       "recommended_price": 0.019579518624442162,
-      "live_price": 0.0145,
-      "live_roi_pct": -25.94,
+      "live_price": 0.01433,
+      "live_roi_pct": -26.81,
       "peak_price": 0.019579518624442162,
       "peak_roi_pct": 0.0,
-      "max_drawdown_pct": -25.94,
+      "max_drawdown_pct": -26.81,
       "roi_history": [
-        -25.94
+        -25.94,
+        -26.81
       ],
       "trend_status": "破位回撤",
       "turnover_24h": 1.7,
@@ -1952,13 +2039,14 @@
       "catalyst": "新Solana Meme Token，初筛信息积极",
       "found_at": "2026-11-13 16:21",
       "recommended_price": 0.0018816462693285313,
-      "live_price": 0.0003258,
-      "live_roi_pct": -82.69,
+      "live_price": 0.0003343,
+      "live_roi_pct": -82.23,
       "peak_price": 0.0018816462693285313,
       "peak_roi_pct": 0.0,
       "max_drawdown_pct": -82.69,
       "roi_history": [
-        -82.69
+        -82.69,
+        -82.23
       ],
       "trend_status": "破位回撤",
       "turnover_24h": 142.6,
@@ -2070,6 +2158,7 @@
       "peak_roi_pct": 0.0,
       "max_drawdown_pct": -85.75,
       "roi_history": [
+        -85.75,
         -85.75
       ],
       "trend_status": "破位回撤",
@@ -2115,13 +2204,14 @@
       "discovered_at": "2026-11-12 06:43",
       "contract": "DKYcjobF7HPtL9RyQBRdeRQ2iWvizpfbgWwPWNXdpump",
       "recommended_price": 0.006119104297913503,
-      "live_price": 0.00015233,
+      "live_price": 0.0001548,
       "peak_price": 0.006119104297913503,
       "peak_roi_pct": 0.0,
-      "live_roi_pct": -97.51,
+      "live_roi_pct": -97.47,
       "max_drawdown_pct": -97.51,
       "roi_history": [
-        -97.51
+        -97.51,
+        -97.47
       ],
       "trend_status": "破位回撤",
       "mc_usd": 5695100.0,
@@ -2301,13 +2391,14 @@
       "discovered_at": "2026-11-12 06:43",
       "contract": "0xe8ffd7e24187f72afb08d75b1bb13088a989a791",
       "recommended_price": 0.00473679172750509,
-      "live_price": 0.002404,
+      "live_price": 0.002401,
       "peak_price": 0.00473679172750509,
       "peak_roi_pct": 0.0,
-      "live_roi_pct": -49.25,
-      "max_drawdown_pct": -49.25,
+      "live_roi_pct": -49.31,
+      "max_drawdown_pct": -49.31,
       "roi_history": [
-        -49.25
+        -49.25,
+        -49.31
       ],
       "trend_status": "破位回撤",
       "mc_usd": 4223500.0,
@@ -2363,13 +2454,14 @@
       "discovered_at": "2026-11-12 06:43",
       "contract": "9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump",
       "recommended_price": 0.0608090111757044,
-      "live_price": 0.03698,
+      "live_price": 0.03648,
       "peak_price": 0.0608090111757044,
       "peak_roi_pct": 0.0,
-      "live_roi_pct": -39.19,
-      "max_drawdown_pct": -39.19,
+      "live_roi_pct": -40.01,
+      "max_drawdown_pct": -40.01,
       "roi_history": [
-        -39.19
+        -39.19,
+        -40.01
       ],
       "trend_status": "破位回撤",
       "mc_usd": 61094300.0,
@@ -2399,20 +2491,20 @@
   "alert": {
     "title": "📡 趋势推演与龙头/黑马配置清单已更新",
     "content": "最新捕获赛道：bStocks Ecosystem, Made in USA, Adventure Games",
-    "time": "2026-11-24 10:20"
+    "time": "2026-11-24 10:40"
   },
   "vc_And_news": [
     {
       "type": "🔥 热搜飙升",
-      "title": "全网热搜飙升: Bitcoin($BTC), Pudgy Penguins($PENGU), Pearl($PEARL), XRP($XRP), Solana($SOL), Venice Token($VVV), Hyperliquid($HYPE), Zcash($ZEC)"
+      "title": "全网热搜飙升: Bitcoin($BTC), Pudgy Penguins($PENGU), Pearl($PEARL), Shiba Inu($SHIB), Zcash($ZEC), Solana($SOL), Venice Token($VVV), XRP($XRP)"
     },
     {
       "type": "🌊 TVL异动",
-      "title": "Blast Bridge (Canonical Bridge) TVL 7日激增 +1653.2% 至 $26.3M"
+      "title": "Blast Bridge (Canonical Bridge) TVL 7日激增 +1672.0% 至 $26.4M"
     },
     {
       "type": "🌊 TVL异动",
-      "title": "Unichain Bridge (Canonical Bridge) TVL 7日激增 +1472.4% 至 $32.8M"
+      "title": "Unichain Bridge (Canonical Bridge) TVL 7日激增 +1486.2% 至 $33.1M"
     },
     {
       "type": "🌊 TVL异动",
@@ -2424,11 +2516,23 @@
     },
     {
       "type": "📰 媒体快讯",
-      "title": "具身机器人公司至简动力融资1亿美元，蚂蚁集团领投"
+      "title": "以太坊基金会将协议安全团队规模扩大一倍，以应对量子与AI威胁"
     },
     {
       "type": "📰 媒体快讯",
-      "title": "机器人AI初创公司Embo完成1.1亿美元种子轮融资，a16z领投，英伟达等跟投"
+      "title": "加密市场小幅上涨，Meme板块涨超3%，仅AI 板块小幅下跌"
+    },
+    {
+      "type": "📰 媒体快讯",
+      "title": "美国 ZEC 现货 ETF 单日净流入 462.62 万美元，NEAR 净流出 62.80 万美元"
+    },
+    {
+      "type": "📰 媒体快讯",
+      "title": "美国 XRP 现货 ETF 单日总净流出 249.00 万美元"
+    },
+    {
+      "type": "📰 媒体快讯",
+      "title": "美国 SOL 现货 ETF 单日总净流出 382.80 万美元"
     },
     {
       "type": "📰 媒体快讯",
@@ -2467,56 +2571,56 @@
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Entertainment",
-      "word": "#Entertainment",
+      "keyword": "#Robinhood Chain St",
+      "word": "#Robinhood Chain St",
       "heat": 82,
       "reason": "板块量能温和放大，早期资金净流入居前"
     }
   ],
-  "updated_at": "2026-11-24 10:20",
+  "updated_at": "2026-11-24 10:40",
   "evolution_state": {
-    "generation": 2,
-    "last_evolved_at": "2026-11-24 10:18",
-    "win_rate_pct": 22.2,
-    "avg_roi_pct": 39925.63,
-    "payoff_ratio": 2718.87,
-    "expectancy_pct": 39925.57,
-    "total_tested": 36,
-    "best_pick": "$CLAUDIA (+1315007.4%)",
-    "worst_pick": "$TTWO (-100.0%)",
-    "attribution_summary": "🏛️ 叙事价值: 31笔, 胜率22.6%, 均益+46373.3%, 盈亏比3151.27 | 🐶 链上早期Meme/金狗: 4笔, 胜率25.0%, 均益-50.4%, 盈亏比0.45 | 🚀 叙事异动黑马: 1笔, 胜率0.0%, 均益-49.2%, 盈亏比0.5",
+    "generation": 3,
+    "last_evolved_at": "2026-11-24 10:38",
+    "win_rate_pct": 21.4,
+    "avg_roi_pct": -35.88,
+    "payoff_ratio": 0.39,
+    "expectancy_pct": -36.01,
+    "total_tested": 28,
+    "best_pick": "$CLAUDIA (+33.9%)",
+    "worst_pick": "$SHIT (-99.8%)",
+    "attribution_summary": "🏛️ 叙事价值: 25笔, 胜率24.0%, 中位-30.6%, 盈亏比0.4 | 🐶 链上早期Meme/金狗: 2笔, 胜率0.0%, 中位-68.7%, 盈亏比0.5 | 🚀 叙事异动黑马: 1笔, 胜率0.0%, 中位-49.3%, 盈亏比0.5",
     "guardrails": {
-      "min_mc_wan": 5.0,
-      "max_meme_mc_wan": 500.0,
-      "max_narrative_mc_wan": 500.0,
-      "max_24h_pump_limit": 120.0,
-      "sweet_spot_24h_max": 48.0,
-      "min_buy_ratio_pct": 53.0,
-      "min_score_threshold": 68.0
+      "min_mc_wan": 10.0,
+      "max_meme_mc_wan": 800.0,
+      "max_narrative_mc_wan": 600.0,
+      "max_24h_pump_limit": 150.0,
+      "sweet_spot_24h_max": 55.0,
+      "min_buy_ratio_pct": 55.0,
+      "min_score_threshold": 70.0
     },
     "weights": {
-      "early_timing": 0.3,
-      "buy_pressure": 0.25,
-      "mc_odds": 0.2,
-      "track_heat": 0.15,
-      "fundamentals": 0.1
+      "early_timing": 0.35,
+      "buy_pressure": 0.2,
+      "mc_odds": 0.15,
+      "track_heat": 0.1,
+      "fundamentals": 0.2
     },
-    "evolution_reason": "本轮策略归因于叙事价值和早期Meme/金狗的捕捉，盈亏比提升通过调整市值区间和弹性动量上限实现。",
+    "evolution_reason": "本轮策略归因于市场情绪波动，盈亏比下降，调整市值区间和动量上限以降低风险，微调权重以增强早期识别和基本面分析。",
     "tactical_rules": [
-      "铁律1：优先关注市值和动量平衡的优质项目。",
-      "铁律2：严格控制市值区间和动量上限以降低风险。",
-      "铁律3：强化对叙事价值和早期信号的识别能力。"
+      "铁律1：严格监控市场情绪和交易量，避免追高。",
+      "铁律2：重视早期识别和基本面分析，提高胜率。",
+      "铁律3：动态调整市值区间和动量上限，以适应市场变化。"
     ]
   },
   "trending_symbols": [
     "BTC",
     "PENGU",
     "PEARL",
-    "XRP",
+    "SHIB",
+    "ZEC",
     "SOL",
     "VVV",
-    "HYPE",
-    "ZEC"
+    "XRP"
   ],
   "vc_entities": [],
   "allocation_matrix": [
