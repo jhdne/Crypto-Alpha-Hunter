@@ -350,14 +350,17 @@ def classify_project_and_track(item: dict, approved_tracks: list, hot_keywords: 
 
 def assess_entry_position(item: dict, guardrails: dict, is_meme: bool) -> tuple:
     """
-    V7.1 弹性动量与结构化买点识别器：
-    取消死板的 68% 一刀切拦截，改为【动量结构 + 买盘强度 + 市值位置】综合评估。
+    V7.2 趋势收敛与反死猫跳买点识别器：
+    1. 拦截 6h 暴跌崩盘后的 1h 死猫跳诱多盘（如 6h -40%, 1h +27%）；
+    2. 奖励低振幅横盘蓄势 + 流动性厚实的稳健标的；
+    3. 保留弹性动量通道，允许买盘强劲的健康龙头接力。
     """
     chg_1h = item.get("chg_1h", 0.0)
     chg_6h = item.get("chg_6h", 0.0)
     chg_24h = item.get("chg_24h", 0.0)
     buy_ratio = item.get("buy_ratio", 50.0)
     mc_usd = item.get("mc_usd", 0.0)
+    liq_usd = item.get("liq_usd", 0.0)
     vol_24h = item.get("vol_24h", 0.0)
     vol_1h = item.get("vol_1h", 0.0)
     tx_count = int(item.get("buys_24h", 0)) + int(item.get("sells_24h", 0))
@@ -367,7 +370,7 @@ def assess_entry_position(item: dict, guardrails: dict, is_meme: bool) -> tuple:
     sweet_24h_max = float(guardrails.get("sweet_spot_24h_max", 48.0))
     min_buy_ratio = float(guardrails.get("min_buy_ratio_pct", 53.0))
 
-    # 0. 防刷单验真
+    # 0. 防刷单与停滞检查
     if tx_count >= 200 and vol_24h > 0 and (vol_24h / tx_count) < 15.0:
         return False, "", 0.0, f"疑似微额刷单(均笔${vol_24h / tx_count:.1f} < $15)"
     if pool_age_h > 2.0 and vol_1h <= 0 and vol_24h > 0:
@@ -377,39 +380,53 @@ def assess_entry_position(item: dict, guardrails: dict, is_meme: bool) -> tuple:
     if buy_ratio < min_buy_ratio:
         return False, "", 0.0, f"买盘占比偏弱({buy_ratio:.1f}% < {min_buy_ratio}%)"
 
-    # 2. 高位派发结构（1h 转跌且 24h 涨幅已高）
+    # 2. 铁律拦截：6h 深度暴跌（死猫跳诱多陷阱，严禁把暴跌反抽当点火）
+    if chg_6h < -15.0:
+        return False, "", 0.0, f"6h暴跌崩盘走势({chg_6h:+.1f}%)，拒绝接飞刀/死猫跳"
+    if chg_6h < -8.0 and chg_1h > 15.0:
+        return False, "", 0.0, f"下跌中继急拉诱多(6h{chg_6h:+.1f}%, 1h{chg_1h:+.1f}%)"
+
+    # 3. 高位派发结构（1h 转跌且 24h 涨幅已高）
     if chg_24h > 30.0 and chg_1h < -4.0:
         return False, "", 0.0, f"高位放量派发迹象(24h+{chg_24h:.1f}%, 1h{chg_1h:.1f}%)"
 
-    # 3. 弹性动量评估：高涨幅仅在伴随走弱/买盘不足或极端透支时拦截
+    # 4. 弹性动量评估：高涨幅仅在伴随走弱/买盘不足或极端透支时拦截
     if chg_24h > max_24h_pump and (chg_1h < 0.0 or buy_ratio < 56.0):
         return False, "", 0.0, f"涨幅过热且买盘衰减(24h+{chg_24h:.1f}%, 1h{chg_1h:+.1f}%, 买盘{buy_ratio:.1f}%)"
     if chg_24h > (max_24h_pump * 2.0) and mc_usd > 2000000:
         return False, "", 0.0, f"24h极端暴涨(+{chg_24h:.1f}%)且市值偏大，防流动性退出"
 
-    # 4. 1h 垂直插针过猛
-    if chg_1h > 45.0:
-        return False, "", 0.0, f"1h短线急拉过猛(+{chg_1h:.1f}%)，防冲高回落"
+    # 5. 1h 垂直插针过猛（浅池或负6h时更严格）
+    if chg_1h > 35.0 or (chg_1h > 22.0 and (liq_usd < 100000 or chg_6h < 0)):
+        return False, "", 0.0, f"1h脉冲过猛({chg_1h:+.1f}%)，防冲高回落"
 
-    # 5. 持续阴跌无承接
-    if chg_24h < -25.0 or (chg_6h < -15.0 and chg_1h < 0):
+    # 6. 持续阴跌无承接
+    if chg_24h < -22.0 or (chg_6h < -10.0 and chg_1h < 0):
         return False, "", 0.0, f"趋势走弱阴跌(24h {chg_24h:.1f}%)"
 
     # ========== 黄金买点分类与结构化打分 ==========
-    if pool_age_h <= 48.0 and -5.0 <= chg_24h <= sweet_24h_max and chg_1h >= 0.8 and buy_ratio >= 55.0:
-        return True, "🟢 极早期点火窗口", 95.0, ""
+    # 形态 A：低振幅收敛蓄势（类似稳健主升浪前夜：波动收敛、流动性充沛、6h/24h稳健）
+    if -5.0 <= chg_24h <= 18.0 and -4.0 <= chg_6h <= 10.0 and 0.0 <= chg_1h <= 10.0 and liq_usd >= 60000:
+        return True, "💎 低波蓄势待发", 94.0, ""
 
-    if -2.0 <= chg_24h <= 30.0 and 1.2 <= chg_1h <= 20.0 and buy_ratio >= 54.5:
-        return True, "🟢 底部放量首阳", 92.0, ""
+    # 形态 B：新币极早期点火窗口
+    if pool_age_h <= 48.0 and -5.0 <= chg_24h <= sweet_24h_max and 0.8 <= chg_1h <= 18.0 and chg_6h >= -6.0 and buy_ratio >= 55.0:
+        return True, "🟢 极早期点火窗口", 92.0, ""
 
-    if -12.0 <= chg_24h <= 35.0 and -10.0 <= chg_6h <= 2.0 and 0.5 <= chg_1h <= 14.0 and buy_ratio >= 55.0:
-        return True, "💎 缩量回调企稳", 88.0, ""
+    # 形态 C：底部温和放量首阳
+    if -2.0 <= chg_24h <= 30.0 and -5.0 <= chg_6h <= 15.0 and 1.2 <= chg_1h <= 18.0 and buy_ratio >= 54.5:
+        return True, "🟢 底部放量首阳", 90.0, ""
 
-    if 0.0 <= chg_24h <= sweet_24h_max and 0.5 <= chg_1h <= 25.0:
+    # 形态 D：强势洗盘缩量回调企稳
+    if -12.0 <= chg_24h <= 35.0 and -12.0 <= chg_6h <= 2.0 and 0.5 <= chg_1h <= 12.0 and buy_ratio >= 55.0:
+        return True, "💎 缩量回调企稳", 86.0, ""
+
+    # 形态 E：右侧温和突破
+    if 0.0 <= chg_24h <= sweet_24h_max and 0.5 <= chg_1h <= 20.0 and chg_6h >= -5.0:
         return True, "🚀 右侧温和突破", 84.0, ""
 
-    if chg_24h > sweet_24h_max and chg_1h >= 0.5 and buy_ratio >= 56.0:
-        # 强势接力加速期：允许高涨幅但给予略保守的位置分
+    # 形态 F：强势接力加速期
+    if chg_24h > sweet_24h_max and chg_1h >= 0.5 and chg_6h >= 0.0 and buy_ratio >= 56.0:
         return True, "⚡ 强势接力加速", 77.0, ""
 
     if chg_1h >= 0.0:
@@ -564,31 +581,50 @@ def calculate_quant_score(
     approved_tracks: list,
     hot_keywords: list,
 ) -> float:
+    """
+    V7.2 五维稳健高赔率评分：
+    修复“唯小市值/浅池虚高换手拿满分，稳健厚池蓄势反而分低”的偏差。
+    """
     w_timing = float(weights.get("early_timing", 0.30))
     w_buy = float(weights.get("buy_pressure", 0.25))
     w_mc = float(weights.get("mc_odds", 0.20))
     w_track = float(weights.get("track_heat", 0.15))
     w_fund = float(weights.get("fundamentals", 0.10))
 
+    # 1. 买点与趋势平稳度（惩罚剧烈震荡/暴跌反抽，奖励平稳蓄势）
     pool_age_h = item.get("pool_age_hours", 72.0)
-    age_bonus = 8.0 if pool_age_h <= 24.0 else (5.0 if pool_age_h <= 72.0 else 0.0)
-    s_timing = min(100.0, timing_score + age_bonus)
+    chg_1h = float(item.get("chg_1h", 0.0))
+    chg_6h = float(item.get("chg_6h", 0.0))
+    age_bonus = 6.0 if pool_age_h <= 24.0 else (3.0 if pool_age_h <= 72.0 else 0.0)
+    stability_adj = 0.0
+    if -4.0 <= chg_6h <= 12.0 and 0.0 <= chg_1h <= 10.0:
+        stability_adj += 5.0
+    if abs(chg_6h) > 18.0 or chg_1h > 20.0:
+        stability_adj -= 10.0
+    s_timing = min(100.0, max(0.0, timing_score + age_bonus + stability_adj))
 
+    # 2. 买盘压力与健康换手（惩罚浅池过度虚胖换手）
     buy_ratio = item.get("buy_ratio", 50.0)
-    vol_mc_ratio = item.get("vol_24h", 0.0) / max(item.get("mc_usd", 1.0), 1.0)
-    s_buy = min(100.0, 50.0 + (buy_ratio - 50.0) * 3.2 + min(vol_mc_ratio * 15.0, 22.0))
+    mc_usd = max(item.get("mc_usd", 1.0), 1.0)
+    liq_usd = max(item.get("liq_usd", 1.0), 1.0)
+    vol_24h = item.get("vol_24h", 0.0)
+    vol_mc_ratio = min(vol_24h / mc_usd, 3.0)
+    s_buy = min(100.0, 50.0 + (buy_ratio - 50.0) * 3.0 + min(vol_mc_ratio * 10.0, 18.0))
+    if (vol_24h / liq_usd) > 20.0 and liq_usd < 100000.0:
+        s_buy = max(40.0, s_buy - 16.0)
 
-    # V7.1 微盘高赔率打分曲线（聚焦 5W ~ 500W 黄金击球区）
+    # 3. 市值高赔率得分（5W-500W 黄金击球区）
     mc_wan = item.get("mc_usd", 0.0) / 10000.0
     if 10.0 <= mc_wan <= 150.0:
-        s_mc = 96.0
+        s_mc = 94.0
     elif (5.0 <= mc_wan < 10.0) or (150.0 < mc_wan <= 350.0):
         s_mc = 86.0
     elif 350.0 < mc_wan <= 500.0:
-        s_mc = 74.0
+        s_mc = 78.0
     else:
-        s_mc = 60.0
+        s_mc = 64.0
 
+    # 4. 赛道与叙事共振
     text = f"{item.get('name', '')} {item.get('symbol', '')} {item.get('track', '')}".lower()
     s_track = 70.0
     if any(t.lower() in text for t in approved_tracks):
@@ -597,14 +633,21 @@ def calculate_quant_score(
         s_track += 12.0
     s_track = min(100.0, s_track)
 
-    liq_mc_ratio = item.get("liq_usd", 0.0) / max(item.get("mc_usd", 1.0), 1.0)
+    # 5. 流动性深度与抗砸盘健康度
+    liq_mc_ratio = liq_usd / mc_usd
     tx_count = item.get("buys_24h", 0) + item.get("sells_24h", 0)
-    s_fund = 65.0
+    s_fund = 55.0
     if 0.08 <= liq_mc_ratio <= 0.65:
+        s_fund += 18.0
+    if liq_usd >= 300000.0:
         s_fund += 20.0
+    elif liq_usd >= 100000.0:
+        s_fund += 12.0
+    elif liq_usd < 30000.0:
+        s_fund -= 10.0
     if tx_count >= 300:
-        s_fund += 15.0
-    s_fund = min(100.0, s_fund)
+        s_fund += 10.0
+    s_fund = min(100.0, max(0.0, s_fund))
 
     total = (
         s_timing * w_timing
@@ -666,7 +709,7 @@ def send_feishu_card(projects: list, evo_state: dict):
             "header": {
                 "title": {
                     "tag": "plain_text",
-                    "content": f"🎯 V7.1 极早期高赔率 Alpha 战报 ({len(projects)}个标的)",
+                    "content": f"🎯 V7.2 极早期高赔率 Alpha 战报 ({len(projects)}个标的)",
                 },
                 "template": "turquoise",
             },
@@ -682,7 +725,7 @@ def send_feishu_card(projects: list, evo_state: dict):
 
 
 def run_job2():
-    log.info("[Job 2 V7.1] 启动 1H 高频 Alpha 狙击引擎 ($5W-$500W 黄金区间 + 弹性动量风控)...")
+    log.info("[Job 2 V7.2] 启动 1H 高频 Alpha 狙击引擎 ($5W-$500W 黄金区间 + 反死猫跳风控)...")
     db = FeishuDB()
     local_db = load_local_db()
     evo_state = get_active_evolution_state(local_db)
@@ -872,13 +915,13 @@ def run_job2():
         json.dump(local_db, f, ensure_ascii=False, indent=2)
 
     build_dashboard(
-        f"🎯 V7.1 Alpha 扫描更新 ({len(final_picks)} 个新标的)" if final_picks else "",
+        f"🎯 V7.2 Alpha 扫描更新 ({len(final_picks)} 个新标的)" if final_picks else "",
         f"本轮入选: {', '.join(p['symbol'] for p in final_picks)}" if final_picks else "",
     )
     if final_picks:
         send_feishu_card(final_picks, evo_state)
     else:
-        log.info("本轮未发现满足 $5W-$500W 高赔率标准的新标的，宁缺毋滥。")
+        log.info("本轮未发现满足 $5W-$500W 稳健高赔率标准的新标的，宁缺毋滥。")
 
 
 if __name__ == "__main__":

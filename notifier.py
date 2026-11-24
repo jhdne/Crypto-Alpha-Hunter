@@ -44,8 +44,8 @@ def _build_sparkline_svg(roi_history: list, current_roi: float) -> str:
     pts = [float(x) for x in (roi_history or []) if isinstance(x, (int, float))]
     if not pts:
         pts = [0.0, float(current_roi)]
-    elif len(pts) == 1:
-        pts = [0.0, pts[0]]
+    elif pts[0] != 0.0:
+        pts = [0.0] + pts
 
     w, h = 84, 24
     mn, mx = min(pts), max(pts)
@@ -318,7 +318,7 @@ def _render_history_archive(history_by_date: dict) -> str:
                     <thead class="text-[11px] text-slate-500 uppercase bg-[#0b101b]">
                         <tr>
                             <th class="py-2 px-3 font-medium">标的 / 市值</th>
-                            <th class="py-2 px-3 font-medium">扫描打分</th>
+                            <th class="py-2 px-3 font-medium">入场打分</th>
                             <th class="py-2 px-3 font-medium">推荐价 → 现价</th>
                             <th class="py-2 px-3 font-medium">走势跟踪</th>
                             <th class="py-2 px-3 font-medium">实时盈亏 / 极值</th>
