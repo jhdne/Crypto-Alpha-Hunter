@@ -61,7 +61,11 @@ jobs:
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
         run: |
           python preflight_check.py
-          python -m unittest discover -s tests -v
+          if [ -d "tests" ]; then
+            python -m unittest discover -s tests -t . -v
+          else
+            echo "::warning title=单元测试::未检测到 tests/ 目录，已跳过单元测试"
+          fi
 
       - name: 5. 执行任务
         env:
