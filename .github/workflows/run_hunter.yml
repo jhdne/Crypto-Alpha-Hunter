@@ -15,8 +15,8 @@ on:
           - evolve
           - dashboard
   schedule:
-    - cron: '0 0,12 * * *'   # 每天北京时间 08:00、20:00 嗅探宏观赛道
-    - cron: '15 */4 * * *'   # 每 4 小时：高频自我进化 + 极早期项目狙击
+    - cron: '0 0,12 * * *'   # 每天北京时间 08:00、20:00 嗅探宏观赛道与配置清单
+    - cron: '5 * * * *'      # 每 1 小时：高频自我进化回测 + 极早期项目狙击
     - cron: '0 14 * * 0'     # 每周日北京时间 22:00：深度全量复盘
 
 permissions:
@@ -83,16 +83,14 @@ jobs:
           JOB_TYPE: ${{ github.event.inputs.job_type }}
           SCHEDULE_CRON: ${{ github.event.schedule }}
         run: |
-          # 手动触发使用 job_type；定时任务根据 cron 表达式决定模式
           MODE="${JOB_TYPE:-all}"
           case "$SCHEDULE_CRON" in
             "0 0,12 * * *") MODE="track" ;;
-            "15 */4 * * *") MODE="project" ;;
+            "5 * * * *")    MODE="project" ;;
             "0 14 * * 0")   MODE="evolve" ;;
           esac
           echo "▶ 本次运行模式: $MODE"
 
-          # 辅助任务失败只告警，不阻断后续核心狙击任务
           soft_run() {
             local label="$1"
             shift
@@ -123,7 +121,6 @@ jobs:
               ;;
           esac
 
-          # 无论哪种模式，最后统一刷新一次看板
           soft_run "看板构建" notifier.py
 
       - name: 6. 推送看板与进化记忆至 GitHub Pages
