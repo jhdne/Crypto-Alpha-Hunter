@@ -6,7 +6,7 @@
     },
     "vc_media": {
       "ok": true,
-      "msg": "正常 (实时捕获 12 条热搜、TVL与融资情报)"
+      "msg": "正常 (实时捕获 13 条热搜、TVL与融资情报)"
     },
     "llm": {
       "ok": false,
@@ -23,57 +23,114 @@
   },
   "keywords": [
     {
-      "keyword": "#RPG",
-      "word": "#RPG",
+      "keyword": "#TimeFi",
+      "word": "#TimeFi",
       "heat": 92,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Synthetic Dollar",
-      "word": "#Synthetic Dollar",
+      "keyword": "#Venice Ecosystem",
+      "word": "#Venice Ecosystem",
       "heat": 90,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Fan Token",
-      "word": "#Fan Token",
+      "keyword": "#AI Applications",
+      "word": "#AI Applications",
       "heat": 88,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#The Boy’s Club",
-      "word": "#The Boy’s Club",
+      "keyword": "#NFTFi",
+      "word": "#NFTFi",
       "heat": 86,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Frog-Themed",
-      "word": "#Frog-Themed",
+      "keyword": "#DeFAI",
+      "word": "#DeFAI",
       "heat": 84,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Trump-Affiliated",
-      "word": "#Trump-Affiliated",
+      "keyword": "#NFT Marketplace",
+      "word": "#NFT Marketplace",
       "heat": 82,
       "reason": "板块量能温和放大，早期资金净流入居前"
     }
   ],
   "vc_news": [
-    "🔥 [全网热搜飙升] Bitcoin($BTC), Hyperliquid($HYPE), Monad($MON), Big Time($BIGTIME), Ethereum($ETH), Solana($SOL), Sui($SUI), Pearl($PEARL)",
-    "🌊 [链上TVL异动] TheDeep (Liquidity Manager) TVL 7日激增 +179.6% 至 $10.5M",
-    "🌊 [链上TVL异动] Theo Network thBill (RWA) TVL 7日激增 +92.5% 至 $22.7M",
-    "🌊 [链上TVL异动] CommunityV3 (Dexs) TVL 7日激增 +73.2% 至 $33.9M",
-    "🌊 [链上TVL异动] Shift DeFi (Yield) TVL 7日激增 +63.0% 至 $77.6M",
-    "📰 [媒体快讯] Solana开发人员推动验证者停止处理未被采用的区块，以减少无效计算",
-    "📰 [媒体快讯] 数字资产与结构化金融平台OpenVault完成200万美元种子轮融资",
-    "📰 [媒体快讯] Ark Invest昨日减持183万美元Bullish股票和681万美元自有比特币ETF",
-    "📰 [媒体快讯] 币安钱包通过集成Renaiss Protocol上线Gacha开包功能",
-    "📰 [媒体快讯] Solana DEX Velocity halts trading over bug just months after relaunch",
-    "📰 [媒体快讯] Europol follows $28.5M crypto trail in streaming piracy crackdown",
-    "📰 [媒体快讯] Utah moves to dismiss criminal charges against Kalshi after trading halt"
+    "🔥 [全网热搜飙升] Pepe Intelligence($PEI), Non-Playable Shiba($NPS), Variational X($VAR), Pudgy Penguins($PENGU), Venice Token($VVV), Chainlink($LINK), Pearl($PEARL), Injective($INJ)",
+    "🌊 [链上TVL异动] TheDeep (Liquidity Manager) TVL 7日激增 +163.4% 至 $9.7M",
+    "🌊 [链上TVL异动] Theo Network thBill (RWA) TVL 7日激增 +92.6% 至 $22.8M",
+    "🌊 [链上TVL异动] CommunityV3 (Dexs) TVL 7日激增 +63.5% 至 $34.0M",
+    "🌊 [链上TVL异动] Shift DeFi (Yield) TVL 7日激增 +63.1% 至 $77.6M",
+    "📰 [媒体快讯] Fidelity提交Chainlink Fund的S-1文件",
+    "📰 [媒体快讯] 美国现货比特币ETF 11月累计净流出49.4亿美元，创单月纪录",
+    "📰 [媒体快讯] Ethereum Foundation backs Keccak-256 to counter quantum, AI threats",
+    "📰 [媒体快讯] FCC authorizes SpaceX to deploy 1M satellites for orbital AI data centers",
+    "📰 [媒体快讯] Ex-FTX COO calls out Netflix over CZ’s ‘Asian mafia’ portrayal",
+    "📰 [媒体快讯] Ukraine passes bill to legalize crypto and tax profits at 23%",
+    "📰 [媒体快讯] Japan’s SBI, SMFG launch Solana venture for stablecoins, tokenization",
+    "📰 [媒体快讯] Hong Kong launches tokenized debt platform with 24-hour settlement"
   ],
   "tracks": [
+    {
+      "id": "timefi",
+      "name": "TimeFi",
+      "source": "🔥早期资金点火",
+      "change_24h": 23.4,
+      "reason": "板块成交放量启动，中小市值标的弹性极佳",
+      "status": "已批准",
+      "赛道ID": "timefi",
+      "赛道名称": "TimeFi",
+      "发现来源": "🔥早期资金点火",
+      "24h涨幅(%)": 23.4,
+      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
+      "人工状态": "允许深挖"
+    },
+    {
+      "id": "venice-ecosystem",
+      "name": "Venice Ecosystem",
+      "source": "🔥早期资金点火",
+      "change_24h": 14.02,
+      "reason": "板块成交放量启动，中小市值标的弹性极佳",
+      "status": "已批准",
+      "赛道ID": "venice-ecosystem",
+      "赛道名称": "Venice Ecosystem",
+      "发现来源": "🔥早期资金点火",
+      "24h涨幅(%)": 14.02,
+      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
+      "人工状态": "允许深挖"
+    },
+    {
+      "id": "ai-applications",
+      "name": "AI Applications",
+      "source": "🔥早期资金点火",
+      "change_24h": 12.92,
+      "reason": "板块成交放量启动，中小市值标的弹性极佳",
+      "status": "已批准",
+      "赛道ID": "ai-applications",
+      "赛道名称": "AI Applications",
+      "发现来源": "🔥早期资金点火",
+      "24h涨幅(%)": 12.92,
+      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
+      "人工状态": "允许深挖"
+    },
+    {
+      "id": "nftfi",
+      "name": "NFTFi",
+      "source": "🔥早期资金点火",
+      "change_24h": 10.23,
+      "reason": "板块成交放量启动，中小市值标的弹性极佳",
+      "status": "已批准",
+      "赛道ID": "nftfi",
+      "赛道名称": "NFTFi",
+      "发现来源": "🔥早期资金点火",
+      "24h涨幅(%)": 10.23,
+      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
+      "人工状态": "允许深挖"
+    },
     {
       "id": "rpg",
       "name": "RPG",
@@ -127,62 +184,6 @@
       "赛道名称": "The Boy’s Club",
       "发现来源": "🔥早期资金点火",
       "24h涨幅(%)": -0.15,
-      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
-      "人工状态": "允许深挖"
-    },
-    {
-      "id": "frog-themed-coins",
-      "name": "Frog-Themed",
-      "source": "🔥早期资金点火",
-      "change_24h": 0.72,
-      "reason": "板块成交放量启动，中小市值标的弹性极佳",
-      "status": "已批准",
-      "赛道ID": "frog-themed-coins",
-      "赛道名称": "Frog-Themed",
-      "发现来源": "🔥早期资金点火",
-      "24h涨幅(%)": 0.72,
-      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
-      "人工状态": "允许深挖"
-    },
-    {
-      "id": "cefi",
-      "name": "CeFi",
-      "source": "🔥早期资金点火",
-      "change_24h": 0.32,
-      "reason": "板块成交放量启动，中小市值标的弹性极佳",
-      "status": "已批准",
-      "赛道ID": "cefi",
-      "赛道名称": "CeFi",
-      "发现来源": "🔥早期资金点火",
-      "24h涨幅(%)": 0.32,
-      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
-      "人工状态": "允许深挖"
-    },
-    {
-      "id": "made-in-usa",
-      "name": "Made in USA",
-      "source": "🔥早期资金点火",
-      "change_24h": 11.89,
-      "reason": "板块成交放量启动，中小市值标的弹性极佳",
-      "status": "已批准",
-      "赛道ID": "made-in-usa",
-      "赛道名称": "Made in USA",
-      "发现来源": "🔥早期资金点火",
-      "24h涨幅(%)": 11.89,
-      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
-      "人工状态": "允许深挖"
-    },
-    {
-      "id": "reality-ecosystem",
-      "name": "Reality Ecosystem",
-      "source": "🔥早期资金点火",
-      "change_24h": 8.99,
-      "reason": "板块成交放量启动，中小市值标的弹性极佳",
-      "status": "已批准",
-      "赛道ID": "reality-ecosystem",
-      "赛道名称": "Reality Ecosystem",
-      "发现来源": "🔥早期资金点火",
-      "24h涨幅(%)": 8.99,
       "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
       "人工状态": "允许深挖"
     }
@@ -2616,98 +2617,102 @@
   ],
   "alert": {
     "title": "📡 趋势推演与龙头/黑马配置清单已更新",
-    "content": "最新捕获赛道：RPG, Synthetic Dollar, Fan Token",
-    "time": "2026-11-25 15:03"
+    "content": "最新捕获赛道：TimeFi, Venice Ecosystem, AI Applications",
+    "time": "2026-11-26 05:05"
   },
   "vc_And_news": [
     {
       "type": "🔥 热搜飙升",
-      "title": "全网热搜飙升: Bitcoin($BTC), Hyperliquid($HYPE), Monad($MON), Big Time($BIGTIME), Ethereum($ETH), Solana($SOL), Sui($SUI), Pearl($PEARL)"
+      "title": "全网热搜飙升: Pepe Intelligence($PEI), Non-Playable Shiba($NPS), Variational X($VAR), Pudgy Penguins($PENGU), Venice Token($VVV), Chainlink($LINK), Pearl($PEARL), Injective($INJ)"
     },
     {
       "type": "🌊 TVL异动",
-      "title": "TheDeep (Liquidity Manager) TVL 7日激增 +179.6% 至 $10.5M"
+      "title": "TheDeep (Liquidity Manager) TVL 7日激增 +163.4% 至 $9.7M"
     },
     {
       "type": "🌊 TVL异动",
-      "title": "Theo Network thBill (RWA) TVL 7日激增 +92.5% 至 $22.7M"
+      "title": "Theo Network thBill (RWA) TVL 7日激增 +92.6% 至 $22.8M"
     },
     {
       "type": "🌊 TVL异动",
-      "title": "CommunityV3 (Dexs) TVL 7日激增 +73.2% 至 $33.9M"
+      "title": "CommunityV3 (Dexs) TVL 7日激增 +63.5% 至 $34.0M"
     },
     {
       "type": "🌊 TVL异动",
-      "title": "Shift DeFi (Yield) TVL 7日激增 +63.0% 至 $77.6M"
+      "title": "Shift DeFi (Yield) TVL 7日激增 +63.1% 至 $77.6M"
     },
     {
       "type": "📰 媒体快讯",
-      "title": "Solana开发人员推动验证者停止处理未被采用的区块，以减少无效计算"
+      "title": "Fidelity提交Chainlink Fund的S-1文件"
     },
     {
       "type": "📰 媒体快讯",
-      "title": "数字资产与结构化金融平台OpenVault完成200万美元种子轮融资"
+      "title": "美国现货比特币ETF 11月累计净流出49.4亿美元，创单月纪录"
     },
     {
       "type": "📰 媒体快讯",
-      "title": "Ark Invest昨日减持183万美元Bullish股票和681万美元自有比特币ETF"
+      "title": "Ethereum Foundation backs Keccak-256 to counter quantum, AI threats"
     },
     {
       "type": "📰 媒体快讯",
-      "title": "币安钱包通过集成Renaiss Protocol上线Gacha开包功能"
+      "title": "FCC authorizes SpaceX to deploy 1M satellites for orbital AI data centers"
     },
     {
       "type": "📰 媒体快讯",
-      "title": "Solana DEX Velocity halts trading over bug just months after relaunch"
+      "title": "Ex-FTX COO calls out Netflix over CZ’s ‘Asian mafia’ portrayal"
     },
     {
       "type": "📰 媒体快讯",
-      "title": "Europol follows $28.5M crypto trail in streaming piracy crackdown"
+      "title": "Ukraine passes bill to legalize crypto and tax profits at 23%"
     },
     {
       "type": "📰 媒体快讯",
-      "title": "Utah moves to dismiss criminal charges against Kalshi after trading halt"
+      "title": "Japan’s SBI, SMFG launch Solana venture for stablecoins, tokenization"
+    },
+    {
+      "type": "📰 媒体快讯",
+      "title": "Hong Kong launches tokenized debt platform with 24-hour settlement"
     }
   ],
   "hot_keywords": [
     {
-      "keyword": "#RPG",
-      "word": "#RPG",
+      "keyword": "#TimeFi",
+      "word": "#TimeFi",
       "heat": 92,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Synthetic Dollar",
-      "word": "#Synthetic Dollar",
+      "keyword": "#Venice Ecosystem",
+      "word": "#Venice Ecosystem",
       "heat": 90,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Fan Token",
-      "word": "#Fan Token",
+      "keyword": "#AI Applications",
+      "word": "#AI Applications",
       "heat": 88,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#The Boy’s Club",
-      "word": "#The Boy’s Club",
+      "keyword": "#NFTFi",
+      "word": "#NFTFi",
       "heat": 86,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Frog-Themed",
-      "word": "#Frog-Themed",
+      "keyword": "#DeFAI",
+      "word": "#DeFAI",
       "heat": 84,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Trump-Affiliated",
-      "word": "#Trump-Affiliated",
+      "keyword": "#NFT Marketplace",
+      "word": "#NFT Marketplace",
       "heat": 82,
       "reason": "板块量能温和放大，早期资金净流入居前"
     }
   ],
-  "updated_at": "2026-11-26 03:07",
+  "updated_at": "2026-11-26 05:05:28 (UTC+8)",
   "evolution_state": {
     "generation": 6,
     "last_evolved_at": "2026-11-26 03:06",
@@ -2743,42 +2748,42 @@
     ]
   },
   "trending_symbols": [
-    "BTC",
-    "HYPE",
-    "MON",
-    "BIGTIME",
-    "ETH",
-    "SOL",
-    "SUI",
-    "PEARL"
+    "PEI",
+    "NPS",
+    "VAR",
+    "PENGU",
+    "VVV",
+    "LINK",
+    "PEARL",
+    "INJ"
   ],
   "vc_entities": [],
   "allocation_matrix": [
     {
-      "track": "RPG",
+      "track": "TimeFi",
       "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
-      "leader": "RPG 头部高流动性核心协议",
+      "leader": "TimeFi 头部高流动性核心协议",
       "dark_horse": "市值 <$500万 且买盘占比 >55% 的早期新池标的",
       "ratio_hint": "龙头 55% / 黑马 45%"
     },
     {
-      "track": "Synthetic Dollar",
+      "track": "Venice Ecosystem",
       "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
-      "leader": "Synthetic Dollar 头部高流动性核心协议",
+      "leader": "Venice Ecosystem 头部高流动性核心协议",
       "dark_horse": "市值 <$500万 且买盘占比 >55% 的早期新池标的",
       "ratio_hint": "龙头 55% / 黑马 45%"
     },
     {
-      "track": "Fan Token",
+      "track": "AI Applications",
       "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
-      "leader": "Fan Token 头部高流动性核心协议",
+      "leader": "AI Applications 头部高流动性核心协议",
       "dark_horse": "市值 <$500万 且买盘占比 >55% 的早期新池标的",
       "ratio_hint": "龙头 55% / 黑马 45%"
     },
     {
-      "track": "The Boy’s Club",
+      "track": "NFTFi",
       "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
-      "leader": "The Boy’s Club 头部高流动性核心协议",
+      "leader": "NFTFi 头部高流动性核心协议",
       "dark_horse": "市值 <$500万 且买盘占比 >55% 的早期新池标的",
       "ratio_hint": "龙头 55% / 黑马 45%"
     }
