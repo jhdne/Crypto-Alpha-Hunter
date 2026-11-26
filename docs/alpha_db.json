@@ -29,26 +29,26 @@
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Venice Ecosystem",
-      "word": "#Venice Ecosystem",
+      "keyword": "#AI Applications",
+      "word": "#AI Applications",
       "heat": 90,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#AI Applications",
-      "word": "#AI Applications",
+      "keyword": "#SocialFi",
+      "word": "#SocialFi",
       "heat": 88,
+      "reason": "板块量能温和放大，早期资金净流入居前"
+    },
+    {
+      "keyword": "#Venice Ecosystem",
+      "word": "#Venice Ecosystem",
+      "heat": 86,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
       "keyword": "#NFTFi",
       "word": "#NFTFi",
-      "heat": 86,
-      "reason": "板块量能温和放大，早期资金净流入居前"
-    },
-    {
-      "keyword": "#DeFAI",
-      "word": "#DeFAI",
       "heat": 84,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
@@ -60,46 +60,32 @@
     }
   ],
   "vc_news": [
-    "🔥 [全网热搜飙升] Pepe Intelligence($PEI), Non-Playable Shiba($NPS), Variational X($VAR), Pudgy Penguins($PENGU), Venice Token($VVV), Chainlink($LINK), Pearl($PEARL), Injective($INJ)",
-    "🌊 [链上TVL异动] TheDeep (Liquidity Manager) TVL 7日激增 +163.4% 至 $9.7M",
+    "🔥 [全网热搜飙升] Venice Token($VVV), Pudgy Penguins($PENGU), Ethereum($ETH), Hyperliquid($HYPE), Monad($MON), Zcash($ZEC), Bitcoin($BTC), Pearl($PEARL)",
     "🌊 [链上TVL异动] Theo Network thBill (RWA) TVL 7日激增 +92.6% 至 $22.8M",
-    "🌊 [链上TVL异动] CommunityV3 (Dexs) TVL 7日激增 +63.5% 至 $34.0M",
-    "🌊 [链上TVL异动] Shift DeFi (Yield) TVL 7日激增 +63.1% 至 $77.6M",
-    "📰 [媒体快讯] Fidelity提交Chainlink Fund的S-1文件",
-    "📰 [媒体快讯] 美国现货比特币ETF 11月累计净流出49.4亿美元，创单月纪录",
-    "📰 [媒体快讯] Ethereum Foundation backs Keccak-256 to counter quantum, AI threats",
-    "📰 [媒体快讯] FCC authorizes SpaceX to deploy 1M satellites for orbital AI data centers",
-    "📰 [媒体快讯] Ex-FTX COO calls out Netflix over CZ’s ‘Asian mafia’ portrayal",
-    "📰 [媒体快讯] Ukraine passes bill to legalize crypto and tax profits at 23%",
-    "📰 [媒体快讯] Japan’s SBI, SMFG launch Solana venture for stablecoins, tokenization",
-    "📰 [媒体快讯] Hong Kong launches tokenized debt platform with 24-hour settlement"
+    "🌊 [链上TVL异动] Shift DeFi (Yield) TVL 7日激增 +63.0% 至 $77.6M",
+    "🌊 [链上TVL异动] Perena Vaults (Onchain Capital Allocator) TVL 7日激增 +35.7% 至 $23.2M",
+    "🌊 [链上TVL异动] Okcoin (CEX) TVL 7日激增 +33.3% 至 $27.3M",
+    "📰 [媒体快讯] 英国计划对DeFi领域制定严格监管规则，力度或超美欧",
+    "📰 [媒体快讯] 以太坊现货 ETF 昨日总净流出 6851.05 万美元，持续 9 日净流出",
+    "📰 [媒体快讯] 比特币现货 ETF 昨日总净流出 4.53 亿美元，持续 7 日净流出",
+    "📰 [媒体快讯] UK regulator plans tighter DeFi rules, citing $6.3B Binance hack: Report",
+    "📰 [媒体快讯] 1Password hacker stole customer names and emails, but vaults safe",
+    "📰 [媒体快讯] AI labs likely sitting on cryptography ‘bombshells,’ computer scientist says",
+    "📰 [媒体快讯] Braiins warns of Bitcoin mining attacks affecting over 1,000 sites",
+    "📰 [媒体快讯] Ethereum Foundation backs Keccak-256 to counter quantum, AI threats"
   ],
   "tracks": [
     {
       "id": "timefi",
       "name": "TimeFi",
       "source": "🔥早期资金点火",
-      "change_24h": 23.4,
+      "change_24h": 32.74,
       "reason": "板块成交放量启动，中小市值标的弹性极佳",
       "status": "已批准",
       "赛道ID": "timefi",
       "赛道名称": "TimeFi",
       "发现来源": "🔥早期资金点火",
-      "24h涨幅(%)": 23.4,
-      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
-      "人工状态": "允许深挖"
-    },
-    {
-      "id": "venice-ecosystem",
-      "name": "Venice Ecosystem",
-      "source": "🔥早期资金点火",
-      "change_24h": 14.02,
-      "reason": "板块成交放量启动，中小市值标的弹性极佳",
-      "status": "已批准",
-      "赛道ID": "venice-ecosystem",
-      "赛道名称": "Venice Ecosystem",
-      "发现来源": "🔥早期资金点火",
-      "24h涨幅(%)": 14.02,
+      "24h涨幅(%)": 32.74,
       "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
       "人工状态": "允许深挖"
     },
@@ -107,13 +93,41 @@
       "id": "ai-applications",
       "name": "AI Applications",
       "source": "🔥早期资金点火",
-      "change_24h": 12.92,
+      "change_24h": 14.7,
       "reason": "板块成交放量启动，中小市值标的弹性极佳",
       "status": "已批准",
       "赛道ID": "ai-applications",
       "赛道名称": "AI Applications",
       "发现来源": "🔥早期资金点火",
-      "24h涨幅(%)": 12.92,
+      "24h涨幅(%)": 14.7,
+      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
+      "人工状态": "允许深挖"
+    },
+    {
+      "id": "socialfi",
+      "name": "SocialFi",
+      "source": "🔥早期资金点火",
+      "change_24h": 11.39,
+      "reason": "板块成交放量启动，中小市值标的弹性极佳",
+      "status": "已批准",
+      "赛道ID": "socialfi",
+      "赛道名称": "SocialFi",
+      "发现来源": "🔥早期资金点火",
+      "24h涨幅(%)": 11.39,
+      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
+      "人工状态": "允许深挖"
+    },
+    {
+      "id": "venice-ecosystem",
+      "name": "Venice Ecosystem",
+      "source": "🔥早期资金点火",
+      "change_24h": 10.44,
+      "reason": "板块成交放量启动，中小市值标的弹性极佳",
+      "status": "已批准",
+      "赛道ID": "venice-ecosystem",
+      "赛道名称": "Venice Ecosystem",
+      "发现来源": "🔥早期资金点火",
+      "24h涨幅(%)": 10.44,
       "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
       "人工状态": "允许深挖"
     },
@@ -170,20 +184,6 @@
       "赛道名称": "Fan Token",
       "发现来源": "🔥早期资金点火",
       "24h涨幅(%)": -0.1,
-      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
-      "人工状态": "允许深挖"
-    },
-    {
-      "id": "the-boy-s-club",
-      "name": "The Boy’s Club",
-      "source": "🔥早期资金点火",
-      "change_24h": -0.15,
-      "reason": "板块成交放量启动，中小市值标的弹性极佳",
-      "status": "已批准",
-      "赛道ID": "the-boy-s-club",
-      "赛道名称": "The Boy’s Club",
-      "发现来源": "🔥早期资金点火",
-      "24h涨幅(%)": -0.15,
       "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
       "人工状态": "允许深挖"
     }
@@ -2711,17 +2711,13 @@
   ],
   "alert": {
     "title": "📡 趋势推演与龙头/黑马配置清单已更新",
-    "content": "最新捕获赛道：TimeFi, Venice Ecosystem, AI Applications",
-    "time": "2026-11-26 05:05"
+    "content": "最新捕获赛道：TimeFi, AI Applications, SocialFi",
+    "time": "2026-11-26 14:56"
   },
   "vc_And_news": [
     {
       "type": "🔥 热搜飙升",
-      "title": "全网热搜飙升: Pepe Intelligence($PEI), Non-Playable Shiba($NPS), Variational X($VAR), Pudgy Penguins($PENGU), Venice Token($VVV), Chainlink($LINK), Pearl($PEARL), Injective($INJ)"
-    },
-    {
-      "type": "🌊 TVL异动",
-      "title": "TheDeep (Liquidity Manager) TVL 7日激增 +163.4% 至 $9.7M"
+      "title": "全网热搜飙升: Venice Token($VVV), Pudgy Penguins($PENGU), Ethereum($ETH), Hyperliquid($HYPE), Monad($MON), Zcash($ZEC), Bitcoin($BTC), Pearl($PEARL)"
     },
     {
       "type": "🌊 TVL异动",
@@ -2729,43 +2725,47 @@
     },
     {
       "type": "🌊 TVL异动",
-      "title": "CommunityV3 (Dexs) TVL 7日激增 +63.5% 至 $34.0M"
+      "title": "Shift DeFi (Yield) TVL 7日激增 +63.0% 至 $77.6M"
     },
     {
       "type": "🌊 TVL异动",
-      "title": "Shift DeFi (Yield) TVL 7日激增 +63.1% 至 $77.6M"
+      "title": "Perena Vaults (Onchain Capital Allocator) TVL 7日激增 +35.7% 至 $23.2M"
+    },
+    {
+      "type": "🌊 TVL异动",
+      "title": "Okcoin (CEX) TVL 7日激增 +33.3% 至 $27.3M"
     },
     {
       "type": "📰 媒体快讯",
-      "title": "Fidelity提交Chainlink Fund的S-1文件"
+      "title": "英国计划对DeFi领域制定严格监管规则，力度或超美欧"
     },
     {
       "type": "📰 媒体快讯",
-      "title": "美国现货比特币ETF 11月累计净流出49.4亿美元，创单月纪录"
+      "title": "以太坊现货 ETF 昨日总净流出 6851.05 万美元，持续 9 日净流出"
+    },
+    {
+      "type": "📰 媒体快讯",
+      "title": "比特币现货 ETF 昨日总净流出 4.53 亿美元，持续 7 日净流出"
+    },
+    {
+      "type": "📰 媒体快讯",
+      "title": "UK regulator plans tighter DeFi rules, citing $6.3B Binance hack: Report"
+    },
+    {
+      "type": "📰 媒体快讯",
+      "title": "1Password hacker stole customer names and emails, but vaults safe"
+    },
+    {
+      "type": "📰 媒体快讯",
+      "title": "AI labs likely sitting on cryptography ‘bombshells,’ computer scientist says"
+    },
+    {
+      "type": "📰 媒体快讯",
+      "title": "Braiins warns of Bitcoin mining attacks affecting over 1,000 sites"
     },
     {
       "type": "📰 媒体快讯",
       "title": "Ethereum Foundation backs Keccak-256 to counter quantum, AI threats"
-    },
-    {
-      "type": "📰 媒体快讯",
-      "title": "FCC authorizes SpaceX to deploy 1M satellites for orbital AI data centers"
-    },
-    {
-      "type": "📰 媒体快讯",
-      "title": "Ex-FTX COO calls out Netflix over CZ’s ‘Asian mafia’ portrayal"
-    },
-    {
-      "type": "📰 媒体快讯",
-      "title": "Ukraine passes bill to legalize crypto and tax profits at 23%"
-    },
-    {
-      "type": "📰 媒体快讯",
-      "title": "Japan’s SBI, SMFG launch Solana venture for stablecoins, tokenization"
-    },
-    {
-      "type": "📰 媒体快讯",
-      "title": "Hong Kong launches tokenized debt platform with 24-hour settlement"
     }
   ],
   "hot_keywords": [
@@ -2776,26 +2776,26 @@
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Venice Ecosystem",
-      "word": "#Venice Ecosystem",
+      "keyword": "#AI Applications",
+      "word": "#AI Applications",
       "heat": 90,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#AI Applications",
-      "word": "#AI Applications",
+      "keyword": "#SocialFi",
+      "word": "#SocialFi",
       "heat": 88,
+      "reason": "板块量能温和放大，早期资金净流入居前"
+    },
+    {
+      "keyword": "#Venice Ecosystem",
+      "word": "#Venice Ecosystem",
+      "heat": 86,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
       "keyword": "#NFTFi",
       "word": "#NFTFi",
-      "heat": 86,
-      "reason": "板块量能温和放大，早期资金净流入居前"
-    },
-    {
-      "keyword": "#DeFAI",
-      "word": "#DeFAI",
       "heat": 84,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
@@ -2806,7 +2806,7 @@
       "reason": "板块量能温和放大，早期资金净流入居前"
     }
   ],
-  "updated_at": "2026-11-26 10:44",
+  "updated_at": "2026-11-26 14:56:06 (UTC+8)",
   "evolution_state": {
     "generation": 7,
     "last_evolved_at": "2026-11-26 10:44",
@@ -2842,14 +2842,14 @@
     ]
   },
   "trending_symbols": [
-    "PEI",
-    "NPS",
-    "VAR",
-    "PENGU",
     "VVV",
-    "LINK",
-    "PEARL",
-    "INJ"
+    "PENGU",
+    "ETH",
+    "HYPE",
+    "MON",
+    "ZEC",
+    "BTC",
+    "PEARL"
   ],
   "vc_entities": [],
   "allocation_matrix": [
@@ -2861,13 +2861,6 @@
       "ratio_hint": "龙头 55% / 黑马 45%"
     },
     {
-      "track": "Venice Ecosystem",
-      "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
-      "leader": "Venice Ecosystem 头部高流动性核心协议",
-      "dark_horse": "市值 <$500万 且买盘占比 >55% 的早期新池标的",
-      "ratio_hint": "龙头 55% / 黑马 45%"
-    },
-    {
       "track": "AI Applications",
       "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
       "leader": "AI Applications 头部高流动性核心协议",
@@ -2875,9 +2868,16 @@
       "ratio_hint": "龙头 55% / 黑马 45%"
     },
     {
-      "track": "NFTFi",
+      "track": "SocialFi",
       "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
-      "leader": "NFTFi 头部高流动性核心协议",
+      "leader": "SocialFi 头部高流动性核心协议",
+      "dark_horse": "市值 <$500万 且买盘占比 >55% 的早期新池标的",
+      "ratio_hint": "龙头 55% / 黑马 45%"
+    },
+    {
+      "track": "Venice Ecosystem",
+      "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
+      "leader": "Venice Ecosystem 头部高流动性核心协议",
       "dark_horse": "市值 <$500万 且买盘占比 >55% 的早期新池标的",
       "ratio_hint": "龙头 55% / 黑马 45%"
     }
