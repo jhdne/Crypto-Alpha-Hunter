@@ -6,7 +6,7 @@
     },
     "vc_media": {
       "ok": true,
-      "msg": "正常 (实时捕获 10 条热搜、TVL与融资情报)"
+      "msg": "正常 (实时捕获 11 条热搜、TVL与融资情报)"
     },
     "llm": {
       "ok": false,
@@ -29,60 +29,103 @@
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Derivatives",
-      "word": "#Derivatives",
+      "keyword": "#Gaming Platform",
+      "word": "#Gaming Platform",
       "heat": 90,
-      "reason": "板块量能温和放大，早期资金净流入居前"
-    },
-    {
-      "keyword": "#Perpetuals",
-      "word": "#Perpetuals",
-      "heat": 88,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
       "keyword": "#Reality Ecosystem",
       "word": "#Reality Ecosystem",
-      "heat": 86,
+      "heat": 88,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
       "keyword": "#bStocks Ecosystem",
       "word": "#bStocks Ecosystem",
+      "heat": 86,
+      "reason": "板块量能温和放大，早期资金净流入居前"
+    },
+    {
+      "keyword": "#Yield Farming",
+      "word": "#Yield Farming",
       "heat": 84,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Decentralized Exch",
-      "word": "#Decentralized Exch",
+      "keyword": "#Dex Aggregator",
+      "word": "#Dex Aggregator",
       "heat": 82,
       "reason": "板块量能温和放大，早期资金净流入居前"
     }
   ],
   "vc_news": [
-    "🔥 [全网热搜飙升] Pudgy Penguins($PENGU), Bitcoin($BTC), Kinetiq($KNTQ), Lighter($LIT), Akedo($AKE), Pearl($PEARL), Derive($DRV), Beldex($BDX)",
-    "🌊 [链上TVL异动] Theo Network thBill (RWA) TVL 7日激增 +287.2% 至 $45.7M",
-    "🌊 [链上TVL异动] Revert Lend (Lending) TVL 7日激增 +195.9% 至 $13.7M",
-    "🌊 [链上TVL异动] Shift DeFi (Yield) TVL 7日激增 +63.0% 至 $77.6M",
-    "🌊 [链上TVL异动] Perena Vaults (Onchain Capital Allocator) TVL 7日激增 +41.9% 至 $23.3M",
-    "📰 [媒体快讯] AI is driving a flood of crypto bug reports. Now it’s helping sort them",
-    "📰 [媒体快讯] ‘Very racist’ Netflix SBF series, BitMart’s $319M shortfall: Asia Express",
-    "📰 [媒体快讯] BNB Chain details new layer-1 for trading, private finance and AI",
-    "📰 [媒体快讯] UK is ‘getting it wrong’ on DeFi regulation, says Coinbase",
-    "📰 [媒体快讯] Japan weighs tighter oversight of DeFi, self-custodial wallets"
+    "🔥 [全网热搜飙升] Pudgy Penguins($PENGU), PumpChan($PUMPCHAN), Portal($PORTAL), Zylo Ecosystem($ZYLO), Bitcoin($BTC), Zcash($ZEC), Hyperliquid($HYPE), Monero($XMR)",
+    "🌊 [链上TVL异动] Theo Network thBill (RWA) TVL 7日激增 +287.2% 至 $45.8M",
+    "🌊 [链上TVL异动] Revert Lend (Lending) TVL 7日激增 +201.1% 至 $13.5M",
+    "🌊 [链上TVL异动] Stellar DeFi Hub (Farm) TVL 7日激增 +69.7% 至 $78.5M",
+    "🌊 [链上TVL异动] Hyperliquid Spot Orderbook (Dexs) TVL 7日激增 +37.3% 至 $127.2M",
+    "📰 [媒体快讯] Bio Protocol拟调整融资模式，引入里程碑拨款",
+    "📰 [媒体快讯] Ondo Stocks新增四只富兰克林邓普顿代币化ETF",
+    "📰 [媒体快讯] China sets March 2027 rollout for blockchain identity regulations",
+    "📰 [媒体快讯] Binance to launch tokenized IPO program after regulatory approval: Yi He",
+    "📰 [媒体快讯] Brazil’s stock exchange pushes stablecoin launch back to 2027",
+    "📰 [媒体快讯] Bluefin to shut down perps, refocus on spot trading and tokenized RWAs"
   ],
   "tracks": [
     {
       "id": "robinhood-chain-meme",
       "name": "Robinhood Chain Meme",
       "source": "🔥早期资金点火",
-      "change_24h": 9.52,
+      "change_24h": 22.18,
       "reason": "板块成交放量启动，中小市值标的弹性极佳",
       "status": "已批准",
       "赛道ID": "robinhood-chain-meme",
       "赛道名称": "Robinhood Chain Meme",
       "发现来源": "🔥早期资金点火",
-      "24h涨幅(%)": 9.52,
+      "24h涨幅(%)": 22.18,
+      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
+      "人工状态": "允许深挖"
+    },
+    {
+      "id": "gaming-platform",
+      "name": "Gaming Platform",
+      "source": "🔥早期资金点火",
+      "change_24h": 14.16,
+      "reason": "板块成交放量启动，中小市值标的弹性极佳",
+      "status": "已批准",
+      "赛道ID": "gaming-platform",
+      "赛道名称": "Gaming Platform",
+      "发现来源": "🔥早期资金点火",
+      "24h涨幅(%)": 14.16,
+      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
+      "人工状态": "允许深挖"
+    },
+    {
+      "id": "reality-ecosystem",
+      "name": "Reality Ecosystem",
+      "source": "🔥早期资金点火",
+      "change_24h": 9.83,
+      "reason": "板块成交放量启动，中小市值标的弹性极佳",
+      "status": "已批准",
+      "赛道ID": "reality-ecosystem",
+      "赛道名称": "Reality Ecosystem",
+      "发现来源": "🔥早期资金点火",
+      "24h涨幅(%)": 9.83,
+      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
+      "人工状态": "允许深挖"
+    },
+    {
+      "id": "bstocks-ecosystem",
+      "name": "bStocks Ecosystem",
+      "source": "🔥早期资金点火",
+      "change_24h": 6.49,
+      "reason": "板块成交放量启动，中小市值标的弹性极佳",
+      "status": "已批准",
+      "赛道ID": "bstocks-ecosystem",
+      "赛道名称": "bStocks Ecosystem",
+      "发现来源": "🔥早期资金点火",
+      "24h涨幅(%)": 6.49,
       "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
       "人工状态": "允许深挖"
     },
@@ -115,20 +158,6 @@
       "人工状态": "允许深挖"
     },
     {
-      "id": "reality-ecosystem",
-      "name": "Reality Ecosystem",
-      "source": "🔥早期资金点火",
-      "change_24h": 6.43,
-      "reason": "板块成交放量启动，中小市值标的弹性极佳",
-      "status": "已批准",
-      "赛道ID": "reality-ecosystem",
-      "赛道名称": "Reality Ecosystem",
-      "发现来源": "🔥早期资金点火",
-      "24h涨幅(%)": 6.43,
-      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
-      "人工状态": "允许深挖"
-    },
-    {
       "id": "timefi",
       "name": "TimeFi",
       "source": "🔥早期资金点火",
@@ -153,34 +182,6 @@
       "赛道名称": "DeFAI",
       "发现来源": "🔥早期资金点火",
       "24h涨幅(%)": 7.6,
-      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
-      "人工状态": "允许深挖"
-    },
-    {
-      "id": "politifi",
-      "name": "PolitiFi",
-      "source": "🔥早期资金点火",
-      "change_24h": 4.92,
-      "reason": "板块成交放量启动，中小市值标的弹性极佳",
-      "status": "已批准",
-      "赛道ID": "politifi",
-      "赛道名称": "PolitiFi",
-      "发现来源": "🔥早期资金点火",
-      "24h涨幅(%)": 4.92,
-      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
-      "人工状态": "允许深挖"
-    },
-    {
-      "id": "ai-applications",
-      "name": "AI Applications",
-      "source": "🔥早期资金点火",
-      "change_24h": 14.7,
-      "reason": "板块成交放量启动，中小市值标的弹性极佳",
-      "status": "已批准",
-      "赛道ID": "ai-applications",
-      "赛道名称": "AI Applications",
-      "发现来源": "🔥早期资金点火",
-      "24h涨幅(%)": 14.7,
       "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
       "人工状态": "允许深挖"
     }
@@ -3018,49 +3019,53 @@
   ],
   "alert": {
     "title": "📡 趋势推演与龙头/黑马配置清单已更新",
-    "content": "最新捕获赛道：Robinhood Chain Meme, Derivatives, Perpetuals",
-    "time": "2026-11-27 14:48"
+    "content": "最新捕获赛道：Robinhood Chain Meme, Gaming Platform, Reality Ecosystem",
+    "time": "2026-11-28 04:42"
   },
   "vc_And_news": [
     {
       "type": "🔥 热搜飙升",
-      "title": "全网热搜飙升: Pudgy Penguins($PENGU), Bitcoin($BTC), Kinetiq($KNTQ), Lighter($LIT), Akedo($AKE), Pearl($PEARL), Derive($DRV), Beldex($BDX)"
+      "title": "全网热搜飙升: Pudgy Penguins($PENGU), PumpChan($PUMPCHAN), Portal($PORTAL), Zylo Ecosystem($ZYLO), Bitcoin($BTC), Zcash($ZEC), Hyperliquid($HYPE), Monero($XMR)"
     },
     {
       "type": "🌊 TVL异动",
-      "title": "Theo Network thBill (RWA) TVL 7日激增 +287.2% 至 $45.7M"
+      "title": "Theo Network thBill (RWA) TVL 7日激增 +287.2% 至 $45.8M"
     },
     {
       "type": "🌊 TVL异动",
-      "title": "Revert Lend (Lending) TVL 7日激增 +195.9% 至 $13.7M"
+      "title": "Revert Lend (Lending) TVL 7日激增 +201.1% 至 $13.5M"
     },
     {
       "type": "🌊 TVL异动",
-      "title": "Shift DeFi (Yield) TVL 7日激增 +63.0% 至 $77.6M"
+      "title": "Stellar DeFi Hub (Farm) TVL 7日激增 +69.7% 至 $78.5M"
     },
     {
       "type": "🌊 TVL异动",
-      "title": "Perena Vaults (Onchain Capital Allocator) TVL 7日激增 +41.9% 至 $23.3M"
+      "title": "Hyperliquid Spot Orderbook (Dexs) TVL 7日激增 +37.3% 至 $127.2M"
     },
     {
       "type": "📰 媒体快讯",
-      "title": "AI is driving a flood of crypto bug reports. Now it’s helping sort them"
+      "title": "Bio Protocol拟调整融资模式，引入里程碑拨款"
     },
     {
       "type": "📰 媒体快讯",
-      "title": "‘Very racist’ Netflix SBF series, BitMart’s $319M shortfall: Asia Express"
+      "title": "Ondo Stocks新增四只富兰克林邓普顿代币化ETF"
     },
     {
       "type": "📰 媒体快讯",
-      "title": "BNB Chain details new layer-1 for trading, private finance and AI"
+      "title": "China sets March 2027 rollout for blockchain identity regulations"
     },
     {
       "type": "📰 媒体快讯",
-      "title": "UK is ‘getting it wrong’ on DeFi regulation, says Coinbase"
+      "title": "Binance to launch tokenized IPO program after regulatory approval: Yi He"
     },
     {
       "type": "📰 媒体快讯",
-      "title": "Japan weighs tighter oversight of DeFi, self-custodial wallets"
+      "title": "Brazil’s stock exchange pushes stablecoin launch back to 2027"
+    },
+    {
+      "type": "📰 媒体快讯",
+      "title": "Bluefin to shut down perps, refocus on spot trading and tokenized RWAs"
     }
   ],
   "hot_keywords": [
@@ -3071,37 +3076,37 @@
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Derivatives",
-      "word": "#Derivatives",
+      "keyword": "#Gaming Platform",
+      "word": "#Gaming Platform",
       "heat": 90,
-      "reason": "板块量能温和放大，早期资金净流入居前"
-    },
-    {
-      "keyword": "#Perpetuals",
-      "word": "#Perpetuals",
-      "heat": 88,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
       "keyword": "#Reality Ecosystem",
       "word": "#Reality Ecosystem",
-      "heat": 86,
+      "heat": 88,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
       "keyword": "#bStocks Ecosystem",
       "word": "#bStocks Ecosystem",
+      "heat": 86,
+      "reason": "板块量能温和放大，早期资金净流入居前"
+    },
+    {
+      "keyword": "#Yield Farming",
+      "word": "#Yield Farming",
       "heat": 84,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Decentralized Exch",
-      "word": "#Decentralized Exch",
+      "keyword": "#Dex Aggregator",
+      "word": "#Dex Aggregator",
       "heat": 82,
       "reason": "板块量能温和放大，早期资金净流入居前"
     }
   ],
-  "updated_at": "2026-11-27 22:53",
+  "updated_at": "2026-11-28 04:42:46 (UTC+8)",
   "evolution_state": {
     "generation": 11,
     "last_evolved_at": "2026-11-27 22:52",
@@ -3138,13 +3143,13 @@
   },
   "trending_symbols": [
     "PENGU",
+    "PUMPCHAN",
+    "PORTAL",
+    "ZYLO",
     "BTC",
-    "KNTQ",
-    "LIT",
-    "AKE",
-    "PEARL",
-    "DRV",
-    "BDX"
+    "ZEC",
+    "HYPE",
+    "XMR"
   ],
   "vc_entities": [],
   "allocation_matrix": [
@@ -3156,16 +3161,9 @@
       "ratio_hint": "龙头 55% / 黑马 45%"
     },
     {
-      "track": "Derivatives",
+      "track": "Gaming Platform",
       "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
-      "leader": "Derivatives 头部高流动性核心协议",
-      "dark_horse": "市值 <$500万 且买盘占比 >55% 的早期新池标的",
-      "ratio_hint": "龙头 55% / 黑马 45%"
-    },
-    {
-      "track": "Perpetuals",
-      "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
-      "leader": "Perpetuals 头部高流动性核心协议",
+      "leader": "Gaming Platform 头部高流动性核心协议",
       "dark_horse": "市值 <$500万 且买盘占比 >55% 的早期新池标的",
       "ratio_hint": "龙头 55% / 黑马 45%"
     },
@@ -3173,6 +3171,13 @@
       "track": "Reality Ecosystem",
       "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
       "leader": "Reality Ecosystem 头部高流动性核心协议",
+      "dark_horse": "市值 <$500万 且买盘占比 >55% 的早期新池标的",
+      "ratio_hint": "龙头 55% / 黑马 45%"
+    },
+    {
+      "track": "bStocks Ecosystem",
+      "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
+      "leader": "bStocks Ecosystem 头部高流动性核心协议",
       "dark_horse": "市值 <$500万 且买盘占比 >55% 的早期新池标的",
       "ratio_hint": "龙头 55% / 黑马 45%"
     }
