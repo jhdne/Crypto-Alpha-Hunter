@@ -6,7 +6,7 @@
     },
     "vc_media": {
       "ok": true,
-      "msg": "正常 (实时捕获 7 条热搜、TVL与融资情报)"
+      "msg": "正常 (实时捕获 10 条热搜、TVL与融资情报)"
     },
     "llm": {
       "ok": false,
@@ -23,52 +23,111 @@
   },
   "keywords": [
     {
-      "keyword": "#TimeFi",
-      "word": "#TimeFi",
+      "keyword": "#Robinhood Chain Me",
+      "word": "#Robinhood Chain Me",
       "heat": 92,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#DeFAI",
-      "word": "#DeFAI",
+      "keyword": "#Derivatives",
+      "word": "#Derivatives",
       "heat": 90,
+      "reason": "板块量能温和放大，早期资金净流入居前"
+    },
+    {
+      "keyword": "#Perpetuals",
+      "word": "#Perpetuals",
+      "heat": 88,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
       "keyword": "#Reality Ecosystem",
       "word": "#Reality Ecosystem",
-      "heat": 88,
-      "reason": "板块量能温和放大，早期资金净流入居前"
-    },
-    {
-      "keyword": "#PolitiFi",
-      "word": "#PolitiFi",
       "heat": 86,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Directed Acyclic G",
-      "word": "#Directed Acyclic G",
+      "keyword": "#bStocks Ecosystem",
+      "word": "#bStocks Ecosystem",
       "heat": 84,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Simulation Games",
-      "word": "#Simulation Games",
+      "keyword": "#Decentralized Exch",
+      "word": "#Decentralized Exch",
       "heat": 82,
       "reason": "板块量能温和放大，早期资金净流入居前"
     }
   ],
   "vc_news": [
-    "🔥 [全网热搜飙升] Pudgy Penguins($PENGU), Monero($XMR), Zylo Ecosystem($ZYLO), Pepe Wojak($PEJAK), Non-Playable Shiba($NPS), Hyperliquid($HYPE), Pearl($PEARL), Venice Token($VVV)",
-    "🌊 [链上TVL异动] Theo Network thBill (RWA) TVL 7日激增 +287.2% 至 $45.8M",
-    "🌊 [链上TVL异动] Revert Lend (Lending) TVL 7日激增 +188.6% 至 $13.6M",
+    "🔥 [全网热搜飙升] Pudgy Penguins($PENGU), Bitcoin($BTC), Kinetiq($KNTQ), Lighter($LIT), Akedo($AKE), Pearl($PEARL), Derive($DRV), Beldex($BDX)",
+    "🌊 [链上TVL异动] Theo Network thBill (RWA) TVL 7日激增 +287.2% 至 $45.7M",
+    "🌊 [链上TVL异动] Revert Lend (Lending) TVL 7日激增 +195.9% 至 $13.7M",
     "🌊 [链上TVL异动] Shift DeFi (Yield) TVL 7日激增 +63.0% 至 $77.6M",
-    "🌊 [链上TVL异动] Perena Vaults (Onchain Capital Allocator) TVL 7日激增 +41.4% 至 $23.2M",
-    "📰 [媒体快讯] Japan weighs tighter oversight of DeFi, self-custodial wallets",
-    "📰 [媒体快讯] Spain moves to grant financial watchdog power to freeze crypto accounts"
+    "🌊 [链上TVL异动] Perena Vaults (Onchain Capital Allocator) TVL 7日激增 +41.9% 至 $23.3M",
+    "📰 [媒体快讯] AI is driving a flood of crypto bug reports. Now it’s helping sort them",
+    "📰 [媒体快讯] ‘Very racist’ Netflix SBF series, BitMart’s $319M shortfall: Asia Express",
+    "📰 [媒体快讯] BNB Chain details new layer-1 for trading, private finance and AI",
+    "📰 [媒体快讯] UK is ‘getting it wrong’ on DeFi regulation, says Coinbase",
+    "📰 [媒体快讯] Japan weighs tighter oversight of DeFi, self-custodial wallets"
   ],
   "tracks": [
+    {
+      "id": "robinhood-chain-meme",
+      "name": "Robinhood Chain Meme",
+      "source": "🔥早期资金点火",
+      "change_24h": 9.52,
+      "reason": "板块成交放量启动，中小市值标的弹性极佳",
+      "status": "已批准",
+      "赛道ID": "robinhood-chain-meme",
+      "赛道名称": "Robinhood Chain Meme",
+      "发现来源": "🔥早期资金点火",
+      "24h涨幅(%)": 9.52,
+      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
+      "人工状态": "允许深挖"
+    },
+    {
+      "id": "decentralized-derivatives",
+      "name": "Derivatives",
+      "source": "🔥早期资金点火",
+      "change_24h": 7.54,
+      "reason": "板块成交放量启动，中小市值标的弹性极佳",
+      "status": "已批准",
+      "赛道ID": "decentralized-derivatives",
+      "赛道名称": "Derivatives",
+      "发现来源": "🔥早期资金点火",
+      "24h涨幅(%)": 7.54,
+      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
+      "人工状态": "允许深挖"
+    },
+    {
+      "id": "decentralized-perpetuals",
+      "name": "Perpetuals",
+      "source": "🔥早期资金点火",
+      "change_24h": 6.94,
+      "reason": "板块成交放量启动，中小市值标的弹性极佳",
+      "status": "已批准",
+      "赛道ID": "decentralized-perpetuals",
+      "赛道名称": "Perpetuals",
+      "发现来源": "🔥早期资金点火",
+      "24h涨幅(%)": 6.94,
+      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
+      "人工状态": "允许深挖"
+    },
+    {
+      "id": "reality-ecosystem",
+      "name": "Reality Ecosystem",
+      "source": "🔥早期资金点火",
+      "change_24h": 6.43,
+      "reason": "板块成交放量启动，中小市值标的弹性极佳",
+      "status": "已批准",
+      "赛道ID": "reality-ecosystem",
+      "赛道名称": "Reality Ecosystem",
+      "发现来源": "🔥早期资金点火",
+      "24h涨幅(%)": 6.43,
+      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
+      "人工状态": "允许深挖"
+    },
     {
       "id": "timefi",
       "name": "TimeFi",
@@ -98,20 +157,6 @@
       "人工状态": "允许深挖"
     },
     {
-      "id": "reality-ecosystem",
-      "name": "Reality Ecosystem",
-      "source": "🔥早期资金点火",
-      "change_24h": 5.59,
-      "reason": "板块成交放量启动，中小市值标的弹性极佳",
-      "status": "已批准",
-      "赛道ID": "reality-ecosystem",
-      "赛道名称": "Reality Ecosystem",
-      "发现来源": "🔥早期资金点火",
-      "24h涨幅(%)": 5.59,
-      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
-      "人工状态": "允许深挖"
-    },
-    {
       "id": "politifi",
       "name": "PolitiFi",
       "source": "🔥早期资金点火",
@@ -136,48 +181,6 @@
       "赛道名称": "AI Applications",
       "发现来源": "🔥早期资金点火",
       "24h涨幅(%)": 14.7,
-      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
-      "人工状态": "允许深挖"
-    },
-    {
-      "id": "socialfi",
-      "name": "SocialFi",
-      "source": "🔥早期资金点火",
-      "change_24h": 11.39,
-      "reason": "板块成交放量启动，中小市值标的弹性极佳",
-      "status": "已批准",
-      "赛道ID": "socialfi",
-      "赛道名称": "SocialFi",
-      "发现来源": "🔥早期资金点火",
-      "24h涨幅(%)": 11.39,
-      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
-      "人工状态": "允许深挖"
-    },
-    {
-      "id": "venice-ecosystem",
-      "name": "Venice Ecosystem",
-      "source": "🔥早期资金点火",
-      "change_24h": 10.44,
-      "reason": "板块成交放量启动，中小市值标的弹性极佳",
-      "status": "已批准",
-      "赛道ID": "venice-ecosystem",
-      "赛道名称": "Venice Ecosystem",
-      "发现来源": "🔥早期资金点火",
-      "24h涨幅(%)": 10.44,
-      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
-      "人工状态": "允许深挖"
-    },
-    {
-      "id": "nftfi",
-      "name": "NFTFi",
-      "source": "🔥早期资金点火",
-      "change_24h": 10.23,
-      "reason": "板块成交放量启动，中小市值标的弹性极佳",
-      "status": "已批准",
-      "赛道ID": "nftfi",
-      "赛道名称": "NFTFi",
-      "发现来源": "🔥早期资金点火",
-      "24h涨幅(%)": 10.23,
       "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
       "人工状态": "允许深挖"
     }
@@ -2984,21 +2987,21 @@
   ],
   "alert": {
     "title": "📡 趋势推演与龙头/黑马配置清单已更新",
-    "content": "最新捕获赛道：TimeFi, DeFAI, Reality Ecosystem",
-    "time": "2026-11-27 04:57"
+    "content": "最新捕获赛道：Robinhood Chain Meme, Derivatives, Perpetuals",
+    "time": "2026-11-27 14:48"
   },
   "vc_And_news": [
     {
       "type": "🔥 热搜飙升",
-      "title": "全网热搜飙升: Pudgy Penguins($PENGU), Monero($XMR), Zylo Ecosystem($ZYLO), Pepe Wojak($PEJAK), Non-Playable Shiba($NPS), Hyperliquid($HYPE), Pearl($PEARL), Venice Token($VVV)"
+      "title": "全网热搜飙升: Pudgy Penguins($PENGU), Bitcoin($BTC), Kinetiq($KNTQ), Lighter($LIT), Akedo($AKE), Pearl($PEARL), Derive($DRV), Beldex($BDX)"
     },
     {
       "type": "🌊 TVL异动",
-      "title": "Theo Network thBill (RWA) TVL 7日激增 +287.2% 至 $45.8M"
+      "title": "Theo Network thBill (RWA) TVL 7日激增 +287.2% 至 $45.7M"
     },
     {
       "type": "🌊 TVL异动",
-      "title": "Revert Lend (Lending) TVL 7日激增 +188.6% 至 $13.6M"
+      "title": "Revert Lend (Lending) TVL 7日激增 +195.9% 至 $13.7M"
     },
     {
       "type": "🌊 TVL异动",
@@ -3006,56 +3009,68 @@
     },
     {
       "type": "🌊 TVL异动",
-      "title": "Perena Vaults (Onchain Capital Allocator) TVL 7日激增 +41.4% 至 $23.2M"
+      "title": "Perena Vaults (Onchain Capital Allocator) TVL 7日激增 +41.9% 至 $23.3M"
+    },
+    {
+      "type": "📰 媒体快讯",
+      "title": "AI is driving a flood of crypto bug reports. Now it’s helping sort them"
+    },
+    {
+      "type": "📰 媒体快讯",
+      "title": "‘Very racist’ Netflix SBF series, BitMart’s $319M shortfall: Asia Express"
+    },
+    {
+      "type": "📰 媒体快讯",
+      "title": "BNB Chain details new layer-1 for trading, private finance and AI"
+    },
+    {
+      "type": "📰 媒体快讯",
+      "title": "UK is ‘getting it wrong’ on DeFi regulation, says Coinbase"
     },
     {
       "type": "📰 媒体快讯",
       "title": "Japan weighs tighter oversight of DeFi, self-custodial wallets"
-    },
-    {
-      "type": "📰 媒体快讯",
-      "title": "Spain moves to grant financial watchdog power to freeze crypto accounts"
     }
   ],
   "hot_keywords": [
     {
-      "keyword": "#TimeFi",
-      "word": "#TimeFi",
+      "keyword": "#Robinhood Chain Me",
+      "word": "#Robinhood Chain Me",
       "heat": 92,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#DeFAI",
-      "word": "#DeFAI",
+      "keyword": "#Derivatives",
+      "word": "#Derivatives",
       "heat": 90,
+      "reason": "板块量能温和放大，早期资金净流入居前"
+    },
+    {
+      "keyword": "#Perpetuals",
+      "word": "#Perpetuals",
+      "heat": 88,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
       "keyword": "#Reality Ecosystem",
       "word": "#Reality Ecosystem",
-      "heat": 88,
-      "reason": "板块量能温和放大，早期资金净流入居前"
-    },
-    {
-      "keyword": "#PolitiFi",
-      "word": "#PolitiFi",
       "heat": 86,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Directed Acyclic G",
-      "word": "#Directed Acyclic G",
+      "keyword": "#bStocks Ecosystem",
+      "word": "#bStocks Ecosystem",
       "heat": 84,
       "reason": "板块量能温和放大，早期资金净流入居前"
     },
     {
-      "keyword": "#Simulation Games",
-      "word": "#Simulation Games",
+      "keyword": "#Decentralized Exch",
+      "word": "#Decentralized Exch",
       "heat": 82,
       "reason": "板块量能温和放大，早期资金净流入居前"
     }
   ],
-  "updated_at": "2026-11-27 12:55",
+  "updated_at": "2026-11-27 14:48:29 (UTC+8)",
   "evolution_state": {
     "generation": 10,
     "last_evolved_at": "2026-11-27 12:55",
@@ -3092,27 +3107,34 @@
   },
   "trending_symbols": [
     "PENGU",
-    "XMR",
-    "ZYLO",
-    "PEJAK",
-    "NPS",
-    "HYPE",
+    "BTC",
+    "KNTQ",
+    "LIT",
+    "AKE",
     "PEARL",
-    "VVV"
+    "DRV",
+    "BDX"
   ],
   "vc_entities": [],
   "allocation_matrix": [
     {
-      "track": "TimeFi",
+      "track": "Robinhood Chain Meme",
       "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
-      "leader": "TimeFi 头部高流动性核心协议",
+      "leader": "Robinhood Chain Meme 头部高流动性核心协议",
       "dark_horse": "市值 <$500万 且买盘占比 >55% 的早期新池标的",
       "ratio_hint": "龙头 55% / 黑马 45%"
     },
     {
-      "track": "DeFAI",
+      "track": "Derivatives",
       "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
-      "leader": "DeFAI 头部高流动性核心协议",
+      "leader": "Derivatives 头部高流动性核心协议",
+      "dark_horse": "市值 <$500万 且买盘占比 >55% 的早期新池标的",
+      "ratio_hint": "龙头 55% / 黑马 45%"
+    },
+    {
+      "track": "Perpetuals",
+      "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
+      "leader": "Perpetuals 头部高流动性核心协议",
       "dark_horse": "市值 <$500万 且买盘占比 >55% 的早期新池标的",
       "ratio_hint": "龙头 55% / 黑马 45%"
     },
@@ -3120,13 +3142,6 @@
       "track": "Reality Ecosystem",
       "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
       "leader": "Reality Ecosystem 头部高流动性核心协议",
-      "dark_horse": "市值 <$500万 且买盘占比 >55% 的早期新池标的",
-      "ratio_hint": "龙头 55% / 黑马 45%"
-    },
-    {
-      "track": "PolitiFi",
-      "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
-      "leader": "PolitiFi 头部高流动性核心协议",
       "dark_horse": "市值 <$500万 且买盘占比 >55% 的早期新池标的",
       "ratio_hint": "龙头 55% / 黑马 45%"
     }
