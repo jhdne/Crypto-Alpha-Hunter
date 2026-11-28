@@ -6,11 +6,11 @@
     },
     "vc_media": {
       "ok": true,
-      "msg": "正常 (实时捕获 11 条热搜、TVL与融资情报)"
+      "msg": "正常 (实时捕获 13 条热搜、TVL与融资情报)"
     },
     "llm": {
-      "ok": false,
-      "msg": "LLM 返回为空，使用量化推演保底"
+      "ok": true,
+      "msg": "正常 (GLM/Groq 实时推理在线)"
     },
     "feishu": {
       "ok": true,
@@ -23,96 +23,112 @@
   },
   "keywords": [
     {
-      "keyword": "#Robinhood Chain Me",
-      "word": "#Robinhood Chain Me",
-      "heat": 92,
-      "reason": "板块量能温和放大，早期资金净流入居前"
-    },
-    {
-      "keyword": "#Gaming Platform",
-      "word": "#Gaming Platform",
-      "heat": 90,
-      "reason": "板块量能温和放大，早期资金净流入居前"
-    },
-    {
       "keyword": "#Reality Ecosystem",
       "word": "#Reality Ecosystem",
-      "heat": 88,
-      "reason": "板块量能温和放大，早期资金净流入居前"
-    },
-    {
-      "keyword": "#bStocks Ecosystem",
-      "word": "#bStocks Ecosystem",
-      "heat": 86,
-      "reason": "板块量能温和放大，早期资金净流入居前"
+      "heat": 98,
+      "reason": "结合AR/VR技术，市场潜力巨大，近期资金流入明显"
     },
     {
       "keyword": "#Yield Farming",
       "word": "#Yield Farming",
-      "heat": 84,
-      "reason": "板块量能温和放大，早期资金净流入居前"
+      "heat": 97,
+      "reason": "DeFi热潮持续，收益农场模式创新，吸引大量投资者"
     },
     {
-      "keyword": "#Dex Aggregator",
-      "word": "#Dex Aggregator",
-      "heat": 82,
-      "reason": "板块量能温和放大，早期资金净流入居前"
+      "keyword": "#Gaming Platform",
+      "word": "#Gaming Platform",
+      "heat": 96,
+      "reason": "游戏行业与区块链结合，市场接受度高，潜力巨大"
+    },
+    {
+      "keyword": "#Synthetic Dollar",
+      "word": "#Synthetic Dollar",
+      "heat": 95,
+      "reason": "稳定币概念持续发酵，合成美元有望成为下一个热点"
+    },
+    {
+      "keyword": "#Binance Alpha Spotlight",
+      "word": "#Binance Alpha Spotlight",
+      "heat": 94,
+      "reason": "Binance平台影响力大，Alpha Spotlight项目有望获得关注"
+    },
+    {
+      "keyword": "#Robinhood Chain Stocks Ecosystem",
+      "word": "#Robinhood Chain Stocks Ecosystem",
+      "heat": 93,
+      "reason": "Robinhood影响力持续，股票生态系统有望获得市场认可"
     }
   ],
   "vc_news": [
-    "🔥 [全网热搜飙升] Pudgy Penguins($PENGU), PumpChan($PUMPCHAN), Portal($PORTAL), Zylo Ecosystem($ZYLO), Bitcoin($BTC), Zcash($ZEC), Hyperliquid($HYPE), Monero($XMR)",
-    "🌊 [链上TVL异动] Theo Network thBill (RWA) TVL 7日激增 +287.2% 至 $45.8M",
-    "🌊 [链上TVL异动] Revert Lend (Lending) TVL 7日激增 +201.1% 至 $13.5M",
-    "🌊 [链上TVL异动] Stellar DeFi Hub (Farm) TVL 7日激增 +69.7% 至 $78.5M",
-    "🌊 [链上TVL异动] Hyperliquid Spot Orderbook (Dexs) TVL 7日激增 +37.3% 至 $127.2M",
-    "📰 [媒体快讯] Bio Protocol拟调整融资模式，引入里程碑拨款",
-    "📰 [媒体快讯] Ondo Stocks新增四只富兰克林邓普顿代币化ETF",
+    "🔥 [全网热搜飙升] World Liberty Financial($WLFI), Centrifuge($CFG), Montra($MONTRA), Hyperliquid($HYPE), XRP($XRP), Official Trump($TRUMP), Solana($SOL), USD1($USD1)",
+    "🌊 [链上TVL异动] Theo Network thBill (RWA) TVL 7日激增 +287.3% 至 $45.8M",
+    "🌊 [链上TVL异动] Revert Lend (Lending) TVL 7日激增 +211.4% 至 $13.4M",
+    "🌊 [链上TVL异动] Stellar DeFi Hub (Farm) TVL 7日激增 +69.8% 至 $78.5M",
+    "🌊 [链上TVL异动] Hyperliquid Spot Orderbook (Dexs) TVL 7日激增 +60.8% 至 $127.8M",
+    "📰 [媒体快讯] 《AIGC内容生产行业自律公约》发布",
+    "📰 [媒体快讯] Chiliz：ChainPort跨链桥将于12月1日关闭，持有USDC的用户需尽快转出",
+    "📰 [媒体快讯] 以太坊现货 ETF 昨日净流出 6927.1 万美元，持续 10 日净流出",
+    "📰 [媒体快讯] 比特币现货 ETF 昨日净流出 3.89 亿美元，持续 8 日净流出",
+    "📰 [媒体快讯] Franklin Templeton makes room for HYPE in crypto index ETF",
     "📰 [媒体快讯] China sets March 2027 rollout for blockchain identity regulations",
     "📰 [媒体快讯] Binance to launch tokenized IPO program after regulatory approval: Yi He",
-    "📰 [媒体快讯] Brazil’s stock exchange pushes stablecoin launch back to 2027",
-    "📰 [媒体快讯] Bluefin to shut down perps, refocus on spot trading and tokenized RWAs"
+    "📰 [媒体快讯] Brazil’s stock exchange pushes stablecoin launch back to 2027"
   ],
   "tracks": [
     {
       "id": "robinhood-chain-meme",
       "name": "Robinhood Chain Meme",
       "source": "🔥早期资金点火",
-      "change_24h": 22.18,
-      "reason": "板块成交放量启动，中小市值标的弹性极佳",
+      "change_24h": 12.01,
+      "reason": "社区活跃，市场关注度提升，具备潜在爆发力",
       "status": "已批准",
       "赛道ID": "robinhood-chain-meme",
       "赛道名称": "Robinhood Chain Meme",
       "发现来源": "🔥早期资金点火",
-      "24h涨幅(%)": 22.18,
-      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
-      "人工状态": "允许深挖"
-    },
-    {
-      "id": "gaming-platform",
-      "name": "Gaming Platform",
-      "source": "🔥早期资金点火",
-      "change_24h": 14.16,
-      "reason": "板块成交放量启动，中小市值标的弹性极佳",
-      "status": "已批准",
-      "赛道ID": "gaming-platform",
-      "赛道名称": "Gaming Platform",
-      "发现来源": "🔥早期资金点火",
-      "24h涨幅(%)": 14.16,
-      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
+      "24h涨幅(%)": 12.01,
+      "AI赛道简评": "社区活跃，市场关注度提升，具备潜在爆发力",
       "人工状态": "允许深挖"
     },
     {
       "id": "reality-ecosystem",
       "name": "Reality Ecosystem",
-      "source": "🔥早期资金点火",
-      "change_24h": 9.83,
-      "reason": "板块成交放量启动，中小市值标的弹性极佳",
+      "source": "💰一二级共振",
+      "change_24h": 4.47,
+      "reason": "技术成熟，市场潜力巨大，资金流入活跃",
       "status": "已批准",
       "赛道ID": "reality-ecosystem",
       "赛道名称": "Reality Ecosystem",
-      "发现来源": "🔥早期资金点火",
-      "24h涨幅(%)": 9.83,
-      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
+      "发现来源": "💰一二级共振",
+      "24h涨幅(%)": 4.47,
+      "AI赛道简评": "技术成熟，市场潜力巨大，资金流入活跃",
+      "人工状态": "允许深挖"
+    },
+    {
+      "id": "yield-farming",
+      "name": "Yield Farming",
+      "source": "🔥DeFi热潮",
+      "change_24h": 3.73,
+      "reason": "DeFi概念持续发酵，收益农场模式创新，吸引大量投资者",
+      "status": "已批准",
+      "赛道ID": "yield-farming",
+      "赛道名称": "Yield Farming",
+      "发现来源": "🔥DeFi热潮",
+      "24h涨幅(%)": 3.73,
+      "AI赛道简评": "DeFi概念持续发酵，收益农场模式创新，吸引大量投资者",
+      "人工状态": "允许深挖"
+    },
+    {
+      "id": "gaming-platform",
+      "name": "Gaming Platform",
+      "source": "💰行业融合",
+      "change_24h": 2.14,
+      "reason": "游戏行业与区块链结合，市场接受度高，潜力巨大",
+      "status": "已批准",
+      "赛道ID": "gaming-platform",
+      "赛道名称": "Gaming Platform",
+      "发现来源": "💰行业融合",
+      "24h涨幅(%)": 2.14,
+      "AI赛道简评": "游戏行业与区块链结合，市场接受度高，潜力巨大",
       "人工状态": "允许深挖"
     },
     {
@@ -168,20 +184,6 @@
       "赛道名称": "TimeFi",
       "发现来源": "🔥早期资金点火",
       "24h涨幅(%)": 8.74,
-      "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
-      "人工状态": "允许深挖"
-    },
-    {
-      "id": "defai",
-      "name": "DeFAI",
-      "source": "🔥早期资金点火",
-      "change_24h": 7.6,
-      "reason": "板块成交放量启动，中小市值标的弹性极佳",
-      "status": "已批准",
-      "赛道ID": "defai",
-      "赛道名称": "DeFAI",
-      "发现来源": "🔥早期资金点火",
-      "24h涨幅(%)": 7.6,
       "AI赛道简评": "板块成交放量启动，中小市值标的弹性极佳",
       "人工状态": "允许深挖"
     }
@@ -3050,37 +3052,49 @@
   ],
   "alert": {
     "title": "📡 趋势推演与龙头/黑马配置清单已更新",
-    "content": "最新捕获赛道：Robinhood Chain Meme, Gaming Platform, Reality Ecosystem",
-    "time": "2026-11-28 04:42"
+    "content": "最新捕获赛道：Robinhood Chain Meme, Reality Ecosystem, Yield Farming",
+    "time": "2026-11-28 14:22"
   },
   "vc_And_news": [
     {
       "type": "🔥 热搜飙升",
-      "title": "全网热搜飙升: Pudgy Penguins($PENGU), PumpChan($PUMPCHAN), Portal($PORTAL), Zylo Ecosystem($ZYLO), Bitcoin($BTC), Zcash($ZEC), Hyperliquid($HYPE), Monero($XMR)"
+      "title": "全网热搜飙升: World Liberty Financial($WLFI), Centrifuge($CFG), Montra($MONTRA), Hyperliquid($HYPE), XRP($XRP), Official Trump($TRUMP), Solana($SOL), USD1($USD1)"
     },
     {
       "type": "🌊 TVL异动",
-      "title": "Theo Network thBill (RWA) TVL 7日激增 +287.2% 至 $45.8M"
+      "title": "Theo Network thBill (RWA) TVL 7日激增 +287.3% 至 $45.8M"
     },
     {
       "type": "🌊 TVL异动",
-      "title": "Revert Lend (Lending) TVL 7日激增 +201.1% 至 $13.5M"
+      "title": "Revert Lend (Lending) TVL 7日激增 +211.4% 至 $13.4M"
     },
     {
       "type": "🌊 TVL异动",
-      "title": "Stellar DeFi Hub (Farm) TVL 7日激增 +69.7% 至 $78.5M"
+      "title": "Stellar DeFi Hub (Farm) TVL 7日激增 +69.8% 至 $78.5M"
     },
     {
       "type": "🌊 TVL异动",
-      "title": "Hyperliquid Spot Orderbook (Dexs) TVL 7日激增 +37.3% 至 $127.2M"
+      "title": "Hyperliquid Spot Orderbook (Dexs) TVL 7日激增 +60.8% 至 $127.8M"
     },
     {
       "type": "📰 媒体快讯",
-      "title": "Bio Protocol拟调整融资模式，引入里程碑拨款"
+      "title": "《AIGC内容生产行业自律公约》发布"
     },
     {
       "type": "📰 媒体快讯",
-      "title": "Ondo Stocks新增四只富兰克林邓普顿代币化ETF"
+      "title": "Chiliz：ChainPort跨链桥将于12月1日关闭，持有USDC的用户需尽快转出"
+    },
+    {
+      "type": "📰 媒体快讯",
+      "title": "以太坊现货 ETF 昨日净流出 6927.1 万美元，持续 10 日净流出"
+    },
+    {
+      "type": "📰 媒体快讯",
+      "title": "比特币现货 ETF 昨日净流出 3.89 亿美元，持续 8 日净流出"
+    },
+    {
+      "type": "📰 媒体快讯",
+      "title": "Franklin Templeton makes room for HYPE in crypto index ETF"
     },
     {
       "type": "📰 媒体快讯",
@@ -3093,51 +3107,47 @@
     {
       "type": "📰 媒体快讯",
       "title": "Brazil’s stock exchange pushes stablecoin launch back to 2027"
-    },
-    {
-      "type": "📰 媒体快讯",
-      "title": "Bluefin to shut down perps, refocus on spot trading and tokenized RWAs"
     }
   ],
   "hot_keywords": [
     {
-      "keyword": "#Robinhood Chain Me",
-      "word": "#Robinhood Chain Me",
-      "heat": 92,
-      "reason": "板块量能温和放大，早期资金净流入居前"
-    },
-    {
-      "keyword": "#Gaming Platform",
-      "word": "#Gaming Platform",
-      "heat": 90,
-      "reason": "板块量能温和放大，早期资金净流入居前"
-    },
-    {
       "keyword": "#Reality Ecosystem",
       "word": "#Reality Ecosystem",
-      "heat": 88,
-      "reason": "板块量能温和放大，早期资金净流入居前"
-    },
-    {
-      "keyword": "#bStocks Ecosystem",
-      "word": "#bStocks Ecosystem",
-      "heat": 86,
-      "reason": "板块量能温和放大，早期资金净流入居前"
+      "heat": 98,
+      "reason": "结合AR/VR技术，市场潜力巨大，近期资金流入明显"
     },
     {
       "keyword": "#Yield Farming",
       "word": "#Yield Farming",
-      "heat": 84,
-      "reason": "板块量能温和放大，早期资金净流入居前"
+      "heat": 97,
+      "reason": "DeFi热潮持续，收益农场模式创新，吸引大量投资者"
     },
     {
-      "keyword": "#Dex Aggregator",
-      "word": "#Dex Aggregator",
-      "heat": 82,
-      "reason": "板块量能温和放大，早期资金净流入居前"
+      "keyword": "#Gaming Platform",
+      "word": "#Gaming Platform",
+      "heat": 96,
+      "reason": "游戏行业与区块链结合，市场接受度高，潜力巨大"
+    },
+    {
+      "keyword": "#Synthetic Dollar",
+      "word": "#Synthetic Dollar",
+      "heat": 95,
+      "reason": "稳定币概念持续发酵，合成美元有望成为下一个热点"
+    },
+    {
+      "keyword": "#Binance Alpha Spotlight",
+      "word": "#Binance Alpha Spotlight",
+      "heat": 94,
+      "reason": "Binance平台影响力大，Alpha Spotlight项目有望获得关注"
+    },
+    {
+      "keyword": "#Robinhood Chain Stocks Ecosystem",
+      "word": "#Robinhood Chain Stocks Ecosystem",
+      "heat": 93,
+      "reason": "Robinhood影响力持续，股票生态系统有望获得市场认可"
     }
   ],
-  "updated_at": "2026-11-28 07:21",
+  "updated_at": "2026-11-28 14:22:24 (UTC+8)",
   "evolution_state": {
     "generation": 12,
     "last_evolved_at": "2026-11-28 07:21",
@@ -3173,44 +3183,44 @@
     ]
   },
   "trending_symbols": [
-    "PENGU",
-    "PUMPCHAN",
-    "PORTAL",
-    "ZYLO",
-    "BTC",
-    "ZEC",
+    "WLFI",
+    "CFG",
+    "MONTRA",
     "HYPE",
-    "XMR"
+    "XRP",
+    "TRUMP",
+    "SOL",
+    "USD1"
   ],
   "vc_entities": [],
   "allocation_matrix": [
     {
       "track": "Robinhood Chain Meme",
-      "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
-      "leader": "Robinhood Chain Meme 头部高流动性核心协议",
-      "dark_horse": "市值 <$500万 且买盘占比 >55% 的早期新池标的",
-      "ratio_hint": "龙头 55% / 黑马 45%"
-    },
-    {
-      "track": "Gaming Platform",
-      "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
-      "leader": "Gaming Platform 头部高流动性核心协议",
-      "dark_horse": "市值 <$500万 且买盘占比 >55% 的早期新池标的",
-      "ratio_hint": "龙头 55% / 黑马 45%"
+      "trend_thesis": "社区驱动，市场关注度提升，有望实现爆发式增长",
+      "leader": "Robinhood Chain Meme 项目代币",
+      "dark_horse": "市值较低的新兴社区项目",
+      "ratio_hint": "龙头 60% / 黑马 40%"
     },
     {
       "track": "Reality Ecosystem",
-      "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
-      "leader": "Reality Ecosystem 头部高流动性核心协议",
-      "dark_horse": "市值 <$500万 且买盘占比 >55% 的早期新池标的",
-      "ratio_hint": "龙头 55% / 黑马 45%"
+      "trend_thesis": "AR/VR技术成熟，市场潜力巨大，有望引领下一波科技浪潮",
+      "leader": "AR/VR相关项目代币",
+      "dark_horse": "市值较低的新兴AR/VR项目",
+      "ratio_hint": "龙头 60% / 黑马 40%"
     },
     {
-      "track": "bStocks Ecosystem",
-      "trend_thesis": "板块成交放量启动，中小市值标的弹性极佳",
-      "leader": "bStocks Ecosystem 头部高流动性核心协议",
-      "dark_horse": "市值 <$500万 且买盘占比 >55% 的早期新池标的",
-      "ratio_hint": "龙头 55% / 黑马 45%"
+      "track": "Yield Farming",
+      "trend_thesis": "DeFi概念持续发酵，收益农场模式创新，吸引大量投资者",
+      "leader": "主流收益农场平台代币",
+      "dark_horse": "市值较低的新兴收益农场项目",
+      "ratio_hint": "龙头 60% / 黑马 40%"
+    },
+    {
+      "track": "Gaming Platform",
+      "trend_thesis": "游戏行业与区块链结合，市场接受度高，潜力巨大",
+      "leader": "主流游戏平台代币",
+      "dark_horse": "市值较低的新兴游戏项目",
+      "ratio_hint": "龙头 60% / 黑马 40%"
     }
   ]
 }
